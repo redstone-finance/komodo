@@ -12,6 +12,7 @@ contract KoToken is ERC20, Ownable {
     address public broker;
 
     mapping(address => uint256) public collateral;
+    mapping(address => uint256) public debt;
     
     
     constructor(bytes32 asset_, string memory name_, string memory symbol_) ERC20(name_, symbol_) {        
@@ -19,13 +20,42 @@ contract KoToken is ERC20, Ownable {
     }
     
     
-    function mint(address account, uint256 amount) external onlyOwner {
-        super._mint(account, amount);
+    function mint(uint256 amount) external {
+        super._mint(msg.sender, amount);
+        debt[msg.sender] += amount;
     }
 
 
-    function burn(address account, uint256 amount) external onlyOwner {
-        super._burn(account, amount);
+    function burn(uint256 amount) external {
+        require(debt[msg.sender] >= amount, "Cannot burn more than minted");
+        debt[msg.sender] -= amount;
+        super._burn(msg.sender, amount);
     }
+
+    function addCollateral() payable external {
+        collateral[msg.sender] += msg.value;
+        emit CollateralAdded(msg.sender, msg.value, block.timestamp);
+    }
+
+    function removeCollateral(uint amount) payable external {
+        require(collateral[msg.sender] >= amount, "Cannot remove more collateral than deposited");
+        collateral[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
+        emit CollateralRemoved(msg.sender, amount, block.timestamp);
+    }
+    
+    function collateralOf(address account) public view returns(uint256) {
+        return collateral[account];
+    }
+
+    function debtOf(address account) public view returns(uint256) {
+        return debt[account];
+    }
+
+
+    //EVENTS
+
+    event CollateralAdded(address account, uint256 val, uint256 time);
+    event CollateralRemoved(address account, uint256 val, uint256 time);
 
 }

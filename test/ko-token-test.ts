@@ -4,6 +4,7 @@ import { MockPriceFeed } from "../typechain/MockPriceFeed";
 import {SignerWithAddress} from "@nomiclabs/hardhat-ethers/signers";
 const { expect } = require("chai");
 
+
 const toBytes32 = ethers.utils.formatBytes32String;
 const fromBytes32 = ethers.utils.parseBytes32String;
 
@@ -34,13 +35,24 @@ describe("KoToken", function() {
 
   });
 
+  it("Should not allow to mint without proper collateral", async function() {
+      await expect(koToken.connect(maker).mint(100,{value: 10}))
+          .to.be.revertedWith('The account must remain solvent');
+  });
+
 
   it("Should mint", async function() {
-      await koToken.connect(maker).mint(100);
+      await koToken.connect(maker).mint(100,{value: 20});
 
       expect(await koToken.balanceOf(maker.address)).to.equal(100);
+      
+      expect(await koToken.collateralOf(maker.address)).to.equal(20);
+      expect(await koToken.collateralValueOf(maker.address)).to.equal(40000);
+      
       expect(await koToken.debtOf(maker.address)).to.equal(100);
       expect(await koToken.debtValueOf(maker.address)).to.equal(20000);
+      
+      expect(await koToken.solvencyOf(maker.address)).to.equal(2000);
   });
 
   it("Should burn", async function() {
@@ -52,12 +64,14 @@ describe("KoToken", function() {
 
 
   it("Should add collateral", async function() {
-    await koToken.connect(maker).addCollateral({value: 100});
+    await koToken.connect(maker).addCollateral({value: 80});
 
     expect(await koToken.collateralOf(maker.address)).to.equal(100);
 
     expect(await koToken.collateralValueOf(maker.address)).to.equal(200000);
+    expect(await koToken.solvencyOf(maker.address)).to.equal(12500);
   });
+  
     
   it("Should remove collateral", async function() {
     await koToken.connect(maker).removeCollateral(40);
@@ -65,6 +79,13 @@ describe("KoToken", function() {
     expect(await koToken.collateralOf(maker.address)).to.equal(60);
     expect(await koToken.collateralValueOf(maker.address)).to.equal(120000);
   });
+  
+
+  it("Should not allow removing too much collateral", async function() {
+    await expect(koToken.connect(maker).removeCollateral(60))
+        .to.be.revertedWith('The account must remain solvent');
+  });
+  
 
   it("Should transfer", async function() {
     expect(await koToken.balanceOf(maker.address)).to.equal(80);

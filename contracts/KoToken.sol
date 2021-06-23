@@ -14,8 +14,11 @@ contract KoToken is ERC20, Ownable {
     bytes32 public asset;
     address public broker;
     IPriceFeed priceFeed;
-    
+
+    uint256 constant public MAX_SOLVENCY = 2**256 - 1;
     bytes32 constant public COLLATERAL_TOKEN  = "ETH"; 
+    uint256 constant public SOLVENCY_PRECISION  = 1000; // 1 unit = 0.1% 
+    uint256 constant public MIN_SOLVENCY  = 1200; // 1 unit = 0.1% 
 
     mapping(address => uint256) public collateral;
     mapping(address => uint256) public debt;
@@ -27,9 +30,10 @@ contract KoToken is ERC20, Ownable {
     }
     
     
-    function mint(uint256 amount) external {
+    function mint(uint256 amount) payable external remainsSolvent {
         super._mint(msg.sender, amount);
         debt[msg.sender] += amount;
+        collateral[msg.sender] += msg.value;
     }
 
 
@@ -46,7 +50,7 @@ contract KoToken is ERC20, Ownable {
     }
     
 
-    function removeCollateral(uint amount) payable external {
+    function removeCollateral(uint amount) payable external remainsSolvent {
         require(collateral[msg.sender] >= amount, "Cannot remove more collateral than deposited");
         collateral[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);
@@ -71,6 +75,20 @@ contract KoToken is ERC20, Ownable {
 
     function debtValueOf(address account) public view returns(uint256) {
         return debt[account] * priceFeed.getPrice(asset);
+    }
+    
+    
+    function solvencyOf(address account) public view returns(uint256) {
+        if (debtValueOf(account) == 0) {
+            return MAX_SOLVENCY;
+        } else {
+            return collateralValueOf(account) * SOLVENCY_PRECISION / debtValueOf(account);
+        }
+    }
+    
+    modifier remainsSolvent() {
+        _;
+        require(solvencyOf(msg.sender) >= MIN_SOLVENCY, "The account must remain solvent");        
     }
     
     

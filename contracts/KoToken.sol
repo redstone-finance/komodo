@@ -85,6 +85,23 @@ contract KoToken is ERC20, Ownable {
             return collateralValueOf(account) * SOLVENCY_PRECISION / debtValueOf(account);
         }
     }
+
+
+    /**
+     * @dev Value of komodo tokens held by given account at the current market price
+     */
+    function balanceValueOf(address account) public view returns(uint256) {
+        return balanceOf(account) * priceFeed.getPrice(asset); 
+    }
+
+
+    /**
+     * @dev Total value of all minted komodo tokens at the current market price
+     */
+    function totalValue() public view returns(uint256) {
+        return totalSupply() * priceFeed.getPrice(asset);
+    }
+    
     
     modifier remainsSolvent() {
         _;

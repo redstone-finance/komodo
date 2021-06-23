@@ -45,6 +45,8 @@ describe("KoToken", function() {
       await koToken.connect(maker).mint(100,{value: 20});
 
       expect(await koToken.balanceOf(maker.address)).to.equal(100);
+      expect(await koToken.balanceValueOf(maker.address)).to.equal(20000);
+      expect(await koToken.totalValue()).to.equal(20000);
       
       expect(await koToken.collateralOf(maker.address)).to.equal(20);
       expect(await koToken.collateralValueOf(maker.address)).to.equal(40000);

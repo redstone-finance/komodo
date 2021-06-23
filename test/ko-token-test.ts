@@ -1,5 +1,6 @@
 import { ethers } from "hardhat";
 import { KoToken } from "../typechain/KoToken";
+import { MockPriceFeed } from "../typechain/MockPriceFeed";
 import {SignerWithAddress} from "@nomiclabs/hardhat-ethers/signers";
 const { expect } = require("chai");
 
@@ -11,14 +12,21 @@ describe("KoToken", function() {
   let koToken: KoToken;
   let buyer: SignerWithAddress;
   let maker: SignerWithAddress;
+  let priceFeed: MockPriceFeed;
 
   
   
   it("Should deploy koToken with the asset symbol", async function() {
     [buyer, maker] = await ethers.getSigners();
+    
+    const MockPriceFeed = await ethers.getContractFactory("MockPriceFeed");
+    priceFeed = await MockPriceFeed.deploy() as MockPriceFeed;
+    
+    await priceFeed.setPrice(toBytes32("ETH"), 2000);
+    await priceFeed.setPrice(toBytes32("PIG"), 200);
       
     const KoToken = await ethers.getContractFactory("KoToken");
-    koToken = await KoToken.deploy(toBytes32("PIG"), "komodo-PIG-token", "kPIG") as KoToken;
+    koToken = await KoToken.deploy(toBytes32("PIG"), "komodo-PIG-token", "kPIG", priceFeed.address) as KoToken;
     await koToken.deployed();
 
     expect(fromBytes32(await koToken.asset())).to.equal("PIG");
@@ -32,6 +40,7 @@ describe("KoToken", function() {
 
       expect(await koToken.balanceOf(maker.address)).to.equal(100);
       expect(await koToken.debtOf(maker.address)).to.equal(100);
+      expect(await koToken.debtValueOf(maker.address)).to.equal(20000);
   });
 
   it("Should burn", async function() {
@@ -46,12 +55,15 @@ describe("KoToken", function() {
     await koToken.connect(maker).addCollateral({value: 100});
 
     expect(await koToken.collateralOf(maker.address)).to.equal(100);
+
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(200000);
   });
     
   it("Should remove collateral", async function() {
     await koToken.connect(maker).removeCollateral(40);
     
     expect(await koToken.collateralOf(maker.address)).to.equal(60);
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(120000);
   });
 
   it("Should transfer", async function() {

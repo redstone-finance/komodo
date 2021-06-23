@@ -1,6 +1,6 @@
 import { toBuffer } from 'ethereumjs-util';
 import { signTypedMessage, recoverTypedMessage, MsgParams } from "eth-sig-util";
-import {ethers} from "hardhat";
+import { ethers } from "ethers";
 
 
 export type PriceDataType = {
@@ -33,7 +33,7 @@ const serializeBN = (value:any) => value.toString();
 export class PriceSigner {
     private _domainData: object;
 
-    constructor(version: string = '0.4.0', chainId: number = 1) {
+    constructor(version: string = "0.4", chainId: number = 1) {
         this._domainData =  {
             name: 'Redstone',
             version: version,

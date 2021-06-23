@@ -24,13 +24,14 @@ describe("KoToken", function() {
     priceFeed = await MockPriceFeed.deploy() as MockPriceFeed;
     
     await priceFeed.setPrice(toBytes32("ETH"), 2000);
-    await priceFeed.setPrice(toBytes32("PIG"), 200);
+    await priceFeed.setPrice(toBytes32("OIL"), 200);
       
     const KoToken = await ethers.getContractFactory("KoToken");
-    koToken = await KoToken.deploy(toBytes32("PIG"), "komodo-PIG-token", "kPIG", priceFeed.address) as KoToken;
+    koToken = await KoToken.deploy() as KoToken;
+    await koToken.initialize(toBytes32("OIL"), "komodo-OIL-token", "kOIL", priceFeed.address);
     await koToken.deployed();
 
-    expect(fromBytes32(await koToken.asset())).to.equal("PIG");
+    expect(fromBytes32(await koToken.asset())).to.equal("OIL");
     expect(await koToken.balanceOf(maker.address)).to.equal(0);
 
   });

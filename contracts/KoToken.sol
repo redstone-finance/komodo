@@ -2,15 +2,16 @@
 pragma solidity ^0.8.2;
 
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "./ERC20Initializable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "evm-relayer/contracts/IPriceFeed.sol";
-import "evm-relayer/contracts/MockPriceFeed.sol"; //to generate Typechain proxy
 
 
 
-contract KoToken is ERC20, Ownable {
-    
+
+contract KoToken is ERC20Initializable, Ownable {
+
+    bool private initialized;
     bytes32 public asset;
     address public broker;
     IPriceFeed priceFeed;
@@ -22,11 +23,16 @@ contract KoToken is ERC20, Ownable {
 
     mapping(address => uint256) public collateral;
     mapping(address => uint256) public debt;
-    
-    
-    constructor(bytes32 asset_, string memory name_, string memory symbol_, IPriceFeed priceFeed_) ERC20(name_, symbol_) {        
+
+    function initialize(bytes32 asset_, string memory name_, string memory symbol_, IPriceFeed priceFeed_) external {
+        require(!initialized);
+
+        super.initialize(name_, symbol_);
+        
         asset = asset_;
         priceFeed = priceFeed_;
+        
+        initialized = true;
     }
     
     

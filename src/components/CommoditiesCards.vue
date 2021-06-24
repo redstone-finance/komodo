@@ -3,13 +3,23 @@
     <v-container>
       <v-row>
         <v-col v-for="commodity in commodities" :key="commodity.symbol" md="4">
-          <v-card class="pa-2 increase-on-hover" outlined>
+          <v-card
+            :href="'/#/commodity/' + commodity.symbol"
+            class="pa-2 increase-on-hover"
+            outlined
+          >
+            <v-chip small outlined class="tag" :text-color="getTagColor(commodity)">
+              {{ commodity.tags[0] }}
+            </v-chip>
+
             <v-card-title>
-              <v-avatar>
-                <img alt="commodity-logo" :src="commodity.logoURI" />
+              <v-avatar class="commodity-avatar" size="52">
+                <img alt="commodity-logo" class="pa-3" :src="commodity.logoURI" />
               </v-avatar>
               <p class="ml-6 pt-4">
-                {{ commodity.symbol }}
+                <span>
+                  {{ commodity.symbol }}
+                </span>
                 <br />
                 <span class="commodity-name">
                   {{ commodity.name }}
@@ -36,6 +46,15 @@
                     Liquidity
                   </div>
                 </div>
+
+                <!-- <div class="liquidity metric">
+                  <div class="value">
+                    Redstone
+                  </div>
+                  <div class="label">
+                    Oracle
+                  </div>
+                </div> -->
               </div>
             </v-card-text>
             
@@ -61,15 +80,41 @@ export default {
     commodities: Array,
   },
 
+  methods: {
+    getTagColor(commodity) {
+      const tag = commodity.tags[0];
+      // grains, energies, metals, livestocks, softs
+      switch (tag) {
+        case "grains":
+          return "orange";
+        case "energies":
+          return "green";
+        case "metals":
+          return "blue";
+        case "livestocks":
+          return "brown";
+        case "softs":
+          return "pink";
+        default:
+          return "black";
+      }
+    }
+  }
+
 }
 </script>
 
 <style scoped lang="scss">
 
-/* .card {
-  border: 1px solid black;
-  margin: 10px;
-} */
+.tag {
+  position: absolute;
+  right: 60px;
+  top: 43px;
+}
+
+.commodity-avatar {
+  border: 3px solid #2196F3;
+}
 
 .commodity-name {
   font-size: 12px;
@@ -86,20 +131,25 @@ export default {
 
 .metrics {
     display: flex;
-    // justify-content: space-between;
+    // justify-content: stretch;
+    justify-content: center;
   }
 
 .metric {
-  margin-right: 40px;
+  margin-right: 20px;
+  width: 100px;
+  // border: 1px solid black;
+  text-align: center;
 
   .value {
     color: #111;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
+    border-bottom: 1px solid #eee;
   }
 
   .label {
-    font-size: 12px;
+    font-size: 10px;
     color: #777;
     font-weight: 400;
   }

@@ -8,6 +8,14 @@
       </a>
     </p>
 
+    <div class="tabs-container">
+      <v-tabs v-model="tabIndex" centered>
+        <v-tab v-for="category in categories" :key="category">
+          {{ category }}
+        </v-tab>
+      </v-tabs>
+    </div>
+
     <CommoditiesCards :commodities="commodities" />
   </div>
 </template>
@@ -20,17 +28,41 @@ import commoditiesData from "@/assets/data/commodities.json"
 export default {
   name: 'commodities',
 
+  data() {
+    return {
+      tabIndex: 0,
+    };
+  },
+
   computed: {
     commodities() {
       const tokens = [];
       for (const symbol in commoditiesData) {
-        tokens.push({
-          ...commoditiesData[symbol],
-          symbol,
-        });
+        const commodity = commoditiesData[symbol];
+        if (["all", commodity.tags[0]].includes(this.selecteddTab)) {
+          tokens.push({
+            ...commodity,
+            symbol,
+          });
+        }
       }
       return tokens;
-    }
+    },
+
+    categories() {
+      const categories = ["all"];
+      for (const commodity of Object.values(commoditiesData)) {
+        const category = commodity.tags[0];
+        if (!categories.includes(category)) {
+          categories.push(category);
+        }
+      }
+      return categories;
+    },
+
+    selecteddTab() {
+      return this.categories[this.tabIndex];
+    },
   },
 
   components: {
@@ -53,6 +85,7 @@ h1 {
   margin: auto;
   color: #777;
   font-size: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
 </style>

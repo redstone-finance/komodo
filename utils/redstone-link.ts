@@ -4,11 +4,11 @@ import redstone from 'redstone-api';
 import _ from "lodash";
 
 
-const PRIV = "z internal";
+const PRIV = "0xb113f80f8df7330f724d5aa8a630bbbefd7799a819e6866113e2b05be4003857";
 
 const signer: Wallet = new Wallet(PRIV);
 
-const serializePriceValue = (value: any) => Math.round(value * (10 ** 8));
+
 
 export async function getSignedPrice(): Promise<SignedPriceDataType> {
 
@@ -27,8 +27,8 @@ export async function getSignedPrice(): Promise<SignedPriceDataType> {
   let symbols:string[] = [];
   let values:number[] = [];
   Object.keys(prices).sort().forEach( symbol => {
-    symbols.push(utils.formatBytes32String(symbol));
-    values.push(serializePriceValue(prices[symbol].value));
+    symbols.push(symbol);
+    values.push(prices[symbol].value);
     console.log(symbol);
     console.log(prices[symbol].value);
   });
@@ -46,9 +46,9 @@ export async function getSignedPrice(): Promise<SignedPriceDataType> {
     timestamp: prices["IBM"].timestamp
   };
   
-  console.log(priceData);
+  //console.log(priceData);
 
   let signed =  priceSigner.signPriceData(priceData, signer.privateKey);
-  console.log(signed);
+  //console.log(signed);
   return signed;
 }

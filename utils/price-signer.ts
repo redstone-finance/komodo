@@ -5,7 +5,7 @@ import { ethers } from "ethers";
 
 export type PriceDataType = {
     symbols: string[],
-    prices: number[],
+    values: number[],
     timestamp: number
 }
 
@@ -17,7 +17,7 @@ export type SignedPriceDataType = {
 
 const PriceData = [
     {name: 'symbols', type: 'bytes32[]'},
-    {name: 'prices', type: 'uint256[]'},
+    {name: 'values', type: 'uint256[]'},
     {name: 'timestamp', type: 'uint256'}
 ];
 
@@ -29,6 +29,7 @@ const EIP712Domain = [
 ];
 
 const serializeBN = (value:any) => value.toString();
+const serializePriceValue = (value: any) => Math.round(value * (10 ** 8));
 
 export class PriceSigner {
     private _domainData: object;
@@ -43,9 +44,9 @@ export class PriceSigner {
 
     private serializeToMessage(priceData: PriceDataType): object {
         return {
-            symbols: priceData.symbols,
-            prices: priceData.prices.map(serializeBN),
-            timestamp: serializeBN(priceData.timestamp)
+            symbols: priceData.symbols.map(ethers.utils.formatBytes32String),
+            prices: priceData.prices.map(serializePriceValue),
+            timestamp: priceData.timestamp
         }
     }
 
@@ -59,6 +60,8 @@ export class PriceSigner {
             primaryType: 'PriceData',
             message: this.serializeToMessage(priceData),
         };
+        
+        console.log(data);
 
         return {
             priceData: priceData,

@@ -4,7 +4,7 @@ pragma solidity ^0.8.2;
 import "hardhat/console.sol";
 import "./ERC20Initializable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "evm-relayer/contracts/IPriceFeed.sol";
+import "redstone-flash-storage/lib/contracts/IPriceFeed.sol";
 
 
 

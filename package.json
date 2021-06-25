@@ -16,18 +16,23 @@
     "@typechain/ethers-v5": "^6.0.5",
     "@types/lodash": "^4.14.170",
     "@types/mocha": "^8.2.2",
+    "axios": "^0.21.1",
     "chai": "^4.3.4",
     "eth-sig-util": "^3.0.1",
     "ethereum-waffle": "^3.4.0",
     "hardhat": "^2.4.0",
+    "hardhat-typechain": "^0.3.5",
     "lodash": "^4.17.21",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
+    "@uniswap/v3-core": "git+https://github.com/Uniswap/uniswap-v3-core.git",
+    "deep-sort-object": "^1.0.2",
     "ethers": "^5.3.1",
-    "evm-relayer": "git+https://github.com/redstone-finance/redstone-flash-storage.git",
-    "redstone-api": "^0.4.3"
+    "redstone-api": "^0.4.3",
+    "redstone-flash-storage": "^1.0.1",
+    "sort-deep-object-arrays": "^1.1.2"
   }
 }

@@ -1,16 +1,24 @@
 import {PriceFeed} from "../typechain/PriceFeed";
 import {ethers} from "ethers";
+import {SignedPricePackage}  from './evm-signer';
+import {SignedPriceDataType} from "./price-signer";
 
-const { getSignedPrice } = require("../utils/mock-api");
+const { getSignedPrice } = require("../utils/redstone-api");
 
 
 async function getPriceData(priceFeed: PriceFeed) {
-  let {priceData, signature} = getSignedPrice();
+  const signedPriceData: SignedPriceDataType = await getSignedPrice();
+  
+  console.log("Signer: " + signedPriceData.signer);
+  
+  
 
-  let setPriceTx = await priceFeed.populateTransaction.setPrices(priceData, signature);
+  
+
+  let setPriceTx = await priceFeed.populateTransaction.setPrices(signedPriceData.priceData, signedPriceData.signature);
   let setPriceData = setPriceTx.data ? setPriceTx.data.substr(2) : "";
 
-  let clearPriceTx = await priceFeed.populateTransaction.clearPrices(priceData);
+  let clearPriceTx = await priceFeed.populateTransaction.clearPrices(signedPriceData.priceData);
   let clearPricePrefix = clearPriceTx.data ? clearPriceTx.data.substr(2,8) : "";
 
   //Add priceDataLen info

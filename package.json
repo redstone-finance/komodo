@@ -29,10 +29,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
     "@uniswap/v3-core": "git+https://github.com/Uniswap/uniswap-v3-core.git",
-    "deep-sort-object": "^1.0.2",
     "ethers": "^5.3.1",
     "redstone-api": "^0.4.3",
-    "redstone-flash-storage": "^1.0.1",
-    "sort-deep-object-arrays": "^1.1.2"
+    "redstone-flash-storage": "^1.0.4"
   }
 }

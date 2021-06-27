@@ -27,14 +27,14 @@ async function checkState() {
   
 }
 
-async function addToPosition() {
+async function increaseLiquidity(pairId) {
   let balance = await usdc.balanceOf(main.address);
   console.log("USDC balance: " + ethers.utils.formatUnits(balance, 6));
   
   let incParams = {
-    tokenId: 3563,
-    amount0Desired: 25000000,
-    amount1Desired: 0,
+    tokenId: pairId,
+    amount0Desired: 0,
+    amount1Desired: 10000000,
     amount0Min: 0,
     amount1Min: 0,
     deadline: 10000000000
@@ -44,4 +44,25 @@ async function addToPosition() {
   console.log(tx.hash);
 }
 
-addToPosition();
+async function mintPosition(pairId) {
+  let balance = await usdc.balanceOf(main.address);
+  console.log("USDC balance: " + ethers.utils.formatUnits(balance, 6));
+
+  let mintParams = {
+    tokenId: pairId,
+    amount0Desired: 0,
+    amount1Desired: 10000000,
+    amount0Min: 0,
+    amount1Min: 0,
+    deadline: 10000000000
+  }
+
+  let tx = await nftManager.increaseLiquidity(incParams, {gasLimit: 1000000});
+  console.log(tx.hash);
+}
+
+
+const kIBM_ID = 3587;
+
+//mintPosition(kIBM_ID);
+increaseLiquidity(kIBM_ID);

@@ -16,7 +16,7 @@ console.log("MAIN: " + main.address);
 async function mint(address) {
   let token = new ethers.Contract(address, KO_TOKEN.abi, main);
   token = wrapContract(token, REDSTONE_STOCKS_PROVIDER);
-  let tx = await token.mintWithPrices(1, {value: 1});
+  let tx = await token.mintWithPrices(ethers.utils.parseEther("1"), {value: ethers.utils.parseEther("0.1")});
   console.log("Tokens minted: " + tx.hash);
 }
 

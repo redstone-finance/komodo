@@ -1,5 +1,5 @@
 import { ethers } from "hardhat";
-import { KoToken } from "../typechain/KoToken";
+import { KoTokenEth } from "../typechain/KoTokenEth";
 import { MockPriceFeed } from "../typechain/MockPriceFeed";
 import {SignerWithAddress} from "@nomiclabs/hardhat-ethers/signers";
 const { expect } = require("chai");
@@ -10,7 +10,7 @@ const fromBytes32 = ethers.utils.parseBytes32String;
 
 describe("KoToken", function() {
   
-  let koToken: KoToken;
+  let koToken: KoTokenEth;
   let buyer: SignerWithAddress;
   let maker: SignerWithAddress;
   let priceFeed: MockPriceFeed;
@@ -26,8 +26,8 @@ describe("KoToken", function() {
     await priceFeed.setPrice(toBytes32("ETH"), 2000);
     await priceFeed.setPrice(toBytes32("OIL"), 200);
       
-    const KoToken = await ethers.getContractFactory("KoToken");
-    koToken = await KoToken.deploy() as KoToken;
+    const KoToken = await ethers.getContractFactory("KoTokenETH");
+    koToken = await KoToken.deploy() as KoTokenEth;
     await koToken.initialize(toBytes32("OIL"), "komodo-OIL-token", "kOIL", priceFeed.address);
     await koToken.deployed();
 

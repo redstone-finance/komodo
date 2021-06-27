@@ -9,7 +9,7 @@ import "redstone-flash-storage/lib/contracts/IPriceFeed.sol";
 
 
 
-contract KoToken is ERC20Initializable, Ownable {
+contract KoTokenETH is ERC20Initializable, Ownable {
 
     bool private initialized;
     bytes32 public asset;

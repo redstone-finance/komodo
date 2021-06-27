@@ -19,7 +19,7 @@ const toRedstonePrecision = function (x: number): number {
   return x * 10**8;
 };
 
-describe("MockDefi with Proxy contract and pricing Data", function () {
+describe("KoToken with life Redstone pricing", function () {
 
   const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
   const REDSTONE_STOCKS_PROVIDER_ADDRESS = "0x926E370fD53c23f8B71ad2B3217b227E41A92b12";
@@ -34,7 +34,7 @@ describe("MockDefi with Proxy contract and pricing Data", function () {
   it("Deployment should have zero balance", async function () {
     [maker, admin] = await ethers.getSigners();
 
-    const KoToken = await ethers.getContractFactory("KoToken");
+    const KoToken = await ethers.getContractFactory("KoTokenETH");
     const Proxy = await ethers.getContractFactory("RedstoneUpgradeableProxy");
     const PriceFeed = await ethers.getContractFactory("PriceFeed");
     const Verifier = await ethers.getContractFactory("PriceVerifier");
@@ -60,7 +60,7 @@ describe("MockDefi with Proxy contract and pricing Data", function () {
 
   it("Should mint token", async function () {
 
-    koToken = wrapContract(koToken, priceFeed, REDSTONE_STOCKS_PROVIDER);
+    koToken = wrapContract(koToken, REDSTONE_STOCKS_PROVIDER);
 
     await koToken.mintWithPrices(1, {value: 1});
 

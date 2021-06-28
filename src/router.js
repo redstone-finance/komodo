@@ -20,10 +20,12 @@ export default new Router({
     {
       path: '/commodity/:symbol',
       name: 'commodity',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Commodity.vue'),
-    }
+    },
+    {
+      path: '/token-sponsor/:symbol',
+      name: 'token-sponsor',
+      component: () => import(/* webpackChunkName: "about" */ './views/TokenSponsor.vue'),
+    },
   ]
 })

@@ -1,19 +1,73 @@
 <template>
-  <div class="commodities">
-    <h1 class="text-center">Commodity: {{ $route.params.symbol }}</h1>
+  <div class="commodity">
+    <div class="back-link-container">
+      <!-- <i class="material-icons">arrow_back</i>
+      All commodities -->
+      <!-- <a href="/#/commodities">
+        <v-icon aria-hidden="false">
+          mdi-arrow-left
+        </v-icon>
+        All commodities
+      </a> -->
+    </div>
+
+    <h1 class="text-center">
+      {{ symbol }}:
+      <span class="price-value">{{ priceValue | price }}</span>
+    </h1>
+    <div class="text-center subtitle">
+      {{ tokenDetails.name }}
+    </div>
+
+    <TokenPriceChartContainer :symbol="symbol" provider="redstone-stocks" />
   </div>
 </template>
 
 <script>
-// import commoditiesData from "@/assets/data/commodities.json"
+import redstone from "redstone-api";
+import TokenPriceChartContainer from "@/components/TokenPriceChartContainer";
+import commoditiesData from "@/assets/data/commodities.json"
 
 export default {
   name: 'Commodity',
 
+  data() {
+    return {
+      currentPrice: null,
+    };
+  },
+
+  async created() {
+    this.currentPrice = await redstone.getPrice(this.symbol, {
+      provider: "redstone-stocks",
+    });
+  },
+
   computed: {
+    symbol() {
+      return this.$route.params.symbol;
+    },
+
+    tokenDetails() {
+      const details = commoditiesData[this.symbol];
+      return {
+        ...details,
+        symbol: this.symbol,
+      };
+    },
+
+    priceValue() {
+      if (this.currentPrice) {
+        return this.currentPrice.value;
+      } else {
+        return 0;
+      }
+      
+    },
   },
 
   components: {
+    TokenPriceChartContainer,
   }
 }
 </script>
@@ -27,11 +81,26 @@ h1 {
   color: #333;
 }
 
-.description {
-  max-width: 300px;
-  margin: auto;
+// .description {
+//   max-width: 300px;
+//   margin: auto;
+//   color: #777;
+//   font-size: 12px;
+//   margin-bottom: 20px;
+// }
+
+.subtitle {
   color: #777;
-  font-size: 12px;
-  margin-bottom: 20px;
 }
+
+.price-value {
+  color: green;
+}
+
+.back-link-container {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
 </style>

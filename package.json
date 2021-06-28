@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
+    "chart.js": "2.9.3",
     "core-js": "^2.6.5",
     "ethers": "^5.3.1",
-    "evm-relayer": "git+https://github.com/redstone-finance/redstone-flash-storage.git",
+    "lodash": "^4.17.21",
+    "redstone-api": "^0.4.3",
     "vue": "^2.6.10",
+    "vue-chartjs": "^3.5.1",
+    "vue-loaders": "^4.1.4",
     "vue-router": "^3.0.3",
     "vuetify": "^2.4.0",
     "vuex": "^3.0.1"

@@ -105,6 +105,63 @@ describe("KoToken", function() {
     expect(await koToken.balanceOf(buyer.address)).to.equal(10);
     expect(await koToken.debtOf(buyer.address)).to.equal(0);
   });
+
+
+  it("Should not liquidate a solvent account", async function() {
+    expect(await koToken.debtOf(maker.address)).to.equal(80);
+
+    expect(await koToken.debtValueOf(maker.address)).to.equal(16000);
+    expect(await koToken.collateralOf(maker.address)).to.equal(60);
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(120000);
+
+    await expect(koToken.connect(buyer).liquidate(maker.address, 10))
+      .to.be.revertedWith('Cannot liquidate a solvent account');
+
+  });
+
+
+  it("Should liquidate without bringing account to solvency", async function() {
+    expect(await koToken.debtOf(maker.address)).to.equal(80);
+
+    await priceFeed.setPrice(toBytes32("ETH"), 315);
+
+    expect(await koToken.debtOf(maker.address)).to.equal(80);
+    expect(await koToken.debtValueOf(maker.address)).to.equal(16000);
+    expect(await koToken.collateralOf(maker.address)).to.equal(60);
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(18900);
+
+    expect(await koToken.solvencyOf(maker.address)).to.equal(1181);
+
+    await koToken.connect(buyer).approve(koToken.address, 1);
+
+    await expect(koToken.connect(buyer).liquidate(maker.address, 1))
+      .to.be.revertedWith('Account must be solvent after liquidation');
+
+  });
+
+
+  it("Should liquidate", async function() {
+    expect(await koToken.debtOf(maker.address)).to.equal(80);
+
+    await priceFeed.setPrice(toBytes32("ETH"), 319);
+
+    expect(await koToken.debtOf(maker.address)).to.equal(80);
+    expect(await koToken.debtValueOf(maker.address)).to.equal(16000);
+    expect(await koToken.collateralOf(maker.address)).to.equal(60);
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(19140);
+
+    expect(await koToken.solvencyOf(maker.address)).to.equal(1196);
+
+    await koToken.connect(buyer).approve(koToken.address, 10);
+    await koToken.connect(buyer).liquidate(maker.address, 10);
+
+    expect(await koToken.debtOf(maker.address)).to.equal(70);
+    expect(await koToken.debtValueOf(maker.address)).to.equal(14000);
+    expect(await koToken.collateralOf(maker.address)).to.equal(54);
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(17226);
+    expect(await koToken.solvencyOf(maker.address)).to.equal(1230);
+
+  });
   
   
   

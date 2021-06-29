@@ -2,7 +2,7 @@
   <v-dialog
     transition="dialog-top-transition"
     v-model="isVisible"
-    max-width="600"
+    max-width="400"
   >
     <template v-slot:default="dialog">
       <v-card>
@@ -11,10 +11,6 @@
           dark
           flat
         >{{ title }}</v-toolbar>
-        <!-- <v-card-text>
-          <div class="text-h2 pa-12">Hello world!</div>
-        </v-card-text> -->
-
 
         <div class="input-container">
           <v-text-field

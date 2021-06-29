@@ -31,7 +31,7 @@
               <div class="metrics">
                 <div class="usd-price metric">
                   <div class="value">
-                    $1.23
+                    {{ getPrice(commodity) | price }}
                   </div>
                   <div class="label">
                     USD Price
@@ -97,6 +97,14 @@ export default {
           return "pink";
         default:
           return "black";
+      }
+    },
+
+    getPrice(commodity) {
+      if (commodity.price) {
+        return commodity.price.value;
+      } else {
+        return '...';
       }
     }
   }

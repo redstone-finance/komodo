@@ -22,6 +22,7 @@
 
 <script>
 // @ is an alias to /src
+import redstone from "redstone-api";
 import CommoditiesCards from '@/components/CommoditiesCards.vue'
 import commoditiesData from "@/assets/data/commodities.json"
 
@@ -34,6 +35,15 @@ export default {
     };
   },
 
+  async created() {
+    if (Object.keys(this.prices).length === 0) {
+      const prices = await redstone.getAllPrices({
+        provider: "redstone-stocks",
+      });
+      this.$store.dispatch('updatePrices', prices);
+    }
+  },
+
   computed: {
     commodities() {
       const tokens = [];
@@ -43,6 +53,7 @@ export default {
           tokens.push({
             ...commodity,
             symbol,
+            price: this.prices[symbol],
           });
         }
       }
@@ -62,6 +73,10 @@ export default {
 
     selecteddTab() {
       return this.categories[this.tabIndex];
+    },
+
+    prices() {
+      return this.$store.state.prices;
     },
   },
 

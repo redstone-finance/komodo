@@ -10,6 +10,8 @@
       {{ tokenDetails.name }}
     </div>
 
+    <TokenSponsorActionDialog  ref="dialog" />
+
     <div class="main-card">
       <v-tabs class="mb-4" fixed-tabs centered v-model="tab">
         <v-tab>
@@ -85,7 +87,7 @@
 
           <div class="buttons">
             <div class="button-container">
-              <v-btn color="green" @click="addCollateralButtonClicked()" rounded outlined large>
+              <v-btn color="#1976d2" @click="addCollateralButtonClicked()" rounded outlined large>
                 Add collateral
                 <v-icon right>
                   mdi-lock-plus
@@ -94,7 +96,7 @@
             </div>
 
             <div class="button-container">
-              <v-btn color="pink" @click="removeCollateralButtonClicked()" rounded outlined large>
+              <v-btn color="orange" @click="removeCollateralButtonClicked()" rounded outlined large>
                 Remove collateral
                 <v-icon right>
                   mdi-delete
@@ -111,6 +113,7 @@
 <script>
 import redstone from "redstone-api";
 import commoditiesData from "@/assets/data/commodities.json";
+import TokenSponsorActionDialog from "@/components/TokenSponsorActionDialog";
 
 export default {
   name: 'TokenSponsor',
@@ -130,12 +133,25 @@ export default {
 
   methods: {
     mintButtonClicked() {
-      alert("mintButtonClicked");
+      // alert("mintButtonClicked");
+      this.opendDialog({
+        title: `Mint ${this.symbol} tokens`,
+        inputLabel: `Amount in ${this.symbol}`,
+        onConfirmButtonClick: (value) => this.mint(value),
+      });
       // TODO: open modal to get value to mint
+    },
+
+    mint(value) {
+      alert(`Will mint ${value} tokens`);
     },
 
     burnButtonClicked() {
       alert("burnButtonClicked");
+    },
+
+    opendDialog(opts) {
+      this.$refs.dialog.openDialog(opts);
     },
   },
 
@@ -159,6 +175,10 @@ export default {
         return 0;
       }
     },
+  },
+
+  components: {
+    TokenSponsorActionDialog,
   },
 }
 </script>

@@ -97,7 +97,9 @@ contract KoTokenUSD is ERC20Initializable, Ownable {
      * @dev Collateral value expressed with 10^18 precision
      */
     function collateralValueOf(address account) public view returns(uint256) {
-        return collateralOf(account) * 10**18 / 10**usd.decimals();
+        //USDC usded 6 digits precision ( * 10**12)
+        //Prices from redstone use 8 digits precision ( * 10**8) 
+        return collateralOf(account) * 10**20;
     }
 
 

@@ -12,6 +12,9 @@ const fromBytes32 = ethers.utils.parseBytes32String;
 const toEth = function(val: Number) {
   return ethers.utils.parseEther(val.toString());
 }
+const toVal = function(val: Number) {
+  return ethers.utils.parseUnits(val.toString(), 26);
+}
 const toUsd = function(val: Number) {
   return ethers.utils.parseUnits(val.toString(), 6);
 }
@@ -32,8 +35,8 @@ describe("KoToken", function() {
     const MockPriceFeed = await ethers.getContractFactory("MockPriceFeed");
     priceFeed = await MockPriceFeed.deploy() as MockPriceFeed;
 
-    await priceFeed.setPrice(toBytes32("ETH"), 2000);
-    await priceFeed.setPrice(toBytes32("OIL"), 200);
+
+    await priceFeed.setPrice(toBytes32("OIL"), 20000000000);
 
     const MockUsd = await ethers.getContractFactory("MockUSD");
     usd = await MockUsd.deploy() as MockUsd;
@@ -63,13 +66,13 @@ describe("KoToken", function() {
     expect(await usd.balanceOf(maker.address)).to.equal(toUsd(700));
     
     expect(await koToken.balanceOf(maker.address)).to.equal(toEth(1));
-    expect(await koToken.balanceValueOf(maker.address)).to.equal(toEth(200));
+    expect(await koToken.balanceValueOf(maker.address)).to.equal(toVal(200));
 
     expect(await koToken.collateralOf(maker.address)).to.equal(toUsd(300));
-    expect(await koToken.collateralValueOf(maker.address)).to.equal(toEth(300));
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(toVal(300));
 
     expect(await koToken.debtOf(maker.address)).to.equal(toEth(1));
-    expect(await koToken.debtValueOf(maker.address)).to.equal(toEth(200));
+    expect(await koToken.debtValueOf(maker.address)).to.equal(toVal(200));
 
     expect(await koToken.solvencyOf(maker.address)).to.equal(1500);
   });
@@ -84,11 +87,11 @@ describe("KoToken", function() {
 
     expect(await koToken.collateralOf(maker.address)).to.equal(toUsd(400));
 
-    expect(await koToken.collateralValueOf(maker.address)).to.equal(toEth(400));
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(toVal(400));
     expect(await koToken.solvencyOf(maker.address)).to.equal(2000);
   });
 
-  
+
   it("Should remove collateral", async function() {
     await koToken.connect(maker).removeCollateral(toUsd(100));
 
@@ -96,7 +99,7 @@ describe("KoToken", function() {
 
     expect(await koToken.collateralOf(maker.address)).to.equal(toUsd(300));
 
-    expect(await koToken.collateralValueOf(maker.address)).to.equal(toEth(300));
+    expect(await koToken.collateralValueOf(maker.address)).to.equal(toVal(300));
     expect(await koToken.solvencyOf(maker.address)).to.equal(1500);
   });
 

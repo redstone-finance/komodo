@@ -1,14 +1,17 @@
+
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "strict": true,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "moduleResolution": "node"
+    "target": "es5",
+    "declaration": true,
+    "outDir": "./dist",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "include": ["./scripts", "./test"],
-  "files": [
-    "./hardhat.config.ts"
-  ]
+  "ts-node": {
+    "files": true
+  },
+  "exclude": ["node_modules", "tools", "test"]
 }

@@ -80,14 +80,6 @@ h1 {
   color: #333;
 }
 
-// .description {
-//   max-width: 300px;
-//   margin: auto;
-//   color: #777;
-//   font-size: 12px;
-//   margin-bottom: 20px;
-// }
-
 .subtitle {
   color: #777;
 }

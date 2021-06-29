@@ -200,12 +200,12 @@ export default {
     gaugeOptions() {
       return {
         // arcLabels: ['Low', 'Neutral', 'High'],
-        arcDelimiters: [33.3, 66.7],
+        arcDelimiters: [25, 50, 75],
         needleValue: 80,
         needleColor: '#999',
         // centralLabel: "Solvency",
         chartWidth: 180,
-        arcColors: ['#DB4437', '#F4B400', '#4285F4'],
+        arcColors: ['#DB4437', '#F4B400', '#4285F4', '#0F9D58'],
         rangeLabel: ['Low', 'High']
       };
     },

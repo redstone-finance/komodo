@@ -23,8 +23,9 @@
 <script>
 // @ is an alias to /src
 import redstone from "redstone-api";
-import CommoditiesCards from '@/components/CommoditiesCards.vue'
-import commoditiesData from "@/assets/data/commodities.json"
+import CommoditiesCards from "@/components/CommoditiesCards.vue";
+import commoditiesData from "@/assets/data/commodities.json";
+import blockchain from "@/helpers/blockchain";
 
 export default {
   name: 'commodities',
@@ -36,11 +37,25 @@ export default {
   },
 
   async created() {
+    // Loading prices from redstone
     if (Object.keys(this.prices).length === 0) {
       const prices = await redstone.getAllPrices({
         provider: "redstone-stocks",
       });
       this.$store.dispatch('updatePrices', prices);
+    }
+
+    // Loading liquidity from blockchain
+    if (!this.$store.state.liquidityLoadingCompleted) {
+      for (const commodity of this.commodities) {
+        // const totalSupply = await blockchain.getTotalSupplyForToken(commodity.symbol);
+        const liquidity = await blockchain.getTotalSupplyForToken(commodity.symbol);
+        this.$store.dispatch('setLiquidityForToken', {
+          symbol: commodity.symbol,
+          liquidity,
+        });
+      }
+      this.$store.dispatch('completeLiquidityLoading');
     }
   },
 

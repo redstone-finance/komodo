@@ -40,7 +40,7 @@
 
                 <div class="liquidity metric">
                   <div class="value">
-                    $12.123,00
+                    {{ getLiquidity(commodity) | price }}
                   </div>
                   <div class="label">
                     Liquidity
@@ -106,8 +106,23 @@ export default {
       } else {
         return '...';
       }
+    },
+
+    getLiquidity(commodity) {
+      const { symbol } = commodity;
+      if (this.liquidity[symbol] !== undefined) {
+        return this.liquidity[symbol];
+      } else {
+        return '...';
+      }
     }
-  }
+  },
+
+  computed: {
+    liquidity() {
+      return this.$store.state.liquidity;
+    },
+  },
 
 }
 </script>

@@ -15451,6 +15451,11 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
+vue-gauge@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue-gauge/-/vue-gauge-1.0.3.tgz#383109b9c6181d1b7df065cd295ef54b9591df04"
+  integrity sha512-hIjjDxAjJ5NRKeEVUpwZQ7IA+LONfNE7C51Z5TeEvIEl3jqu2aLE5RnIGQaLdLBYzbK807AiCvYt1nM0m4D6Cw==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"

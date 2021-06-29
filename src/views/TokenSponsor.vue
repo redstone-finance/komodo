@@ -13,6 +13,26 @@
     <TokenSponsorActionDialog  ref="dialog" />
 
     <div class="main-card">
+
+      <div class="solvency-container">
+        <div class="gauge-container">
+          <VueGauge
+            refid="gauge"
+            :options="gaugeOptions"
+          />
+        </div>
+        <div class="text-center mb-6">
+          <span class="subtitle">
+            Solvency:
+          </span>
+          <span class="value">
+            112%
+          </span>
+        </div>
+      </div>
+
+      <hr />
+
       <v-tabs class="mb-4" fixed-tabs centered v-model="tab">
         <v-tab>
           Balance
@@ -112,6 +132,7 @@
 
 <script>
 import redstone from "redstone-api";
+import VueGauge from 'vue-gauge';
 import commoditiesData from "@/assets/data/commodities.json";
 import TokenSponsorActionDialog from "@/components/TokenSponsorActionDialog";
 
@@ -175,10 +196,24 @@ export default {
         return 0;
       }
     },
+
+    gaugeOptions() {
+      return {
+        // arcLabels: ['Low', 'Neutral', 'High'],
+        arcDelimiters: [33.3, 66.7],
+        needleValue: 80,
+        needleColor: '#999',
+        // centralLabel: "Solvency",
+        chartWidth: 180,
+        arcColors: ['#DB4437', '#F4B400', '#4285F4'],
+        rangeLabel: ['Low', 'High']
+      };
+    },
   },
 
   components: {
     TokenSponsorActionDialog,
+    VueGauge,
   },
 }
 </script>
@@ -212,7 +247,23 @@ h1 {
 
   hr {
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
+    
+  }
+
+  .solvency-container {
+    .subtitle {
+      color: #777;
+    }
+    .value {
+      font-weight: bold;
+    }
+
+    .gauge-container {
+      // border: 1px solid black;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .balance-title {

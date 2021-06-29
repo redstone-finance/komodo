@@ -7,19 +7,33 @@
       dense
       flat
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Komodo Logo"
-          class="shrink mr-2"
-          contain
-          src="komodo-icon.png"
-          transition="scale-transition"
-          width="40"
-        />
-        <h2>Komodo</h2>
-      </div>
+      <!-- <div > -->
+        <a class="logo-link d-flex align-center" href="/#/">
+          <v-img
+            alt="Komodo Logo"
+            class="shrink mr-2"
+            contain
+            src="komodo-icon.png"
+            transition="scale-transition"
+            width="40"
+          />
+          <h2>Komodo</h2>
+        </a>
+      <!-- </div> -->
 
       <v-spacer></v-spacer>
+
+      <a class="nav-link" href="/#/commodities">
+        <span>
+          All commodities
+        </span>
+        <v-icon
+            right
+            dark
+          >
+            mdi-finance
+          </v-icon>
+      </a>
     </v-app-bar>
 
     <v-main>
@@ -28,7 +42,7 @@
   </v-app>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -44,6 +58,27 @@ export default Vue.extend({
 
 * {
   font-family: "Poppins", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.logo-link {
+  text-decoration: none;
+  h2 {
+    color: white;
+  }
+}
+
+a.nav-link {
+  text-decoration: none;
+
+  span {
+    color: white;
+  }
+
+  &:hover {
+    span {
+      text-decoration: underline;
+    }
+  }
 }
 
 </style>

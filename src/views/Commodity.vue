@@ -62,7 +62,6 @@ export default {
       } else {
         return 0;
       }
-      
     },
   },
 
@@ -94,7 +93,7 @@ h1 {
 }
 
 .price-value {
-  color: green;
+  color: #0F9D58;
 }
 
 .back-link-container {

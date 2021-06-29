@@ -23,7 +23,7 @@
 
       <div class="action-buttons">
         <v-btn :href="'/#/token-sponsor/' + symbol" color="green" outlined small class="ml-2">
-          Become token sponsor
+          Token sponsor view
           <v-icon
             right
             dark

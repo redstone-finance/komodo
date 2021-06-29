@@ -18,6 +18,7 @@
         <div class="gauge-container">
           <VueGauge
             refid="gauge"
+            :key="gaugeOptions.needleValue" 
             :options="gaugeOptions"
           />
         </div>
@@ -26,7 +27,7 @@
             Solvency:
           </span>
           <span class="value">
-            112%
+            {{ solvency }}%
           </span>
         </div>
       </div>
@@ -57,18 +58,18 @@
             </div>
             <div class="value">
               <div class="main-currency-value">
-                345.12 {{ symbol }}
+                {{ balance || '...' }} {{ symbol }}
               </div>
               <hr />
               <div class="usd-value">
-                $123.12
+                {{ balanceValueUSD | price }}
               </div>
             </div>
           </div>
 
           <div class="buttons">
             <div class="button-container">
-              <v-btn color="green" @click="mintButtonClicked()" rounded outlined large>
+              <v-btn color="#0F9D58" @click="mintButtonClicked()" rounded outlined large>
                 Mint tokens
                 <v-icon right>
                   mdi-wallet-plus
@@ -77,7 +78,7 @@
             </div>
 
             <div class="button-container">
-              <v-btn color="pink" @click="burnButtonClicked()" rounded outlined large>
+              <v-btn color="#DB4437" @click="burnButtonClicked()" rounded outlined large>
                 Burn tokens
                 <v-icon right>
                   mdi-fire
@@ -96,11 +97,16 @@
             </div>
             <div class="value">
               <div class="main-currency-value">
-                3.12 ETH
+                <template v-if="!loadingCollateral">
+                  {{ collateral }} ETH
+                </template>
+                <template v-else>
+                  ...
+                </template>
               </div>
               <hr />
               <div class="usd-value">
-                $123.12
+                {{ collateralValueUSD | price }}
               </div>
             </div>
           </div>
@@ -133,6 +139,7 @@
 <script>
 import redstone from "redstone-api";
 import VueGauge from 'vue-gauge';
+import blockchain from "@/helpers/blockchain";
 import commoditiesData from "@/assets/data/commodities.json";
 import TokenSponsorActionDialog from "@/components/TokenSponsorActionDialog";
 
@@ -142,43 +149,147 @@ export default {
   data() {
     return {
       currentPrice: null,
+      ethPrice: null,
+      balance: null,
       tab: 0,
+      solvency: 0,
+      collateral: 0,
+      loadingCollateral: false,
     };
   },
 
-  async created() {
-    this.currentPrice = await redstone.getPrice(this.symbol, {
-      provider: "redstone-stocks",
-    });
+  created() {
+    this.loadCurrentPrice();
+    this.loadSolvency();
+    this.loadCollateral();
+    this.loadBalance();
+    this.loadEthPrice();
   },
 
   methods: {
+    async loadCurrentPrice() {
+      this.currentPrice = await redstone.getPrice(this.symbol, {
+        provider: "redstone-stocks",
+      });
+    },
+
+    async loadBalance() {
+      this.balance = await blockchain.getBalance(this.symbol);
+    },
+
+    async loadEthPrice() {
+      this.ethPrice = await redstone.getPrice("ETH");
+    },
+
+    async loadSolvency() {
+      this.solvency = await blockchain.getSolvency(this.symbol);
+    },
+
+    async loadCollateral() {
+      this.loadingCollateral = true;
+      this.collateral = await blockchain.getCollateralAmount(this.symbol);
+      this.loadingCollateral = false;
+    },
+
     mintButtonClicked() {
-      // alert("mintButtonClicked");
       this.opendDialog({
         title: `Mint ${this.symbol} tokens`,
         inputLabel: `Amount in ${this.symbol}`,
         onConfirmButtonClick: (value) => this.mint(value),
       });
-      // TODO: open modal to get value to mint
-    },
-
-    mint(value) {
-      alert(`Will mint ${value} tokens`);
     },
 
     burnButtonClicked() {
-      alert("burnButtonClicked");
+      this.opendDialog({
+        title: `Burn ${this.symbol} tokens`,
+        inputLabel: `Amount in ${this.symbol}`,
+        onConfirmButtonClick: (value) => this.burn(value),
+      });
+    },
+
+    addCollateralButtonClicked() {
+      this.opendDialog({
+        title: `Add ETH tokens to your collateral`,
+        inputLabel: `Amount in ETH`,
+        onConfirmButtonClick: (value) => this.addCollateral(value),
+      });
+    },
+
+    removeCollateralButtonClicked() {
+      this.opendDialog({
+        title: `Remove ETH tokens from your collateral`,
+        inputLabel: `Amount in ETH`,
+        onConfirmButtonClick: (value) => this.removeCollateral(value),
+      });
+    },
+
+    async mint(value) {
+      await this.sendBlockchainTransaction(
+        async () => await blockchain.mint(this.symbol, value));
+    },
+
+    async burn(value) {
+      await this.sendBlockchainTransaction(
+        async () => await blockchain.burn(this.symbol, value));
+    },
+
+    async addCollateral(value) {
+      await this.sendBlockchainTransaction(
+        async () => await blockchain.addCollateral(this.symbol, value));
+    },
+
+    async removeCollateral(value) {
+      await this.sendBlockchainTransaction(
+        async () => await blockchain.removeCollateral(this.symbol, value));
+    },
+
+    async sendBlockchainTransaction(txSendFunction, successMsg, errorMsg) {
+      try {
+        this.setDialogLoading(true);
+        this.$toast.info("Please confirm transaction in metamask");
+        await txSendFunction();
+        this.$toast.success(successMsg || "Transaction sent successfully");
+      } catch (e) {
+        this.$toast.error(errorMsg || "Error occured");
+        console.error(e);
+      } finally {
+        this.setDialogLoading(false);
+        this.closeDialog();
+      }
     },
 
     opendDialog(opts) {
       this.$refs.dialog.openDialog(opts);
+    },
+
+    setDialogLoading(value) {
+      this.$refs.dialog.setLoading(value);
+    },
+
+    closeDialog() {
+      this.$refs.dialog.close();
     },
   },
 
   computed: {
     symbol() {
       return this.$route.params.symbol;
+    },
+
+    collateralValueUSD() {
+      if (this.ethPrice) {
+        return this.ethPrice.value * this.collateral;
+      } else {
+        return '...';
+      }
+    },
+
+    balanceValueUSD() {
+      if (this.currentPrice) {
+        return this.currentPrice.value * this.balance;
+      } else {
+        return '...';
+      }
     },
 
     tokenDetails() {
@@ -197,11 +308,16 @@ export default {
       }
     },
 
+    // 0 needleValue means 100% solvency, 100 needleValue means 120% and more
+    needleValue() {
+      return (this.solvency - 100) * (100 / 20);
+    },
+
     gaugeOptions() {
       return {
         // arcLabels: ['Low', 'Neutral', 'High'],
         arcDelimiters: [25, 50, 75],
-        needleValue: 80,
+        needleValue: this.needleValue,
         needleColor: '#999',
         // centralLabel: "Solvency",
         chartWidth: 180,

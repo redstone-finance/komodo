@@ -32,6 +32,7 @@
 
           <v-btn
             outlined
+            :loading="loading"
             color="#1976d2"
             @click="onConfirmButtonClick(value)"
           >
@@ -51,6 +52,7 @@ export default {
     return {
       isVisible: false,
       title: '',
+      loading: false,
       inputLabel: '',
       value: null,
       onConfirmButtonClick: null,
@@ -63,6 +65,14 @@ export default {
       this.inputLabel = opts.inputLabel;
       this.isVisible = true;
       this.onConfirmButtonClick = opts.onConfirmButtonClick;
+    },
+
+    setLoading(value) {
+      this.loading = value;
+    },
+
+    close() {
+      this.isVisible = false;
     },
   },
 }

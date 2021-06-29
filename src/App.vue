@@ -44,6 +44,14 @@
 
 <script>
 import Vue from 'vue';
+import blockchain from '@/helpers/blockchain';
+
+const checkEthereumNetwork = async () => {
+  const name = await blockchain.getNetworkName();
+  if (name !== "kovan") {
+    alert("Please switch to kovan network");
+  }
+};
 
 export default Vue.extend({
   name: 'App',
@@ -51,6 +59,14 @@ export default Vue.extend({
   data: () => ({
     //
   }),
+
+  async mounted() {
+    await checkEthereumNetwork();
+    blockchain.onNetworkChange(() => {
+      checkEthereumNetwork();
+    });
+  },
+
 });
 </script>
 

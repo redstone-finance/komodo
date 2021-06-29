@@ -3,13 +3,16 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueLoaders from 'vue-loaders';
-import vuetify from './plugins/vuetify'
+import VueToast from 'vue-toast-notification';
+import vuetify from './plugins/vuetify';
 
 import 'vue-loaders/dist/vue-loaders.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueLoaders);
+Vue.use(VueToast);
 
 function setupFilters() {
   Vue.filter('price', (value) => {

@@ -4,11 +4,12 @@ const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrap
 const toBytes32 = ethers.utils.formatBytes32String;
 
 const provider = ethers.getDefaultProvider('kovan');
+// const provider = new ethers.providers.JsonRpcProvider();
 const PRIV = "c58ab2267985af5e169f32aaa35ff6bf4878737d013edf92bd17421c1fba3ee7";
 const main = new ethers.Wallet(PRIV, provider);
 console.log("MAIN: " + main.address);
 
-const KO_TOKEN = require('../artifacts/contracts/KoToken.sol/KoToken');
+const KO_TOKEN = require('../artifacts/contracts/KoTokenETH.sol/KoTokenETH');
 const koFactory = new ethers.ContractFactory(KO_TOKEN.abi, KO_TOKEN.bytecode, main);
 
 const REDSTONE_PROXY = require('../artifacts/redstone-flash-storage/lib/contracts/RedstoneUpgradeableProxy.sol/RedstoneUpgradeableProxy.json');
@@ -64,5 +65,6 @@ async function mint(address) {
   console.log("Minted: " + tx.hash);
 }
 
-//deployKoToken("IBM");
+// deployKoToken("IBM");
+deployKoToken("ZCN21");
 

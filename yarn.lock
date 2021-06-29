@@ -832,12 +832,12 @@
     merkle-patricia-tree "^4.2.0"
 
 "@ethereumjs/blockchain@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@ethereumjs/blockchain/-/blockchain-5.3.0.tgz#206936e30a4320d87a26e58d157eadef21ef6ff1"
-  integrity sha512-B0Y5QDZcRDQISPilv3m8nzk97QmC98DnSE9WxzGpCxfef22Mw7xhwGipci5Iy0dVC2Np2Cr5d3F6bHAR7+yVmQ==
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@ethereumjs/blockchain/-/blockchain-5.3.1.tgz#b8cc506ce2481c32aa7dbb22aa100931e6f3723b"
+  integrity sha512-Sr39BoTOzmVSnuYzjiCIpgcBUFE5JWcMF0lYCvzrtx/5Lg1tnpZhw9yMQ6JfIomN421epg4oDz99DWlL9Aqz3g==
   dependencies:
     "@ethereumjs/block" "^3.3.0"
-    "@ethereumjs/common" "^2.3.0"
+    "@ethereumjs/common" "^2.3.1"
     "@ethereumjs/ethash" "^1.0.0"
     debug "^2.2.0"
     ethereumjs-util "^7.0.10"
@@ -1507,10 +1507,10 @@
   resolved "https://registry.yarnpkg.com/@truffle/blockchain-utils/-/blockchain-utils-0.0.31.tgz#0503d9fb2ce3e05c167c27294927f2f88d70a24d"
   integrity sha512-BFo/nyxwhoHqPrqBQA1EAmSxeNnspGLiOCMa9pAL7WYSjyNBlrHaqCMO/F2O87G+NUK/u06E70DiSP2BFP0ZZw==
 
-"@truffle/codec@^0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@truffle/codec/-/codec-0.11.1.tgz#fbe54d7635bc896b3f746b87e15b8125242bc820"
-  integrity sha512-7Z+BStlCKws+mdpQUb3XGCYCkv80QUtmaLVTbl7/Abzimr63lsCTC/37GLWXeRJ1Vam9JYiZEmzaXUHCqJWsTg==
+"@truffle/codec@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@truffle/codec/-/codec-0.11.2.tgz#2b32480991b561bcf625f7e8d41d1d869d80d99e"
+  integrity sha512-z3eNmTQ9Oq5W8f6UMyFmA4cTrp87Lvw7LCgBnH3v1trDT4+IiUQjf52bkyZBOVBGu7ngaw7myPRmJ1hwBySbOw==
   dependencies:
     big.js "^5.2.2"
     bn.js "^5.1.3"
@@ -1534,14 +1534,14 @@
     debug "^4.3.1"
 
 "@truffle/contract@^4.0.35":
-  version "4.3.21"
-  resolved "https://registry.yarnpkg.com/@truffle/contract/-/contract-4.3.21.tgz#a90a363564ea63ff3a42550cb0b97ffdd4972880"
-  integrity sha512-J4nYQVoOL29G7Rg2rmbHbsyQUx/Oj41HBHQOafjltnxppYuFk8OPW0EBm1o7gOAkfgFy4oJPhOVFucZ6JqY+GQ==
+  version "4.3.22"
+  resolved "https://registry.yarnpkg.com/@truffle/contract/-/contract-4.3.22.tgz#c7fb0565895ffaa1b9d7c57c32e0f080cc1ce3f3"
+  integrity sha512-Nn/OZWI8vAsnfxvumx5ez6wvBtuYtuS59icYTSG5V9qldgt462zwqIyf2Du2UM79x0FNkhCU9Ru4+3t5rzrUDw==
   dependencies:
     "@ensdomains/ensjs" "^2.0.1"
     "@truffle/blockchain-utils" "^0.0.31"
     "@truffle/contract-schema" "^3.4.1"
-    "@truffle/debug-utils" "^5.1.1"
+    "@truffle/debug-utils" "^5.1.2"
     "@truffle/error" "^0.0.14"
     "@truffle/interface-adapter" "^0.5.1"
     bignumber.js "^7.2.1"
@@ -1552,12 +1552,12 @@
     web3-eth-abi "1.3.6"
     web3-utils "1.3.6"
 
-"@truffle/debug-utils@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@truffle/debug-utils/-/debug-utils-5.1.1.tgz#7dd5960a4042bad0588074ebb95b73a44fe1f859"
-  integrity sha512-vp/rutosfUV0kdHPfXO+OdzmfmSq/phgXhwjCXn53ePivCemd2WCP4YNo8wO9erhgnYPy5z+tU4tLtIEx9YU0Q==
+"@truffle/debug-utils@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@truffle/debug-utils/-/debug-utils-5.1.2.tgz#fd1ed330b01292c8e65f3efecd03626c1bea0fe4"
+  integrity sha512-rpeG3t6tMiyHSnnKBGt1HSd8Wo1p0j3JR6dpC3REJuqXZ2vXZbYAnyNJRFcIlPOouAikt8FR1K8+gwZmP0XKQg==
   dependencies:
-    "@truffle/codec" "^0.11.1"
+    "@truffle/codec" "^0.11.2"
     "@trufflesuite/chromafi" "^2.2.2"
     bn.js "^5.1.3"
     chalk "^2.4.2"
@@ -1839,9 +1839,9 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "15.12.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.4.tgz#e1cf817d70a1e118e81922c4ff6683ce9d422e26"
-  integrity sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==
+  version "15.12.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.5.tgz#9a78318a45d75c9523d2396131bd3cca54b2d185"
+  integrity sha512-se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==
 
 "@types/node@^12.12.6":
   version "12.20.15"
@@ -2852,21 +2852,10 @@ articles@~0.2.1:
   resolved "https://registry.yarnpkg.com/articles/-/articles-0.2.2.tgz#cc6b429f8cfa811f41e7a08505abbb4e45503197"
   integrity sha512-S3Y4MPp+LD/l0HHm/4yrr6MoXhUkKT98ZdsV2tkTuBNywqUXEtvJT+NBO3KTSQEttc5EOwEJe2Xw8cZ9TI5Hrw==
 
-arweave@^1.10.11:
+arweave@^1.10.11, arweave@^1.10.13, arweave@^1.10.14:
   version "1.10.15"
   resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.15.tgz#c55d0c6f4eef60a4b89056976af411dcdffa83c8"
   integrity sha512-dzct71xkkuGIqb3Cp0HI6X9V+5AvhpCLO70MGawPZ5sZ7n1QUrTKeGuOfWOGGMZx4r4vXRxQg33PUiJScDmNhA==
-  dependencies:
-    arconnect "^0.2.8"
-    asn1.js "^5.4.1"
-    axios "^0.21.1"
-    base64-js "^1.3.1"
-    bignumber.js "^9.0.1"
-
-arweave@^1.10.13, arweave@^1.10.14:
-  version "1.10.14"
-  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.14.tgz#9d34bc92aeb9e974639be51198b697d783bc7927"
-  integrity sha512-0xEjsrhSqqQNa6bDGztO+PhFOn5JkUiC5B/WSu+2KszdGXMuekos3XVkirIgrH4VKqLq84kLmN1ckXuiLkIWgQ==
   dependencies:
     arconnect "^0.2.8"
     asn1.js "^5.4.1"
@@ -4313,9 +4302,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219:
-  version "1.0.30001240"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001240.tgz#ec15d125b590602c8731545c5351ff054ad2d52f"
-  integrity sha512-nb8mDzfMdxBDN7ZKx8chWafAdBp5DAAlpWvNyUGe5tcDWd838zpzDN3Rah9cjCqhfOKkrvx40G2SDtP0qiWX/w==
+  version "1.0.30001241"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001241.tgz#cd3fae47eb3d7691692b406568d7a3e5b23c7598"
+  integrity sha512-1uoSZ1Pq1VpH0WerIMqwptXHNNGfdl7d1cJUFs80CwQ/lVzdhTvsFZCeNFslze7AjsQnb4C85tzclPa1VShbeQ==
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -5050,17 +5039,17 @@ copy-webpack-plugin@^4.6.0:
     serialize-javascript "^1.4.0"
 
 core-js-compat@^3.14.0:
-  version "3.15.1"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.15.1.tgz#1afe233716d37ee021956ef097594071b2b585a7"
-  integrity sha512-xGhzYMX6y7oEGQGAJmP2TmtBLvR4nZmRGEcFa3ubHOq5YEp51gGN9AovVa0AoujGZIq+Wm6dISiYyGNfdflYww==
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.15.2.tgz#47272fbb479880de14b4e6081f71f3492f5bd3cb"
+  integrity sha512-Wp+BJVvwopjI+A1EFqm2dwUmWYXrvucmtIB2LgXn/Rb+gWPKYxtmb4GKHGKG/KGF1eK9jfjzT38DITbTOCX/SQ==
   dependencies:
     browserslist "^4.16.6"
     semver "7.0.0"
 
 core-js-pure@^3.0.1:
-  version "3.15.1"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.15.1.tgz#8356f6576fa2aa8e54ca6fe02620968ff010eed7"
-  integrity sha512-OZuWHDlYcIda8sJLY4Ec6nWq2hRjlyCqCZ+jCflyleMkVt3tPedDVErvHslyS2nbO+SlBFMSBJYvtLMwxnrzjA==
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.15.2.tgz#c8e0874822705f3385d3197af9348f7c9ae2e3ce"
+  integrity sha512-D42L7RYh1J2grW8ttxoY1+17Y4wXZeKe7uyplAI3FkNQyI5OgBIAjUfFiTPfL1rs0qLpxaabITNbjKl1Sp82tA==
 
 core-js@^2.4.0, core-js@^2.5.0, core-js@^2.6.5:
   version "2.6.12"
@@ -5994,9 +5983,9 @@ ejs@^2.6.1:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.47, electron-to-chromium@^1.3.723:
-  version "1.3.759"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.759.tgz#b0d652d376831470a4c230ba721da2427bfb996a"
-  integrity sha512-nM76xH0t2FBH5iMEZDVc3S/qbdKjGH7TThezxC8k1Q7w7WHvIAyJh8lAe2UamGfdRqBTjHfPDn82LJ0ksCiB9g==
+  version "1.3.761"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.761.tgz#6a1748bab8ed94984391ec8be8a7e7ec1fe3d843"
+  integrity sha512-7a/wV/plM/b95XjTdA2Q4zAxxExTDKkNQpTiaU/nVT8tGCQVtX9NsnTjhALBFICpOB58hU6xg5fFC3CT2Bybpg==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -13556,10 +13545,10 @@ redstone-api@^0.4.0, redstone-api@^0.4.2, redstone-api@^0.4.3:
     lodash "^4.17.21"
     pako "^2.0.3"
 
-redstone-flash-storage@^1.0.4:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/redstone-flash-storage/-/redstone-flash-storage-1.0.5.tgz#58ce2826822f3da263196b57affeec84e282e869"
-  integrity sha512-0P9eXipe+gC1Gj9htPl3j/elgw2nkFtL4xnqZY5S/qjquF/ZcUiubR3+3T66Yz5+eUiJpqDW1NSImuIabZmcGQ==
+redstone-flash-storage@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/redstone-flash-storage/-/redstone-flash-storage-1.0.7.tgz#0b6717e8c38dcfe6be96cf014abc7f5baa046222"
+  integrity sha512-ph4EuafHTqn7W4yMipHP3VzcQrdQFTAYai2QGdiBdUtw9TQaSMrzhI0VgO/3TGdTspkGUcTqfDAEAiHwdP8kJg==
   dependencies:
     "@openzeppelin/contracts" "^4.1.0"
     "@openzeppelin/test-helpers" "^0.5.10"
@@ -15836,9 +15825,9 @@ uglify-js@^2.8.29:
     uglify-to-browserify "~1.0.0"
 
 uglify-js@^3.1.4:
-  version "3.13.9"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.13.9.tgz#4d8d21dcd497f29cfd8e9378b9df123ad025999b"
-  integrity sha512-wZbyTQ1w6Y7fHdt8sJnHfSIuWeDgk6B5rCb4E/AM6QNNPbOMIZph21PW5dRB3h7Df0GszN+t7RuUH6sWK5bF0g==
+  version "3.13.10"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.13.10.tgz#a6bd0d28d38f592c3adb6b180ea6e07e1e540a8d"
+  integrity sha512-57H3ACYFXeo1IaZ1w02sfA71wI60MGco/IQFjOqK+WtKoprh7Go2/yvd2HPtoJILO2Or84ncLccI4xoHMTSbGg==
 
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
@@ -17291,9 +17280,9 @@ ws@^6.0.0, ws@^6.2.1:
     async-limiter "~1.0.0"
 
 ws@^7.4.6:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.0.tgz#0033bafea031fb9df041b2026fc72a571ca44691"
-  integrity sha512-6ezXvzOZupqKj4jUqbQ9tXuJNo+BR2gU8fFRk3XCP3e0G6WT414u5ELe6Y0vtp7kmSJ3F7YWObSNr1ESsgi4vw==
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.1.tgz#44fc000d87edb1d9c53e51fbc69a0ac1f6871d66"
+  integrity sha512-2c6faOUH/nhoQN6abwMloF7Iyl0ZS2E9HGtsiLrWn0zOOMWlhtDmdf/uihDt6jnuCxgtwGBNy6Onsoy2s2O2Ow==
 
 xhr-request-promise@^0.1.2:
   version "0.1.3"

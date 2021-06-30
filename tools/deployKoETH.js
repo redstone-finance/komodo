@@ -57,5 +57,13 @@ async function deployKoToken(asset) {
   
 }
 
-deployKoToken("IBM");
+async function mint(address) {
+  let token = new ethers.Contract(address, KO_TOKEN.abi, main);
+  
+  let tx = await token.mint(1, {value: ethers.utils.parseEther("0.1"), gasLimit: 1000000});
+  console.log("Minted: " + tx.hash);
+}
+
+// deployKoToken("IBM");
+deployKoToken("ZCN21");
 

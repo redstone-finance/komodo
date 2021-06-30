@@ -34,6 +34,7 @@ async function mint(address) {
   let txReceipt = await provider.waitForTransaction(txMint.hash);
   console.log("Tokens minted: " + txMint.hash);
   console.log("Gas used: " + txReceipt.gasUsed.toString());
+  console.log("Tx status: " + (txReceipt.status == 1 ? "Success" : "Failed"));
 }
 
-mint("0xD3b745c8D3fDA3446d7E26c576cee1D45AD56a52");
+mint("0x135FFa1dC3C2BEaC0438f28E09fe95ee6CfC45C0");

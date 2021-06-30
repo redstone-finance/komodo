@@ -3,12 +3,12 @@ import chai from "chai";
 import {solidity} from "ethereum-waffle";
 import { KoToken } from "../typechain/KoToken";
 import {SignerWithAddress} from "@nomiclabs/hardhat-ethers/signers";
-import {PriceVerifier} from "../typechain/PriceVerifier";
+
 import redstone from 'redstone-api';
 
 import { wrapContract } from "redstone-flash-storage/lib/utils/contract-wrapper";
 
-import {PriceFeed} from "../typechain/PriceFeed";
+import {PriceFeedWithVerification} from "../typechain/PriceFeedWithVerification";
 
 chai.use(solidity);
 
@@ -28,20 +28,17 @@ describe("KoToken with life Redstone pricing", function () {
   let maker: SignerWithAddress;
   let admin: SignerWithAddress;
   let koToken: KoToken;
-  let priceFeed: PriceFeed;
-  let verifier: PriceVerifier;
+  let priceFeed: PriceFeedWithVerification;
 
   it("Deployment should have zero balance", async function () {
     [maker, admin] = await ethers.getSigners();
 
     const KoToken = await ethers.getContractFactory("KoTokenETH");
     const Proxy = await ethers.getContractFactory("RedstoneUpgradeableProxy");
-    const PriceFeed = await ethers.getContractFactory("PriceFeed");
-    const Verifier = await ethers.getContractFactory("PriceVerifier");
+    const PriceFeed = await ethers.getContractFactory("PriceFeedWithVerification");
 
 
-    verifier = (await Verifier.deploy()) as PriceVerifier;
-    priceFeed = (await PriceFeed.deploy(verifier.address, 5 * 60)) as PriceFeed;
+    priceFeed = (await PriceFeed.deploy(5 * 60)) as PriceFeedWithVerification;
     await priceFeed.authorizeSigner(REDSTONE_STOCKS_PROVIDER_ADDRESS);
     console.log("Authorized: ", REDSTONE_STOCKS_PROVIDER_ADDRESS);
 
@@ -75,6 +72,16 @@ describe("KoToken with life Redstone pricing", function () {
       .to.be.equal(toRedstonePrecision(apiPrices['IBM'].value).toFixed(0));
 
   });
+
+  it("Should mint again", async function () {
+    await koToken.mintWithPrices(1, {value: 1});
+  });
+
+  // it("Should mint with single price oracle", async function () {
+  //   koToken = wrapContract(koToken, REDSTONE_STOCKS_PROVIDER, "IBM");
+  //  
+  //   await koToken.mintWithPrices(1, {value: 1});
+  // });
 
 
 });

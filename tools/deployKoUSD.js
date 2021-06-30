@@ -15,11 +15,11 @@ const koFactory = new ethers.ContractFactory(KO_TOKEN.abi, KO_TOKEN.bytecode, ma
 const REDSTONE_PROXY = require('../artifacts/redstone-flash-storage/lib/contracts/RedstoneUpgradeableProxy.sol/RedstoneUpgradeableProxy.json');
 const redstoneProxyFactory = new ethers.ContractFactory(REDSTONE_PROXY.abi, REDSTONE_PROXY.bytecode, main);
 
-const PRICE_FEED = require('../artifacts/redstone-flash-storage/lib/contracts/PriceFeed.sol/PriceFeed');
+const PRICE_FEED = require('../artifacts/redstone-flash-storage/lib/contracts/PriceFeedWithVerification.sol/PriceFeedWithVerification');
 const priceFeedFactory = new ethers.ContractFactory(PRICE_FEED.abi, PRICE_FEED.bytecode, main);
 
-const VERIFIER_FACTORY = require('../artifacts/redstone-flash-storage/lib/contracts/PriceVerifier.sol/PriceVerifier');
-const verifierFactory = new ethers.ContractFactory(VERIFIER_FACTORY.abi, VERIFIER_FACTORY.bytecode, main);
+//const VERIFIER_FACTORY = require('../artifacts/redstone-flash-storage/lib/contracts/PriceVerifier.sol/PriceVerifier');
+//const verifierFactory = new ethers.ContractFactory(VERIFIER_FACTORY.abi, VERIFIER_FACTORY.bytecode, main);
 
 
 const USDC_ADDRESS = "0xb7a4F3E9097C08dA09517b5aB877F7a917224ede";
@@ -30,11 +30,11 @@ const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
 const REDSTONE_STOCKS_PROVIDER_ADDRESS = "0x926E370fD53c23f8B71ad2B3217b227E41A92b12";
 
 async function deployKoToken(asset) {
-  let verifier = await verifierFactory.deploy();
-  await verifier.deployed();
-  console.log("Verifier deployed: " + verifier.address);
+  //let verifier = await verifierFactory.deploy();
+  //await verifier.deployed();
+  //console.log("Verifier deployed: " + verifier.address);
 
-  let priceFeed = await priceFeedFactory.deploy(verifier.address, 300);
+  let priceFeed = await priceFeedFactory.deploy(300);
   await priceFeed.deployed();
   console.log("Price feed deployed: " + priceFeed.address);
 
@@ -49,7 +49,7 @@ async function deployKoToken(asset) {
 
   const proxy = await redstoneProxyFactory.deploy(koToken.address, priceFeed.address, REDSTONE_STOCKS_PROVIDER_ADDRESS, []);
   await proxy.deployed();
-  console.log("Redstone proxy deployed: " + proxy.address);
+  console.log("Redstone proxy deployed [ENDPOINT]: " + proxy.address);
 
   let proxiedKoToken = new ethers.Contract(proxy.address, KO_TOKEN.abi, main);
   let tx = await proxiedKoToken.initialize(toBytes32(asset), USDC_ADDRESS, "komodo-"+asset, "k"+asset, priceFeed.address);

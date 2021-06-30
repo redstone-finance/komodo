@@ -1,15 +1,15 @@
 const ethers = require('ethers');
+const fs = require('fs');
 const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
 
 const toBytes32 = ethers.utils.formatBytes32String;
 
 const provider = ethers.getDefaultProvider('kovan');
-// const provider = new ethers.providers.JsonRpcProvider();
-const PRIV = "c58ab2267985af5e169f32aaa35ff6bf4878737d013edf92bd17421c1fba3ee7";
+const PRIV = fs.readFileSync(".secret").toString().trim();
 const main = new ethers.Wallet(PRIV, provider);
 console.log("MAIN: " + main.address);
 
-const KO_TOKEN = require('../artifacts/contracts/KoTokenETH.sol/KoTokenETH');
+const KO_TOKEN = require('../artifacts/contracts/KoTokenUSD.sol/KoTokenUSD');
 const koFactory = new ethers.ContractFactory(KO_TOKEN.abi, KO_TOKEN.bytecode, main);
 
 const REDSTONE_PROXY = require('../artifacts/redstone-flash-storage/lib/contracts/RedstoneUpgradeableProxy.sol/RedstoneUpgradeableProxy.json');
@@ -33,38 +33,30 @@ async function deployKoToken(asset) {
   let verifier = await verifierFactory.deploy();
   await verifier.deployed();
   console.log("Verifier deployed: " + verifier.address);
-  
+
   let priceFeed = await priceFeedFactory.deploy(verifier.address, 300);
   await priceFeed.deployed();
   console.log("Price feed deployed: " + priceFeed.address);
-  
+
   let authTx = await priceFeed.authorizeSigner(REDSTONE_STOCKS_PROVIDER_ADDRESS);
   await authTx.wait();
   console.log("Authorized redstone signer: ", REDSTONE_STOCKS_PROVIDER_ADDRESS);
-  
+
   let koToken = await koFactory.deploy();
   await koToken.deployed();
   console.log("KoToken deployed: " + koToken.address);
-  
-  
+
+
   const proxy = await redstoneProxyFactory.deploy(koToken.address, priceFeed.address, REDSTONE_STOCKS_PROVIDER_ADDRESS, []);
   await proxy.deployed();
   console.log("Redstone proxy deployed: " + proxy.address);
 
   let proxiedKoToken = new ethers.Contract(proxy.address, KO_TOKEN.abi, main);
-  let tx = await proxiedKoToken.initialize(toBytes32(asset), "komodo-"+asset, "k"+asset, priceFeed.address);  
+  let tx = await proxiedKoToken.initialize(toBytes32(asset), USDC_ADDRESS, "komodo-"+asset, "k"+asset, priceFeed.address);
   await tx.wait();
   console.log("Ko Token initialized: " + tx.hash);
-  
+
 }
 
-async function mint(address) {
-  let token = new ethers.Contract(address, KO_TOKEN.abi, main);
-  
-  let tx = await token.mint(1, {value: ethers.utils.parseEther("0.1"), gasLimit: 1000000});
-  console.log("Minted: " + tx.hash);
-}
-
-// deployKoToken("IBM");
-deployKoToken("ZCN21");
+deployKoToken("IBM");
 

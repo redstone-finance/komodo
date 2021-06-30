@@ -8,7 +8,7 @@ const { expect } = require("chai");
 const toBytes32 = ethers.utils.formatBytes32String;
 const fromBytes32 = ethers.utils.parseBytes32String;
 
-describe("KoToken", function() {
+describe("KoTokenETH", function() {
   
   let koToken: KoTokenEth;
   let buyer: SignerWithAddress;
@@ -161,10 +161,7 @@ describe("KoToken", function() {
     expect(await koToken.collateralValueOf(maker.address)).to.equal(17226);
     expect(await koToken.solvencyOf(maker.address)).to.equal(1230);
 
-  });
-  
-  
-  
+  });  
   
   
 });

@@ -46,8 +46,7 @@ contract KoTokenUSD is ERC20Initializable, Ownable {
         super._mint(msg.sender, amount);
         debt[msg.sender] += amount;
         
-        usd.transferFrom(msg.sender, address(this), collateralAmount);
-        collateral[msg.sender] += collateralAmount;
+        addCollateral(collateralAmount);
     }
 
 
@@ -65,7 +64,7 @@ contract KoTokenUSD is ERC20Initializable, Ownable {
      * @dev Adds collateral to user account
      * It could be done to increase the solvency ratio
      */
-    function addCollateral(uint256 collateralAmount) external {
+    function addCollateral(uint256 collateralAmount) virtual public {
         collateral[msg.sender] += collateralAmount;
         usd.transferFrom(msg.sender, address(this), collateralAmount);
         
@@ -77,7 +76,7 @@ contract KoTokenUSD is ERC20Initializable, Ownable {
      * @dev Removes outstanding collateral by paying out funds to depositor
      * The account must remain solvent after the operation
      */
-    function removeCollateral(uint amount) external remainsSolvent {
+    function removeCollateral(uint amount) virtual public remainsSolvent {
         require(collateral[msg.sender] >= amount, "Cannot remove more collateral than deposited");
         collateral[msg.sender] -= amount;
         usd.transfer(msg.sender, amount);

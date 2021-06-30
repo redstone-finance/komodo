@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@aave/protocol-v2@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@aave/protocol-v2/-/protocol-v2-1.0.1.tgz#796c229ef14d9fdc24277bae1cbe3f2df783ff45"
+  integrity sha512-MU3WiigW89DWDpCtvaw4rafih7RbADB45uUM/zqfnOD4g9JNUVfeT6MrjV4/DP/JPA2Iv5ySKSx+a1OfUES0Pg==
+  dependencies:
+    tmp-promise "^3.0.2"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.0.0-beta.35", "@babel/code-frame@^7.14.5":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"
@@ -14233,6 +14240,13 @@ rimraf@2.6.3, rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
+rimraf@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
+  dependencies:
+    glob "^7.1.3"
+
 ripemd160-min@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/ripemd160-min/-/ripemd160-min-0.0.6.tgz#a904b77658114474d02503e819dcc55853b67e62"
@@ -15714,6 +15728,13 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tmp-promise@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tmp-promise/-/tmp-promise-3.0.2.tgz#6e933782abff8b00c3119d63589ca1fb9caaa62a"
+  integrity sha512-OyCLAKU1HzBjL6Ev3gxUeraJNlbNingmi8IrHHEsYH8LTmEuhvYfqvhn2F/je+mjf4N58UmZ96OMEy1JanSCpA==
+  dependencies:
+    tmp "^0.2.0"
+
 tmp@0.0.33, tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -15727,6 +15748,13 @@ tmp@0.1.0:
   integrity sha512-J7Z2K08jbGcdA1kkQpJSqLF6T0tdQqpR2pnSUXsIchbPdTI9v3e85cLW0d6WDhwuAleOV71j2xWs8qMPfK7nKw==
   dependencies:
     rimraf "^2.6.3"
+
+tmp@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.2.1.tgz#8457fc3037dcf4719c251367a1af6500ee1ccf14"
+  integrity sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==
+  dependencies:
+    rimraf "^3.0.0"
 
 tmpl@1.0.x:
   version "1.0.4"

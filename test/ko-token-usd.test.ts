@@ -19,7 +19,7 @@ const toUsd = function(val: Number) {
   return ethers.utils.parseUnits(val.toString(), 6);
 }
 
-describe("KoToken", function() {
+describe("KoTokenUSD", function() {
 
   let koToken: KoTokenUsd;
   let buyer: SignerWithAddress;

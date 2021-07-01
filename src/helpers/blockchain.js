@@ -5,6 +5,9 @@ const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrap
 
 const { ethereum, web3 } = window;
 
+const DEFAULT_SOLVENCY = 150; // 150%
+const MIN_SOLVENCY = 121; // 121%
+
 // Connect app to metamask
 ethereum.enable();
 
@@ -137,6 +140,17 @@ async function getEthBalance() {
   return bigNumberPriceToNumber(balance);
 }
 
+function calculateStakeAmount({
+  tokenAmount,
+  tokenPrice,
+  ethPrice,
+  solvency = DEFAULT_SOLVENCY,
+}) {
+  const currentTokenEthPrice = tokenPrice / ethPrice;
+  const stake = (solvency / 100) * tokenAmount * currentTokenEthPrice;
+  return stake;
+}
+
 // async function getLiquidityUSD(symbol) {
 //   const token = await getTokenContractForTxSending(symbol);
 //   const totalValueBN = await token.totalValueWithPrices();
@@ -144,6 +158,9 @@ async function getEthBalance() {
 // }
 
 export default {
+  // Utils
+  calculateStakeAmount,
+
   // Getters
   getLiquidityForToken,
   getSolvency,
@@ -160,4 +177,8 @@ export default {
   burn,
   addCollateral,
   removeCollateral,
+
+  // Const
+  DEFAULT_SOLVENCY,
+  MIN_SOLVENCY,
 };

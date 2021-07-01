@@ -41,7 +41,7 @@
             outlined
             :loading="loading"
             color="#1976d2"
-            @click="onConfirmButtonClick(value, stakeValue)"
+            @click="onConfirmButtonClick(value)"
           >
             Confirm
           </v-btn>
@@ -52,9 +52,9 @@
 </template>
 
 <script>
+import blockchain from "@/helpers/blockchain";
 
-const DEFAULT_SOLVENCY = 150; // 150%
-const MIN_SOLVENCY = 121; // 121%
+const { DEFAULT_SOLVENCY, MIN_SOLVENCY } = blockchain;
 
 export default {
   name: 'TokenSponsorActionDialog',
@@ -77,7 +77,6 @@ export default {
       additionalNoteType: '',
       value: null,
       onConfirmButtonClick: null,
-      stakeValue: 0,
     };
   },
 
@@ -120,12 +119,14 @@ export default {
     },
 
     additionalNoteForMint() {
-      const currentTokenEthPrice =
-        this.currentPrice.value / this.ethPrice.value;
-      const ethNeeded =
-        (DEFAULT_SOLVENCY / 100) * this.value * currentTokenEthPrice;
-      this.stakeValue = Number(ethNeeded.toFixed(5));
-      return `You should stake ${this.stakeValue} ETH to mint `
+      const stake = blockchain.calculateStakeAmount({
+        tokenAmount: this.value,
+        tokenPrice: this.currentPrice.value,
+        ethPrice: this.ethPrice.value,
+        solvency: DEFAULT_SOLVENCY,
+      });
+      const stakeFormatted = Number(stake.toFixed(5));
+      return `You should stake ${stakeFormatted} ETH to mint `
         + `${this.value} ${this.symbol} and maintain ${DEFAULT_SOLVENCY}% solvency`;
     },
 

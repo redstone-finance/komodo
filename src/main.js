@@ -35,6 +35,18 @@ function setupFilters() {
       }
     }
   });
+
+  Vue.filter('price-bn', (value) => {
+    if (isNaN(value)) {
+      return value;
+    } else {
+      if (value < 0.01) {
+        return Number(value).toFixed(6);
+      } else {
+        return Number(value).toFixed(2);
+      }
+    }
+  });
   
   Vue.filter('tx', function (value) {
     if (!value) return '';

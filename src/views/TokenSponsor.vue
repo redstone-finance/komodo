@@ -73,7 +73,7 @@
             </div>
             <div class="value">
               <div class="main-currency-value">
-                {{ balance || '...' }} {{ symbol }}
+                {{ balance | price-bn }} {{ symbol }}
               </div>
               <hr />
               <div class="usd-value">
@@ -113,7 +113,7 @@
             <div class="value">
               <div class="main-currency-value">
                 <template v-if="!loadingCollateral">
-                  {{ collateral }} ETH
+                  {{ collateral | price-bn }} ETH
                 </template>
                 <template v-else>
                   ...
@@ -251,7 +251,7 @@ export default {
         inputLabel: `Amount in ${this.symbol}`,
         initialValue: 0.1,
         additionalNoteType: 'mint',
-        onConfirmButtonClick: (value, stakeValue) => this.mint(value, stakeValue),
+        onConfirmButtonClick: (value) => this.mint(value),
       });
     },
 
@@ -282,9 +282,15 @@ export default {
       });
     },
 
-    async mint(value, stakeValue) {
+    async mint(value) {
+      const stake = blockchain.calculateStakeAmount({
+        tokenAmount: value,
+        tokenPrice: this.currentPrice.value,
+        ethPrice: this.ethPrice.value,
+        solvency: blockchain.DEFAULT_SOLVENCY,
+      });
       await this.sendBlockchainTransaction(
-        async () => await blockchain.mint(this.symbol, value, stakeValue));
+        async () => await blockchain.mint(this.symbol, value, stake));
     },
 
     async burn(value) {

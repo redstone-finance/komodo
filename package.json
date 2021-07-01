@@ -19,6 +19,7 @@
     "@types/lodash": "^4.14.170",
     "@types/mocha": "^8.2.2",
     "@uniswap/v3-core": "git+https://github.com/Uniswap/uniswap-v3-core.git",
+    "@uniswap/v3-sdk": "^3.1.0",
     "axios": "^0.21.1",
     "chai": "^4.3.4",
     "chart.js": "2.9.3",

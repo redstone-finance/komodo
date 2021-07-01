@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import VueLoaders from 'vue-loaders';
 import VueToast from 'vue-toast-notification';
+import VueTimers from 'vue-timers';
 import vuetify from './plugins/vuetify';
 
 import 'vue-loaders/dist/vue-loaders.css';
@@ -13,6 +14,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueLoaders);
 Vue.use(VueToast);
+Vue.use(VueTimers);
 
 function setupFilters() {
   Vue.filter('price', (value) => {

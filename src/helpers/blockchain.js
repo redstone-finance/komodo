@@ -3,6 +3,8 @@ import sleep from "./sleep";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
 const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
 
+const { ethereum, web3 } = window;
+
 // Connect app to metamask
 ethereum.enable();
 
@@ -13,6 +15,7 @@ const KO_TOKEN = require('../../artifacts/contracts/KoTokenETH.sol/KoTokenETH');
 const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
 
 const parseNumber = (number) => ethers.utils.parseEther(String(number));
+const bigNumberPriceToNumber = (bn) => Number(ethers.utils.formatEther(bn));
 
 async function getAddress() {
   const signer = await getSigner();
@@ -62,10 +65,10 @@ function onNetworkChange(callback) {
   });
 }
 
-async function getTotalSupplyForToken(symbol) {
+async function getLiquidityForToken(symbol) {
   const token = await getTokenContract(symbol);
   const toalSupplyBN = await token.totalSupply();
-  return toalSupplyBN.toNumber() + Math.round(Math.random() * 1000); // TODO: remove random
+  return bigNumberPriceToNumber(toalSupplyBN);
 }
 
 async function getSigner() {
@@ -74,12 +77,11 @@ async function getSigner() {
   return signer;
 }
 
-async function mint(symbol, amount) {
+async function mint(symbol, amount, stakeAmount) {
   const token = await getTokenContractForTxSending(symbol);
 
-  return await token.mint(parseNumber(amount), {
-    value: ethers.utils.parseEther("0.1"),
-    gasLimit: 1000000,
+  return await token.mintWithPrices(parseNumber(amount), {
+    value: parseNumber(stakeAmount),
   });
 }
 
@@ -96,16 +98,13 @@ async function addCollateral(symbol, amount) {
 
   return await token.addCollateral({
     value: parseNumber(amount),
-    gasLimit: 1000000,
   });
 }
 
 async function removeCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
 
-  return await token.removeCollateral(parseNumber(amount), {
-    gasLimit: 1000000,
-  });
+  return await token.removeCollateralWithPrices(parseNumber(amount));
 }
 
 async function getCollateralAmount(symbol) {
@@ -114,45 +113,43 @@ async function getCollateralAmount(symbol) {
 
   const collateral = await token.collateralOf(address);
   
-  return Number(ethers.utils.formatEther(collateral));
+  return bigNumberPriceToNumber(collateral);
 }
 
 async function getSolvency(symbol) {
-  // const token = await getTokenContractForTxSending(symbol);
-  // const address = await getAddress();
+  const token = await getTokenContractForTxSending(symbol);
+  const address = await getAddress();
+  const solvency = await token.solvencyOfWithPrices(address);
 
-  // It throws the following error
-  // {code: -32015, message: "VM execution error.", data: "Reverted 0x08c379a...
-  // Probably because solvencyOf getter uses collateralValueOf under the hood
-
-  // const solvency = await token.solvencyOf(address);
-  // console.log({solvency});
-
-  return 117;
+  return solvency.toNumber() / 10;
 }
 
 async function getBalance(symbol) {
   const token = await getTokenContractForTxSending(symbol);
   const address = await getAddress();
-  return await token.balanceOf(address);
+  const balance = await token.balanceOf(address);
+  return bigNumberPriceToNumber(balance);
 }
 
-// TODO: fix
+async function getEthBalance() {
+  const address = await getAddress();
+  const balance = await provider.getBalance(address);
+  return bigNumberPriceToNumber(balance);
+}
+
 // async function getLiquidityUSD(symbol) {
-//   const tokenAddress = deployedTokens[symbol];
-//   let token = new ethers.Contract(tokenAddress, KO_TOKEN.abi, provider);
-//   token = wrapContract(token, REDSTONE_STOCKS_PROVIDER);
-//   const totalValueBN = await token.totalValue();
-//   return totalValueBN.toNumber();
+//   const token = await getTokenContractForTxSending(symbol);
+//   const totalValueBN = await token.totalValueWithPrices();
+//   return bigNumberPriceToNumber(totalValueBN);
 // }
 
 export default {
   // Getters
-  getTotalSupplyForToken,
-  getLiquidityForSymbol: getTotalSupplyForToken,
+  getLiquidityForToken,
   getSolvency,
   getCollateralAmount,
   getBalance,
+  getEthBalance,
 
   // Network
   getNetworkName,

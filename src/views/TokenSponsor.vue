@@ -1,34 +1,49 @@
 <template>
   <div class="token-sponsor">
-    <h1 class="text-center">
-      {{ symbol }}:
-      <span class="price-value">
-        {{ priceValue | price }}
-      </span>
-    </h1>
-    <div class="subtitle text-center">
-      {{ tokenDetails.name }}
-    </div>
 
-    <TokenSponsorActionDialog  ref="dialog" />
+    <TokenSponsorActionDialog
+      :currentPrice="currentPrice"
+      :ethPrice="ethPrice"
+      :balance="balance"
+      :collateral="collateral"
+      :ethBalance="ethBalance"
+      :symbol="symbol"
+      ref="dialog" />
 
     <div class="main-card">
-
-      <div class="solvency-container">
-        <div class="gauge-container">
-          <VueGauge
-            refid="gauge"
-            :key="gaugeOptions.needleValue" 
-            :options="gaugeOptions"
-          />
+      <div class="top-section">
+        <div class="token-details">
+          <h1>
+            {{ symbol }}:
+            <span class="price-value">
+              {{ priceValue | price }}
+            </span>
+          </h1>
+          <div class="subtitle mt-3">
+            {{ tokenDetails.name }}
+          </div>
+          <div class="small-subtitle mt-4">
+            <v-icon class="info-icon" small color="blue">mdi-information-outline</v-icon>
+            You should maintain at least 120% solvency, otherwise your tokens may be liquidated
+          </div>
         </div>
-        <div class="text-center mb-6">
-          <span class="subtitle">
-            Solvency:
-          </span>
-          <span class="value">
-            {{ solvency }}%
-          </span>
+
+        <div class="solvency-container">
+          <div class="gauge-container">
+            <VueGauge
+              refid="gauge"
+              :key="gaugeOptions.needleValue" 
+              :options="gaugeOptions"
+            />
+          </div>
+          <div class="text-center mb-6">
+            <span class="subtitle">
+              Solvency:
+            </span>
+            <span class="value">
+              {{ solvency }}%
+            </span>
+          </div>
         </div>
       </div>
 
@@ -154,23 +169,54 @@ export default {
       tab: 0,
       solvency: 0,
       collateral: 0,
+      ethBalance: 0,
       loadingCollateral: false,
     };
   },
 
   created() {
-    this.loadCurrentPrice();
-    this.loadSolvency();
-    this.loadCollateral();
-    this.loadBalance();
-    this.loadEthPrice();
+    this.loadEverything();
+  },
+
+  timers: {
+    loadCurrentPrice: {
+      time: 2000,
+      autostart: true,
+      repeat: true,
+    },
+    loadEthPrice: {
+      time: 2000,
+      autostart: true,
+      repeat: true,
+    },
   },
 
   methods: {
+    loadEverything() {
+      this.loadCurrentPrice();
+      this.loadSolvency();
+      this.loadCollateral();
+      this.loadBalance();
+      this.loadEthPrice();
+      this.loadEthBalance();
+    },
+
     async loadCurrentPrice() {
-      this.currentPrice = await redstone.getPrice(this.symbol, {
+      const price = await redstone.getPrice(this.symbol, {
         provider: "redstone-stocks",
       });
+
+      // Simulating frequent updates
+      this.currentPrice = {
+        ...price,
+        value: price.value + (Math.random() / 10),
+      };
+
+      console.log("Loaded current price: " + this.currentPrice.value);
+    },
+
+    async loadEthBalance() {
+      this.ethBalance = await blockchain.getEthBalance();
     },
 
     async loadBalance() {
@@ -178,7 +224,15 @@ export default {
     },
 
     async loadEthPrice() {
-      this.ethPrice = await redstone.getPrice("ETH");
+      const price = await redstone.getPrice("ETH");
+
+      // Simulating frequent updates
+      this.ethPrice = {
+        ...price,
+        value: price.value + (Math.random() / 10),
+      };
+
+      console.log("Loaded ETH price: " + this.ethPrice.value);
     },
 
     async loadSolvency() {
@@ -195,7 +249,9 @@ export default {
       this.opendDialog({
         title: `Mint ${this.symbol} tokens`,
         inputLabel: `Amount in ${this.symbol}`,
-        onConfirmButtonClick: (value) => this.mint(value),
+        initialValue: 0.1,
+        additionalNoteType: 'mint',
+        onConfirmButtonClick: (value, stakeValue) => this.mint(value, stakeValue),
       });
     },
 
@@ -203,6 +259,7 @@ export default {
       this.opendDialog({
         title: `Burn ${this.symbol} tokens`,
         inputLabel: `Amount in ${this.symbol}`,
+        additionalNoteType: 'burn',
         onConfirmButtonClick: (value) => this.burn(value),
       });
     },
@@ -211,6 +268,7 @@ export default {
       this.opendDialog({
         title: `Add ETH tokens to your collateral`,
         inputLabel: `Amount in ETH`,
+        additionalNoteType: 'add-collateral',
         onConfirmButtonClick: (value) => this.addCollateral(value),
       });
     },
@@ -219,13 +277,14 @@ export default {
       this.opendDialog({
         title: `Remove ETH tokens from your collateral`,
         inputLabel: `Amount in ETH`,
+        additionalNoteType: 'remove-collateral',
         onConfirmButtonClick: (value) => this.removeCollateral(value),
       });
     },
 
-    async mint(value) {
+    async mint(value, stakeValue) {
       await this.sendBlockchainTransaction(
-        async () => await blockchain.mint(this.symbol, value));
+        async () => await blockchain.mint(this.symbol, value, stakeValue));
     },
 
     async burn(value) {
@@ -247,8 +306,13 @@ export default {
       try {
         this.setDialogLoading(true);
         this.$toast.info("Please confirm transaction in metamask");
-        await txSendFunction();
-        this.$toast.success(successMsg || "Transaction sent successfully");
+        const tx = await txSendFunction();
+        this.$toast.info(successMsg || "Transaction is pending. Please wait...");
+        await tx.wait(1);
+        this.$toast.success(successMsg || "Transaction confirmed");
+
+        // To refresh data in the current view
+        this.loadEverything();
       } catch (e) {
         this.$toast.error(errorMsg || "Error occured");
         console.error(e);
@@ -308,9 +372,11 @@ export default {
       }
     },
 
-    // 0 needleValue means 100% solvency, 100 needleValue means 120% and more
+    // 0 needleValue means 120% solvency, 100 needleValue means 150% and more
     needleValue() {
-      return (this.solvency - 100) * (100 / 20);
+      const minSolvency = 120;
+      const maxSolvency = 150;
+      return (this.solvency - minSolvency) * (100 / (maxSolvency - minSolvency));
     },
 
     gaugeOptions() {
@@ -352,6 +418,17 @@ h1 {
   color: #777;
 }
 
+.small-subtitle {
+  color: #777;
+  font-size: 14px;
+  max-width: 300px;
+
+  .info-icon {
+    position: relative;
+    bottom: 0.5px;
+  }
+}
+
 .main-card {
   margin: auto;
   margin-top: 20px;
@@ -360,6 +437,12 @@ h1 {
   box-shadow: 0 0 1px gray;
   width: 600px;
   // height: 500px;
+
+  .top-section {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   hr {
     border: none;
@@ -377,6 +460,7 @@ h1 {
 
     .gauge-container {
       // border: 1px solid black;
+      // margin-top: 15px;
       display: flex;
       justify-content: center;
     }

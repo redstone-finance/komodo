@@ -23,6 +23,7 @@
     "vue-gauge": "^1.0.3",
     "vue-loaders": "^4.1.4",
     "vue-router": "^3.0.3",
+    "vue-timers": "^2.0.4",
     "vue-toast-notification": "^0.6.2",
     "vuetify": "^2.4.0",
     "vuex": "^3.0.1"

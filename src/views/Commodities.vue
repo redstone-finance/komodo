@@ -48,10 +48,12 @@ export default {
     // Loading liquidity from blockchain
     if (!this.$store.state.liquidityLoadingCompleted) {
       for (const commodity of this.commodities) {
-        const liquidity = await blockchain.getLiquidityForSymbol(commodity.symbol);
+        const { symbol } = commodity;
+        const liquidity = await blockchain.getLiquidityForToken(symbol);
+        const liquidityUSD = this.$store.state.prices[symbol].value * liquidity;
         this.$store.dispatch('setLiquidityForToken', {
-          symbol: commodity.symbol,
-          liquidity,
+          symbol,
+          liquidity: liquidityUSD,
         });
       }
       this.$store.dispatch('completeLiquidityLoading');

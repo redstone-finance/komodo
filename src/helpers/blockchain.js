@@ -1,12 +1,17 @@
 import { ethers } from "ethers";
 import sleep from "./sleep";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
-const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
 
-const { ethereum, web3 } = window;
+const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
+const KO_TOKEN = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
+const ERC20_ABI = require('../../uni-abi/ERC20.json');
 
 const DEFAULT_SOLVENCY = 150; // 150%
 const MIN_SOLVENCY = 121; // 121%
+const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
+const USDC_ADDRESS = "e22da380ee6b445bb8273c81944adeb6e8450422";
+
+const { ethereum, web3 } = window;
 
 // Connect app to metamask
 ethereum.enable();
@@ -14,15 +19,20 @@ ethereum.enable();
 // Will use metamask web3
 const provider = new ethers.providers.Web3Provider(web3.currentProvider);
 
-const KO_TOKEN = require('../../artifacts/contracts/KoTokenETH.sol/KoTokenETH');
-const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
-
 const parseNumber = (number) => ethers.utils.parseEther(String(number));
 const bigNumberPriceToNumber = (bn) => Number(ethers.utils.formatEther(bn));
+const formatUsdcUnits = (bn) => Number(ethers.utils.formatUnits(bn, 6));
+const parseUsdcNumber = (number) =>
+  ethers.utils.parseUnits(String(Math.round(number, 6)), 6);
 
 async function getAddress() {
   const signer = await getSigner();
   return signer.getAddress();
+}
+
+async function getUsdcContract() {
+  const signer = await getSigner();
+  return new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
 }
 
 async function getTokenContract(symbol, opts = {}) {
@@ -40,7 +50,9 @@ async function getTokenContract(symbol, opts = {}) {
 
   // Wrapping with redstone-api if needed
   if (opts.wrapWithRedstone) {
-    token = wrapContract(token, REDSTONE_STOCKS_PROVIDER);
+    // TODO: uncomment
+    // token = wrapContract(token, REDSTONE_STOCKS_PROVIDER, symbol);
+    token = wrapContract(token, REDSTONE_STOCKS_PROVIDER, symbol);
   }
 
   return token;
@@ -83,9 +95,9 @@ async function getSigner() {
 async function mint(symbol, amount, stakeAmount) {
   const token = await getTokenContractForTxSending(symbol);
 
-  return await token.mintWithPrices(parseNumber(amount), {
-    value: parseNumber(stakeAmount),
-  });
+  return await token.mintWithPrices(
+    parseNumber(amount),
+    parseUsdcNumber(stakeAmount));
 }
 
 async function burn(symbol, amount) {
@@ -98,16 +110,25 @@ async function burn(symbol, amount) {
 
 async function addCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
+  const usdc = await getUsdcContract();
 
-  return await token.addCollateral({
-    value: parseNumber(amount),
-  });
+  const tx = await usdc.approve(token.address, parseUsdcNumber(amount));
+  await tx.wait();
+
+  return await token.addCollateral(parseUsdcNumber(amount));
+}
+
+async function approveUsdcSpending(amount, symbol) {
+  const token = await getTokenContractForTxSending(symbol);
+  const usdc = await getUsdcContract();
+
+  const tx = await usdc.approve(token.address, parseUsdcNumber(amount));
+  await tx.wait();
 }
 
 async function removeCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-
-  return await token.removeCollateralWithPrices(parseNumber(amount));
+  return await token.removeCollateralWithPrices(parseUsdcNumber(amount));
 }
 
 async function getCollateralAmount(symbol) {
@@ -116,7 +137,7 @@ async function getCollateralAmount(symbol) {
 
   const collateral = await token.collateralOf(address);
   
-  return bigNumberPriceToNumber(collateral);
+  return formatUsdcUnits(collateral);
 }
 
 async function getSolvency(symbol) {
@@ -140,14 +161,19 @@ async function getEthBalance() {
   return bigNumberPriceToNumber(balance);
 }
 
+async function getUsdcBalance() {
+  const address = await getAddress();
+  const usdc = await getUsdcContract();
+  const balance = await usdc.balanceOf(address);
+  return formatUsdcUnits(balance, 6);
+}
+
 function calculateStakeAmount({
   tokenAmount,
   tokenPrice,
-  ethPrice,
   solvency = DEFAULT_SOLVENCY,
 }) {
-  const currentTokenEthPrice = tokenPrice / ethPrice;
-  const stake = (solvency / 100) * tokenAmount * currentTokenEthPrice;
+  const stake = (solvency / 100) * tokenAmount * tokenPrice;
   return stake;
 }
 
@@ -167,16 +193,18 @@ export default {
   getCollateralAmount,
   getBalance,
   getEthBalance,
+  getUsdcBalance,
 
   // Network
   getNetworkName,
   onNetworkChange,
 
-  // Token tx methods
+  // Transactions methods
   mint,
   burn,
   addCollateral,
   removeCollateral,
+  approveUsdcSpending,
 
   // Const
   DEFAULT_SOLVENCY,

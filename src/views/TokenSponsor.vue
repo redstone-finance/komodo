@@ -7,7 +7,9 @@
       :balance="balance"
       :collateral="collateral"
       :ethBalance="ethBalance"
+      :usdcBalance="usdcBalance"
       :symbol="symbol"
+      :usdcApproveWaiting="usdcApproveWaiting"
       ref="dialog" />
 
     <div class="main-card">
@@ -22,6 +24,15 @@
           <div class="subtitle mt-3">
             {{ tokenDetails.name }}
           </div>
+
+          <div class="small-subtitle mt-4">
+            <v-icon class="info-icon" small color="blue">mdi-currency-usd</v-icon>
+            You have
+            <span class="value">
+              {{ usdcBalance | price-bn }} USDC
+            </span>
+          </div>
+
           <div class="small-subtitle mt-4">
             <v-icon class="info-icon" small color="blue">mdi-information-outline</v-icon>
             You should maintain at least 120% solvency, otherwise your tokens may be liquidated
@@ -113,7 +124,7 @@
             <div class="value">
               <div class="main-currency-value">
                 <template v-if="!loadingCollateral">
-                  {{ collateral | price-bn }} ETH
+                  {{ collateral | price-bn }} USDC
                 </template>
                 <template v-else>
                   ...
@@ -165,12 +176,15 @@ export default {
     return {
       currentPrice: null,
       ethPrice: null,
+      usdcPrice: null,
       balance: null,
       tab: 0,
       solvency: 0,
       collateral: 0,
       ethBalance: 0,
+      usdcBalance: 0,
       loadingCollateral: false,
+      usdcApproveWaiting: false,
     };
   },
 
@@ -189,6 +203,11 @@ export default {
       autostart: true,
       repeat: true,
     },
+    loadUsdcPrice: {
+      time: 2000,
+      autostart: true,
+      repeat: true,
+    },
   },
 
   methods: {
@@ -199,6 +218,7 @@ export default {
       this.loadBalance();
       this.loadEthPrice();
       this.loadEthBalance();
+      this.loadUsdcBalance();
     },
 
     async loadCurrentPrice() {
@@ -215,8 +235,23 @@ export default {
       console.log("Loaded current price: " + this.currentPrice.value);
     },
 
+    async loadUsdcPrice() {
+      const price = await redstone.getPrice("USDC");
+
+      this.usdcPrice = {
+        ...price,
+        value: price.value + (Math.random() / 1000),
+      };
+      
+      console.log("Loaded USDC price: " + this.usdcPrice.value);
+    },
+
     async loadEthBalance() {
       this.ethBalance = await blockchain.getEthBalance();
+    },
+
+    async loadUsdcBalance() {
+      this.usdcBalance = await blockchain.getUsdcBalance();
     },
 
     async loadBalance() {
@@ -266,8 +301,8 @@ export default {
 
     addCollateralButtonClicked() {
       this.opendDialog({
-        title: `Add ETH tokens to your collateral`,
-        inputLabel: `Amount in ETH`,
+        title: `Add USDC tokens to your collateral`,
+        inputLabel: `Amount in USDC`,
         additionalNoteType: 'add-collateral',
         onConfirmButtonClick: (value) => this.addCollateral(value),
       });
@@ -275,8 +310,8 @@ export default {
 
     removeCollateralButtonClicked() {
       this.opendDialog({
-        title: `Remove ETH tokens from your collateral`,
-        inputLabel: `Amount in ETH`,
+        title: `Remove USDC tokens from your collateral`,
+        inputLabel: `Amount in USDC`,
         additionalNoteType: 'remove-collateral',
         onConfirmButtonClick: (value) => this.removeCollateral(value),
       });
@@ -289,6 +324,7 @@ export default {
         ethPrice: this.ethPrice.value,
         solvency: blockchain.DEFAULT_SOLVENCY,
       });
+      await this.approveUsdcSpending(stake);
       await this.sendBlockchainTransaction(
         async () => await blockchain.mint(this.symbol, value, stake));
     },
@@ -299,6 +335,7 @@ export default {
     },
 
     async addCollateral(value) {
+      await this.approveUsdcSpending(value);
       await this.sendBlockchainTransaction(
         async () => await blockchain.addCollateral(this.symbol, value));
     },
@@ -308,19 +345,36 @@ export default {
         async () => await blockchain.removeCollateral(this.symbol, value));
     },
 
+    async approveUsdcSpending(value) {
+      try {
+        this.setDialogLoading(true);
+        this.usdcApproveWaiting = true;
+        this.$toast.info("Please approve USDC spending");
+        await blockchain.approveUsdcSpending(value, this.symbol);
+        this.$toast.success("USDC spending approved");
+      } catch (e) {
+        this.$toast.error("USDC spending approve failed");
+        console.error(e);
+      } finally {
+        this.usdcApproveWaiting = false;
+        this.setDialogLoading(false);
+      }
+      
+    },
+
     async sendBlockchainTransaction(txSendFunction, successMsg, errorMsg) {
       try {
         this.setDialogLoading(true);
         this.$toast.info("Please confirm transaction in metamask");
         const tx = await txSendFunction();
         this.$toast.info(successMsg || "Transaction is pending. Please wait...");
-        await tx.wait(1);
+        await tx.wait();
         this.$toast.success(successMsg || "Transaction confirmed");
 
         // To refresh data in the current view
         this.loadEverything();
       } catch (e) {
-        this.$toast.error(errorMsg || "Error occured");
+        this.$toast.error(errorMsg || "Transaction failed");
         console.error(e);
       } finally {
         this.setDialogLoading(false);
@@ -347,8 +401,13 @@ export default {
     },
 
     collateralValueUSD() {
-      if (this.ethPrice) {
-        return this.ethPrice.value * this.collateral;
+      // if (this.ethPrice) {
+      //   return this.ethPrice.value * this.collateral;
+      // } else {
+      //   return '...';
+      // }
+      if (this.usdcPrice) {
+        return this.usdcPrice.value * this.collateral;
       } else {
         return '...';
       }
@@ -413,7 +472,7 @@ h1 {
   font-weight: 700;
   font-size: 30px;
   margin-top: 14px;
-  color: #333;
+  color: #555;
 }
 
 .price-value {
@@ -428,6 +487,11 @@ h1 {
   color: #777;
   font-size: 14px;
   max-width: 300px;
+
+  .value {
+    font-weight: bold;
+    color: #555;
+  }
 
   .info-icon {
     position: relative;
@@ -462,11 +526,12 @@ h1 {
     }
     .value {
       font-weight: bold;
+      color: #555;
     }
 
     .gauge-container {
       // border: 1px solid black;
-      // margin-top: 15px;
+      margin-top: 15px;
       display: flex;
       justify-content: center;
     }

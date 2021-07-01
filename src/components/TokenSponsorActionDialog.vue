@@ -3,6 +3,9 @@
     transition="dialog-top-transition"
     v-model="isVisible"
     max-width="400"
+    scrolllable
+    hide-overlay
+    persistent
   >
     <template v-slot:default="dialog">
       <v-card>
@@ -10,9 +13,26 @@
           color="#1976d2"
           dark
           flat
-        >{{ title }}</v-toolbar>
+        >
+          {{ title }}
+        </v-toolbar>
 
-        <div v-if="additionalNote" class="additional-note-container">
+        <div v-if="loading" class="loading-komodo-container">
+          <template v-if="usdcApproveWaiting">
+            <div class="waiting-label">
+              Waiting for USDC spending approval...
+            </div>
+            <img src="https://media.giphy.com/media/SVzzgZxzjHGla/giphy.gif"/>
+          </template>
+          <template v-else>
+            <div class="waiting-label">
+              Waiting for tx confirmation...
+            </div>
+            <img src="https://media.giphy.com/media/KZeDdQ4auOZEajNALF/giphy.gif"/>
+          </template>
+        </div>
+
+        <div v-if="additionalNote && !loading" class="additional-note-container">
           <v-icon class="info-icon" small color="blue">mdi-information-outline</v-icon>
           <div class="text">
             {{ additionalNote }}
@@ -28,7 +48,7 @@
           ></v-text-field>
         </div>
 
-        <v-card-actions class="justify-end">
+        <v-card-actions v-if="!loading" class="justify-end">
           <v-btn
             text
             color="#1976d2"
@@ -53,6 +73,7 @@
 
 <script>
 import blockchain from "@/helpers/blockchain";
+import formatter from "@/helpers/formatter";
 
 const { DEFAULT_SOLVENCY, MIN_SOLVENCY } = blockchain;
 
@@ -65,7 +86,9 @@ export default {
     balance: Number,
     symbol: String,
     ethBalance: Number,
+    usdcBalance: Number,
     collateral: Number,
+    usdcApproveWaiting: Boolean,
   },
 
   data() {
@@ -122,12 +145,13 @@ export default {
       const stake = blockchain.calculateStakeAmount({
         tokenAmount: this.value,
         tokenPrice: this.currentPrice.value,
-        ethPrice: this.ethPrice.value,
         solvency: DEFAULT_SOLVENCY,
       });
-      const stakeFormatted = Number(stake.toFixed(5));
-      return `You should stake ${stakeFormatted} ETH to mint `
-        + `${this.value} ${this.symbol} and maintain ${DEFAULT_SOLVENCY}% solvency`;
+      const stakeFormatted = formatter.formatPriceBN(stake);
+      const usdcBalanceFormatted = formatter.formatPriceBN(this.usdcBalance)
+      return `You should stake ${stakeFormatted} USDC to mint `
+        + `${this.value} ${this.symbol} and maintain ${DEFAULT_SOLVENCY}% solvency.`
+        + `You have: ${usdcBalanceFormatted} USDC`;
     },
 
     additionalNoteForBurn() {
@@ -135,15 +159,15 @@ export default {
     },
 
     additionalNoteForAddCollateral() {
-      return `Max: ${this.ethBalance.toFixed(5)} ETH`;
+      const usdcBalanceFormatted = formatter.formatPriceBN(this.usdcBalance);
+      return `Max: ${usdcBalanceFormatted} USDC`;
     },
 
     additionalNoteForRemoveCollateral() {
-      const currentTokenEthPrice =
-        this.currentPrice.value / this.ethPrice.value;
-      const minCollateral = (MIN_SOLVENCY / 100) * this.balance * currentTokenEthPrice;
-      const maxAmountToRemove = (Math.max(this.collateral - minCollateral, 0)).toFixed(5);
-      return `You can remove MAX: ${maxAmountToRemove} ${this.symbol} to `
+      const minCollateral = (MIN_SOLVENCY / 100) * this.balance * this.currentPrice.value;
+      const maxAmountToRemove = Math.max(this.collateral - minCollateral, 0);
+      const maxToRemoveFormatted = formatter.formatPriceBN(maxAmountToRemove);
+      return `You can remove MAX: ${maxToRemoveFormatted} USDC to `
         + `remain solvent with ${MIN_SOLVENCY}% solvency`;
     },
   },
@@ -154,6 +178,24 @@ export default {
 
 .input-container {
   padding: 16px;
+}
+
+.loading-komodo-container {
+  .waiting-label {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  padding: 16px;
+  padding-bottom: 0px;
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+    // margin: 5px;
+  }
 }
 
 .additional-note-container {

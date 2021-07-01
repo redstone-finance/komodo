@@ -65,5 +65,5 @@ async function deployKoToken(asset) {
 
 }
 
-deployKoToken("IBM");
-
+// deployKoToken("IBM");
+deployKoToken("ZCN21");

@@ -10,6 +10,9 @@
       :usdcBalance="usdcBalance"
       :symbol="symbol"
       :usdcApproveWaiting="usdcApproveWaiting"
+      :usdcApproveWaitingForTxMining="usdcApproveWaitingForTxMining"
+      :txWaitingForConfirmation="txWaitingForConfirmation"
+      :txWaitingForMining="txWaitingForMining"
       ref="dialog" />
 
     <div class="main-card">
@@ -52,7 +55,7 @@
               Solvency:
             </span>
             <span class="value">
-              {{ solvency }}%
+              {{ solvency >= 100000 ? 'N/A' : solvency }}%
             </span>
           </div>
         </div>
@@ -184,7 +187,11 @@ export default {
       ethBalance: 0,
       usdcBalance: 0,
       loadingCollateral: false,
+
       usdcApproveWaiting: false,
+      usdcApproveWaitingForTxMining: false,
+      txWaitingForMining: false,
+      txWaitingForConfirmation: false,
     };
   },
 
@@ -347,47 +354,47 @@ export default {
 
     async approveUsdcSpending(value) {
       try {
-        this.setDialogLoading(true);
         this.usdcApproveWaiting = true;
         this.$toast.info("Please approve USDC spending");
-        await blockchain.approveUsdcSpending(value, this.symbol);
+        const tx = await blockchain.approveUsdcSpending(value, this.symbol);
+        this.usdcApproveWaiting = false;
+        this.usdcApproveWaitingForTxMining = true;
+        await tx.wait();
         this.$toast.success("USDC spending approved");
       } catch (e) {
         this.$toast.error("USDC spending approve failed");
         console.error(e);
       } finally {
         this.usdcApproveWaiting = false;
-        this.setDialogLoading(false);
+        this.usdcApproveWaitingForTxMining = false;
       }
       
     },
 
     async sendBlockchainTransaction(txSendFunction, successMsg, errorMsg) {
       try {
-        this.setDialogLoading(true);
-        this.$toast.info("Please confirm transaction in metamask");
+        this.txWaitingForConfirmation = true;
+        this.$toast.info("Please confirm transaction");
         const tx = await txSendFunction();
+        this.txWaitingForConfirmation = false;
+        this.txWaitingForMining = true;
         this.$toast.info(successMsg || "Transaction is pending. Please wait...");
         await tx.wait();
-        this.$toast.success(successMsg || "Transaction confirmed");
-
+        this.$toast.success("Transaction has been confirmed");
         // To refresh data in the current view
         this.loadEverything();
       } catch (e) {
         this.$toast.error(errorMsg || "Transaction failed");
         console.error(e);
       } finally {
-        this.setDialogLoading(false);
+        this.txWaitingForMining = false;
+        this.txWaitingForConfirmation = false;
         this.closeDialog();
       }
     },
 
     opendDialog(opts) {
       this.$refs.dialog.openDialog(opts);
-    },
-
-    setDialogLoading(value) {
-      this.$refs.dialog.setLoading(value);
     },
 
     closeDialog() {

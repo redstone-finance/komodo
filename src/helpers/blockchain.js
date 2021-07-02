@@ -37,7 +37,7 @@ async function getUsdcContract() {
 
 async function getTokenContract(symbol, opts = {}) {
   // const tokenAddress = deployedTokens[symbol];
-  const tokenAddress = deployedTokens["ZCN21"];
+  const tokenAddress = deployedTokens["ZCZ21"];
 
   // Getting signer if needed
   let signerOrProvider = provider;
@@ -110,11 +110,6 @@ async function burn(symbol, amount) {
 
 async function addCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-  const usdc = await getUsdcContract();
-
-  const tx = await usdc.approve(token.address, parseUsdcNumber(amount));
-  await tx.wait();
-
   return await token.addCollateral(parseUsdcNumber(amount));
 }
 
@@ -122,8 +117,7 @@ async function approveUsdcSpending(amount, symbol) {
   const token = await getTokenContractForTxSending(symbol);
   const usdc = await getUsdcContract();
 
-  const tx = await usdc.approve(token.address, parseUsdcNumber(amount));
-  await tx.wait();
+  return await usdc.approve(token.address, parseUsdcNumber(amount));
 }
 
 async function removeCollateral(symbol, amount) {
@@ -145,7 +139,11 @@ async function getSolvency(symbol) {
   const address = await getAddress();
   const solvency = await token.solvencyOfWithPrices(address);
 
-  return solvency.toNumber() / 10;
+  if (solvency.gt(100000)) {
+    return 100000;
+  } else {
+    return solvency.toNumber() / 10;
+  }
 }
 
 async function getBalance(symbol) {

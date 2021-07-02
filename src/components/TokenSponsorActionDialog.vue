@@ -20,15 +20,27 @@
         <div v-if="loading" class="loading-komodo-container">
           <template v-if="usdcApproveWaiting">
             <div class="waiting-label">
-              Waiting for USDC spending approval...
+              Please approve USDC spending!
             </div>
             <img src="https://media.giphy.com/media/SVzzgZxzjHGla/giphy.gif"/>
           </template>
-          <template v-else>
+          <template v-if="usdcApproveWaitingForTxMining">
             <div class="waiting-label">
-              Waiting for tx confirmation...
+              Waiting for USDC spending approval...
             </div>
-            <img src="https://media.giphy.com/media/KZeDdQ4auOZEajNALF/giphy.gif"/>
+            <img src="https://media.giphy.com/media/9MtixQSzE7HJ6/giphy.gif"/>
+          </template>
+          <template v-if="txWaitingForConfirmation">
+            <div class="waiting-label">
+              Please confirm transaction!
+            </div>
+            <!-- <img src="https://media.giphy.com/media/KZeDdQ4auOZEajNALF/giphy.gif"/> -->
+          </template>
+          <template v-if="txWaitingForMining">
+            <div class="waiting-label">
+              Waiting for tx mining...
+            </div>
+            <img src="https://media.giphy.com/media/gZK7u9Ia4KuuQ/giphy.gif"/>
           </template>
         </div>
 
@@ -89,13 +101,15 @@ export default {
     usdcBalance: Number,
     collateral: Number,
     usdcApproveWaiting: Boolean,
+    usdcApproveWaitingForTxMining: Boolean,
+    txWaitingForMining: Boolean,
+    txWaitingForConfirmation: Boolean,
   },
 
   data() {
     return {
       isVisible: false,
       title: '',
-      loading: false,
       inputLabel: '',
       additionalNoteType: '',
       value: null,
@@ -114,10 +128,6 @@ export default {
       if (opts.initialValue) {
         this.value = opts.initialValue;
       }
-    },
-
-    setLoading(value) {
-      this.loading = value;
     },
 
     close() {
@@ -139,6 +149,13 @@ export default {
         default:
           return '';
       }
+    },
+
+    loading() {
+      return this.usdcApproveWaiting
+        || this.usdcApproveWaitingForTxMining
+        || this.txWaitingForConfirmation
+        || this.txWaitingForMining;
     },
 
     additionalNoteForMint() {

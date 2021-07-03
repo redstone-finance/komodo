@@ -75,7 +75,7 @@ async function mintPosition(pairId) {
   console.log(tx.hash);
 }
 
-async function createPool(tokenAddress) {
+async function createPool(tokenAddress, initialPrice = 200) {
   const token = new ethers.Contract(tokenAddress, ERC20_ABI, main);
   let balance = await token.balanceOf(main.address);
   console.log("Token balance: " + ethers.utils.formatEther(balance, 6));
@@ -86,14 +86,14 @@ async function createPool(tokenAddress) {
 
   let sqrtPrice;
   let tx;
-  // TODO: replace 200000000 with realPrice * 1000000
+  const price = String(Math.round(initialPrice * 1000000));
   if (tokenAddress.localeCompare(usdc.address)) {
-    sqrtPrice = uniswapSdk.encodeSqrtRatioX96("200000000", ethers.utils.parseEther("1"));
+    sqrtPrice = uniswapSdk.encodeSqrtRatioX96(price, ethers.utils.parseEther("1"));
     tx = await nftManager.createAndInitializePoolIfNecessary(tokenAddress, USDC_ADDRESS, 10000, sqrtPrice.toString(), {gasLimit: 5000000});
   } else {
-    sqrtPrice = uniswapSdk.encodeSqrtRatioX96(ethers.utils.parseEther("1"), "200000000");
+    sqrtPrice = uniswapSdk.encodeSqrtRatioX96(ethers.utils.parseEther("1"), price);
     tx = await nftManager.createAndInitializePoolIfNecessary(USDC_ADDRESS, tokenAddress, 10000, sqrtPrice.toString(), {gasLimit: 5000000});
-  } 
+  }
   
   console.log("Price: " + sqrtPrice.toString());
 
@@ -103,10 +103,8 @@ async function createPool(tokenAddress) {
   console.log("Tx status: " + txStatus);
 
 
-  // TODO: Alex, add trading on uniswap link
-  return {
-    // TODO: update uniswapTradeUrl
-    uniswapTradeUrl: `https://app.uniswap.org/#/add/${tokenAddress}/${USDC_ADDRESS}/10000`,
+  return {   
+    uniswapTradeUrl: `https://app.uniswap.org/#/swap?inputCurrency=${tokenAddress}&outputCurrency=${USDC_ADDRESS}`,
     uniswapPoolUrl: `https://app.uniswap.org/#/add/${tokenAddress}/${USDC_ADDRESS}/10000`,
     uniswapPoolTx: tx.hash,
     uniswapPoolTxStatus: txStatus,

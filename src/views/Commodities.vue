@@ -2,10 +2,7 @@
   <div class="commodities">
     <h1 class="text-center">Synthetic commodities</h1>
     <p class="text-center description">
-      Here we can add a short description of komodo and how it works. Somtehing similar to
-      <a href="https://synthetix.io/synths" target="_blank">
-        the synths page
-      </a>
+      Komodo offers access to derivative tokens providing exposure to the huge market of commodities.
     </p>
 
     <div class="tabs-container">

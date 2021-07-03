@@ -32,7 +32,8 @@
           </v-icon>
         </v-btn>
         <v-btn
-          href="https://info.uniswap.org/#/pools/0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8"
+          :href="getUniswapTradeUrl(symbol)"
+          target="_blank"
           color="rgb(234, 52, 122)"
           outlined
           small
@@ -98,6 +99,7 @@
 <script>
 import redstone from 'redstone-api';
 import TokenPriceChart from './TokenPriceChart';
+import blockchain from "@/helpers/blockchain";
 // import StatElem from './StatElem';
 import _ from 'lodash';
 
@@ -156,6 +158,10 @@ export default {
   },
 
   methods: {
+    getUniswapTradeUrl(symbol) {
+      return blockchain.getAddressForSymbol(symbol, "uniswapTradeUrl");
+    },
+
     async loadPrices() {
       try {
         this.loading = true;

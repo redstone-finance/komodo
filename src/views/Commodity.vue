@@ -12,11 +12,12 @@
     </div>
 
     <h1 class="text-center">
-      {{ symbol }}:
+      {{ tokenDetails.name }}:
+      
       <span class="price-value">{{ priceValue | price }}</span>
     </h1>
     <div class="text-center subtitle">
-      {{ tokenDetails.name }}
+      {{ symbol }}
     </div>
 
     <TokenPriceChartContainer :symbol="symbol" provider="redstone-stocks" />

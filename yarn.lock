@@ -13846,7 +13846,7 @@ redstone-node@^0.4.9:
     yahoo-finance "^0.3.7"
     yargs "^16.2.0"
 
-"redstone-smartweave-contracts@github:redstone-finance/redstone-smartweave-contracts":
+redstone-smartweave-contracts@redstone-finance/redstone-smartweave-contracts:
   version "0.4.0"
   resolved "https://codeload.github.com/redstone-finance/redstone-smartweave-contracts/tar.gz/e5af048ae5fd2c38f6ebb3f68d31e8d1af0b2f83"
   dependencies:

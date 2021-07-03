@@ -86,6 +86,7 @@ async function createPool(tokenAddress) {
 
   let sqrtPrice;
   let tx;
+  // TODO: replace 200000000 with realPrice * 1000000
   if (tokenAddress.localeCompare(usdc.address)) {
     sqrtPrice = uniswapSdk.encodeSqrtRatioX96("200000000", ethers.utils.parseEther("1"));
     tx = await nftManager.createAndInitializePoolIfNecessary(tokenAddress, USDC_ADDRESS, 10000, sqrtPrice.toString(), {gasLimit: 5000000});
@@ -96,18 +97,33 @@ async function createPool(tokenAddress) {
   
   console.log("Price: " + sqrtPrice.toString());
 
-  let txReceipt = await provider.waitForTransaction(tx.hash);
+  const txReceipt = await provider.waitForTransaction(tx.hash);
+  const txStatus = txReceipt.status == 1 ? "Success" : "Failed";
   console.log("Pool created: " + tx.hash);
-  console.log("Tx status: " + (txReceipt.status == 1 ? "Success" : "Failed"));  
+  console.log("Tx status: " + txStatus);
 
+
+  // TODO: Alex, add trading on uniswap link
+  return {
+    // TODO: update uniswapTradeUrl
+    uniswapTradeUrl: `https://app.uniswap.org/#/add/${tokenAddress}/${USDC_ADDRESS}/10000`,
+    uniswapPoolUrl: `https://app.uniswap.org/#/add/${tokenAddress}/${USDC_ADDRESS}/10000`,
+    uniswapPoolTx: tx.hash,
+    uniswapPoolTxStatus: txStatus,
+  };
 }
 
 //mintPosition(kIBM_ID);
 //increaseLiquidity(kIBM_ID);
 
-createPool("0xb9977dd8fdc0e26fd05333f094843ed8ba06a541")
+// createPool("0xb9977dd8fdc0e26fd05333f094843ed8ba06a541")
 
 //Pool could be accessed from UI
 //https://app.uniswap.org/#/add/[TOKEN_ADDRESS]/[USDC_ADDRESS]/10000
 //Example
 //https://app.uniswap.org/#/add/0xb9977dd8fdc0e26fd05333f094843ed8ba06a541/0xe22da380ee6B445bb8273C81944ADEB6E8450422/10000
+
+
+module.exports = {
+  createPool,
+};

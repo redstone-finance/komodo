@@ -35,9 +35,29 @@ async function getUsdcContract() {
   return new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
 }
 
+function getAddressForSymbol(symbol, addressType) {
+  const tokenAddresses = deployedTokens[symbol];
+  if (!tokenAddresses) {
+    throw new Error(`Token addresses not found for token: ${symbol}`);
+  }
+  const address = tokenAddresses[addressType];
+  if (!address) {
+    throw new Error(`No "${addressType}" address for token: ${symbol}`);
+  }
+  return address;
+}
+
+function getEtherscanUrlForToken(symbol) {
+  const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
+  return 'https://kovan.etherscan.io/token/' + tokenAddress;
+}
+
+function getEtherscanUrlForBoostedCollateral() {
+  return "https://kovan.etherscan.io/address/0xe12AFeC5aa12Cf614678f9bFeeB98cA9Bb95b5B0";
+}
+
 async function getTokenContract(symbol, opts = {}) {
-  // const tokenAddress = deployedTokens[symbol];
-  const tokenAddress = deployedTokens["ZCZ21"];
+  const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
 
   // Getting signer if needed
   let signerOrProvider = provider;
@@ -72,6 +92,11 @@ async function getNetworkName() {
   } else {
     return await getNetworkName();
   }
+}
+
+// Value taken from https://loanscan.io/
+async function getCurrentInterestRateForUsdcOnAave() {
+  return 1.6 + Math.random() / 100; // 1.6 %
 }
 
 function onNetworkChange(callback) {
@@ -184,6 +209,9 @@ function calculateStakeAmount({
 export default {
   // Utils
   calculateStakeAmount,
+  getAddressForSymbol,
+  getEtherscanUrlForToken,
+  getEtherscanUrlForBoostedCollateral,
 
   // Getters
   getLiquidityForToken,
@@ -192,6 +220,7 @@ export default {
   getBalance,
   getEthBalance,
   getUsdcBalance,
+  getCurrentInterestRateForUsdcOnAave,
 
   // Network
   getNetworkName,

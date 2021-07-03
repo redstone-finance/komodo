@@ -19,16 +19,22 @@
       <div class="top-section">
         <div class="token-details">
           <h1>
-            {{ symbol }}:
+            {{ tokenDetails.name }}:
             <span class="price-value">
               {{ priceValue | price }}
             </span>
           </h1>
-          <div class="subtitle mt-3">
-            {{ tokenDetails.name }}
+          <div class="subtitle mt-1">
+            <strong>
+              {{ symbol }}
+            </strong>
+            <a target="_blank" :href="etherscanTokenUrl">
+              Token on etherscan
+              <v-icon style="margin-bottom: 1px;" color="#1976d2" x-small>mdi-open-in-new</v-icon>
+            </a>
           </div>
 
-          <div class="small-subtitle mt-4">
+          <div class="small-subtitle mt-2">
             <v-icon class="info-icon" small color="blue">mdi-currency-usd</v-icon>
             You have
             <span class="value">
@@ -120,14 +126,14 @@
 
         <!-- Collateral -->
         <v-tab-item>
-                    <div class="balance-title">
+          <div class="balance-title">
             <div>
               Your collateral:
             </div>
             <div class="value">
               <div class="main-currency-value">
                 <template v-if="!loadingCollateral">
-                  {{ collateral | price-bn }} USDC
+                  {{ collateralToDisplay | format-collateral }} USDC
                 </template>
                 <template v-else>
                   ...
@@ -138,6 +144,29 @@
                 {{ collateralValueUSD | price }}
               </div>
             </div>
+          </div>
+
+          <div class="main-text">
+            <h4 class="text-center mb-1">Your collateral makes additional money for you</h4>
+            <p>
+              Your collateral is being automatically staked on
+              <a
+                href="https://app.aave.com/borrow/USDC-0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb480xb53c1a33016b2dc2ff3653530bff1848a515c8c5"
+                target="_blank"
+              >
+                Aave protocol
+              </a>.
+              So while you are depositting your collateral for {{ symbol }} tokens you also make money.
+              For each depositted
+              <strong>
+                {{ depositExampleUsdcAmount }} USDC
+              </strong>
+              you will make
+              <strong>
+                {{ (aaveApyForUsdc / 100) * depositExampleUsdcAmount | price-bn }} USDC
+              </strong>
+              annually.
+            </p>
           </div>
 
           <div class="buttons">
@@ -184,6 +213,7 @@ export default {
       tab: 0,
       solvency: 0,
       collateral: 0,
+      collateralToDisplay: 0,
       ethBalance: 0,
       usdcBalance: 0,
       loadingCollateral: false,
@@ -192,6 +222,9 @@ export default {
       usdcApproveWaitingForTxMining: false,
       txWaitingForMining: false,
       txWaitingForConfirmation: false,
+
+      depositExampleUsdcAmount: 1000,
+      aaveApyForUsdc: 1.6,
     };
   },
 
@@ -215,6 +248,16 @@ export default {
       autostart: true,
       repeat: true,
     },
+    loadAaveInterestRate: {
+      time: 2000,
+      autostart: true,
+      repeat: true,
+    },
+    increaseCollateral: {
+      time: 2000,
+      autostart: true,
+      repeat: true,
+    },
   },
 
   methods: {
@@ -226,6 +269,7 @@ export default {
       this.loadEthPrice();
       this.loadEthBalance();
       this.loadUsdcBalance();
+      this.loadAaveInterestRate();
     },
 
     async loadCurrentPrice() {
@@ -284,7 +328,19 @@ export default {
     async loadCollateral() {
       this.loadingCollateral = true;
       this.collateral = await blockchain.getCollateralAmount(this.symbol);
+      this.collateralToDisplay = this.collateral;
       this.loadingCollateral = false;
+    },
+
+    async loadAaveInterestRate() {
+      this.aaveApyForUsdc = await blockchain.getCurrentInterestRateForUsdcOnAave();
+    },
+
+    increaseCollateral() {
+      if (this.aaveApyForUsdc && this.collateral) {
+        const madeInLast2Seconds = (this.aaveApyForUsdc / 100) / (365 * 24 * 1800) * this.collateral;
+        this.collateralToDisplay += madeInLast2Seconds;
+      }
     },
 
     mintButtonClicked() {
@@ -407,12 +463,15 @@ export default {
       return this.$route.params.symbol;
     },
 
+    etherscanTokenUrl() {
+      if (this.symbol) {
+        return blockchain.getEtherscanUrlForToken(this.symbol);  
+      } else {
+        return "";
+      }
+    },
+
     collateralValueUSD() {
-      // if (this.ethPrice) {
-      //   return this.ethPrice.value * this.collateral;
-      // } else {
-      //   return '...';
-      // }
       if (this.usdcPrice) {
         return this.usdcPrice.value * this.collateral;
       } else {
@@ -487,7 +546,32 @@ h1 {
 }
 
 .subtitle {
-  color: #777;
+  font-size: 16px;
+  color: #555;
+
+  a {
+    margin-left: 5px;
+    font-size: 12px;
+    text-decoration: none;
+    // color: #333;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.main-text {
+  padding-left: 60px;
+  padding-right: 60px;
+  color: #555;
+
+  p {
+    font-size: 12px;
+
+    strong {
+      font-weight: 600;
+    }
+  }
 }
 
 .small-subtitle {

@@ -21,6 +21,14 @@ function setupFilters() {
   Vue.filter('price', formatter.formatPrice);
 
   Vue.filter('price-bn', formatter.formatPriceBN);
+
+  Vue.filter('format-collateral', (value) => {
+    if (value && !isNaN(value)) {
+      return Number(value).toFixed(9);
+    } else {
+      return value;
+    }
+  });
   
   Vue.filter('tx', function (value) {
     if (!value) return '';

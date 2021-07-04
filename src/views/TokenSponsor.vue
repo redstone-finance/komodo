@@ -102,6 +102,16 @@
             </div>
           </div>
 
+          <div v-if="balanceValueUSD > 0" class="main-text text-center">
+            <a class="text-center" target="_blank" :href="uniswapPoolUrl">
+              Add liquidity on uniswap
+              <img
+                class="uniswap-logo"
+                src="https://cryptologos.cc/logos/uniswap-uni-logo.svg?v=010"
+              />
+            </a>
+          </div>
+
           <div class="buttons">
             <div class="button-container">
               <v-btn color="#0F9D58" @click="mintButtonClicked()" rounded outlined large>
@@ -463,6 +473,14 @@ export default {
       return this.$route.params.symbol;
     },
 
+    uniswapPoolUrl() {
+      if (this.symbol) {
+        return blockchain.getAddressForSymbol(this.symbol, "uniswapPoolUrl");
+      } else {
+        return "";
+      }
+    },
+
     etherscanTokenUrl() {
       if (this.symbol) {
         return blockchain.getEtherscanUrlForToken(this.symbol);  
@@ -564,6 +582,22 @@ h1 {
   padding-left: 60px;
   padding-right: 60px;
   color: #555;
+
+  a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #ea347a;
+
+    &:hover {
+      text-decoration: underline;
+    } 
+  }
+
+  .uniswap-logo {
+    height: 18px;
+    position: relative;
+    top: 2px;
+  }
 
   p {
     font-size: 12px;

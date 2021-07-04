@@ -42,7 +42,7 @@ contract KoTokenETH is ERC20Initializable, Ownable {
     function mint(uint256 amount) payable external remainsSolvent {
         super._mint(msg.sender, amount);
         debt[msg.sender] += amount;
-        collateral[msg.sender] += msg.value;
+        addCollateral();
     }
 
 
@@ -60,7 +60,7 @@ contract KoTokenETH is ERC20Initializable, Ownable {
      * @dev Adds collateral to user account
      * It could be done to increase the solvency ratio
      */
-    function addCollateral() payable external {
+    function addCollateral() payable virtual public {
         collateral[msg.sender] += msg.value;
         emit CollateralAdded(msg.sender, msg.value, block.timestamp);
     }
@@ -70,7 +70,7 @@ contract KoTokenETH is ERC20Initializable, Ownable {
      * @dev Removes outstanding collateral by paying out funds to depositor
      * The account must remain solvent after the operation
      */
-    function removeCollateral(uint amount) payable external remainsSolvent {
+    function removeCollateral(uint amount) virtual external remainsSolvent {
         require(collateral[msg.sender] >= amount, "Cannot remove more collateral than deposited");
         collateral[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);

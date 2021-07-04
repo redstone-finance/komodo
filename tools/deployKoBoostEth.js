@@ -68,8 +68,42 @@ async function deployKoToken(asset) {
 
 }
 
+const PRICE_FEED_DEPLOYED = "0xc2Db922aAF4B1111fe91836A05564F6525758c78";
 
-deployKoToken("IBM");
+async function deployKoTokenLite(asset) {
+  const addresses = {};
+  
+  let koToken = await koFactory.deploy();
+  await koToken.deployed();
+  console.log("KoToken deployed: " + koToken.address);
+
+  const proxy = await redstoneProxyFactory.deploy(koToken.address, PRICE_FEED_DEPLOYED, REDSTONE_STOCKS_PROVIDER_ADDRESS, []);
+  await proxy.deployed();
+  console.log("Redstone proxy deployed [ENDPOINT]: " + proxy.address);
+
+  addresses.redstoneProxy = proxy.address;
+  
+  let proxiedKoToken = new ethers.Contract(proxy.address, KO_TOKEN.abi, main);
+  let tx = await proxiedKoToken.bInitialize(
+    toBytes32(asset),
+    "komodo-"+asset,
+    "k"+asset,
+    PRICE_FEED_DEPLOYED,
+    WETH_GATEWAY_ADDRESS,
+    ETH_LENDING_POOL,
+    AWETH
+  );
+  await tx.wait();
+  console.log("Ko Token initialized: " + tx.hash);
+  
+  return addresses;
+}
+
+//deployKoToken("IBM");
+//deployKoTokenLite("IBM");
+
+
+module.exports = deployKoTokenLite;
 
 
 

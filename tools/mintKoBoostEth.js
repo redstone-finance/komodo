@@ -47,5 +47,5 @@ async function remove(address) {
   console.log("Tx status: " + (txReceipt.status == 1 ? "Success" : "Failed"));
 }
 
-//mint("0x1e15d37189E645AA6a52417317E461f56d6729D2");
-remove("0x1e15d37189E645AA6a52417317E461f56d6729D2");
+//mint("0x9b35881930B636Db903d22415e72BcC444076261");
+remove("0x9b35881930B636Db903d22415e72BcC444076261");

@@ -23,7 +23,7 @@ contract KoTokenETH is ERC20Initializable, Ownable {
     uint256 constant public LIQUIDATION_BONUS = 50; // 5%, 1 unit = 0.1% 
 
     mapping(address => uint256) public collateral;
-    mapping(address => uint256) public debt;
+    mapping(address => uint256) public debt;   
 
     function initialize(bytes32 asset_, string memory name_, string memory symbol_, IPriceFeed priceFeed_) external {
         require(!initialized);
@@ -81,7 +81,7 @@ contract KoTokenETH is ERC20Initializable, Ownable {
     /**
      * @dev Collateral amount expressed in ETH
      */
-    function collateralOf(address account) public view returns(uint256) {
+    function collateralOf(address account) public virtual view returns(uint256) {
         return collateral[account];
     }
 

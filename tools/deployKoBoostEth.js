@@ -12,9 +12,6 @@ console.log("MAIN: " + main.address);
 const KO_TOKEN = require('../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
 const koFactory = new ethers.ContractFactory(KO_TOKEN.abi, KO_TOKEN.bytecode, main);
 
-const KO_CONTRACT_FACTORY = require('../artifacts/contracts/FactoryKoTokenBoostedETH.sol/FactoryKoTokenBoostedETH');
-const koFactoryFactory = new ethers.ContractFactory(KO_CONTRACT_FACTORY.abi, KO_CONTRACT_FACTORY.bytecode, main);
-
 const REDSTONE_PROXY = require('../artifacts/redstone-flash-storage/lib/contracts/RedstoneUpgradeableProxy.sol/RedstoneUpgradeableProxy.json');
 const redstoneProxyFactory = new ethers.ContractFactory(REDSTONE_PROXY.abi, REDSTONE_PROXY.bytecode, main);
 
@@ -100,7 +97,7 @@ async function deployKoTokenLite(asset) {
 }
 
 //deployKoToken("IBM");
-//deployKoTokenLite("IBM");
+deployKoTokenLite("IBM");
 
 
 module.exports = deployKoTokenLite;

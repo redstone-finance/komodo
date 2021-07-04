@@ -47,5 +47,16 @@ async function remove(address) {
   console.log("Tx status: " + (txReceipt.status == 1 ? "Success" : "Failed"));
 }
 
-//mint("0x9b35881930B636Db903d22415e72BcC444076261");
-remove("0x9b35881930B636Db903d22415e72BcC444076261");
+async function checkCollateral(address) {
+  let token = new ethers.Contract(address, KO_TOKEN.abi, main);
+  token = wrapContract(token, REDSTONE_STOCKS_PROVIDER);
+
+  let balance = await token.collateralOf(main.address);
+  console.log("Current collateral: " + ethers.utils.formatEther(balance));
+
+  setTimeout(() => checkCollateral(address), 1000)
+}
+
+//mint("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
+//remove("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
+checkCollateral("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");

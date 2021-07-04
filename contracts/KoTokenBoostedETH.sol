@@ -14,6 +14,7 @@ contract KoTokenBoostedETH is KoTokenETH {
     IWETHGateway public wethGateway;
     address public ethLendingPool;
     ERC20 public aETH;
+    uint256 totalCollateral;
 
     function bInitialize(
         bytes32 asset_,
@@ -44,6 +45,7 @@ contract KoTokenBoostedETH is KoTokenETH {
      */
     function addCollateral() payable override public {
         collateral[msg.sender] += msg.value;
+        totalCollateral += msg.value;
         wethGateway.depositETH{value:msg.value}(ethLendingPool, address(this), 0);
         emit CollateralAdded(msg.sender, msg.value, block.timestamp);
     }
@@ -56,10 +58,19 @@ contract KoTokenBoostedETH is KoTokenETH {
     function removeCollateral(uint amount) override public remainsSolvent {
         require(collateral[msg.sender] >= amount, "Cannot remove more collateral than deposited");
         collateral[msg.sender] -= amount;
+        totalCollateral -= amount;
         wethGateway.withdrawETH(ethLendingPool, amount, address(this));
         payable(msg.sender).transfer(amount);
         emit CollateralRemoved(msg.sender, amount, block.timestamp);
     }
+
+    /**
+     * @dev Collateral amount expressed in ETH
+     */
+    function collateralOf(address account) public override view returns(uint256) {
+        return collateral[account] * aETH.balanceOf(address(this)) / totalCollateral;
+    }
+    
 
     receive() external payable {}
 

@@ -1,6 +1,6 @@
 const ethers = require('ethers');
 const fs = require('fs');
-const provider = ethers.getDefaultProvider('kovan');
+const provider = require("./ehters-provider");
 const uniswapSdk = require("@uniswap/v3-sdk");
 
 const PRIV = fs.readFileSync(".secret").toString().trim();

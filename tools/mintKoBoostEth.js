@@ -9,7 +9,7 @@ const ERC20_ABI = require("../uni-abi/ERC20.json");
 
 const USDC_ADDRESS = "e22da380ee6b445bb8273c81944adeb6e8450422";
 
-const provider = ethers.getDefaultProvider('kovan');
+const provider = require("./ehters-provider");
 
 const PRIV = fs.readFileSync(".secret").toString().trim();
 const main = new ethers.Wallet(PRIV, provider);

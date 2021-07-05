@@ -4,7 +4,7 @@ const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrap
 
 const toBytes32 = ethers.utils.formatBytes32String;
 
-const provider = ethers.getDefaultProvider('kovan');
+const provider = require("./ehters-provider");
 const PRIV = fs.readFileSync(".secret").toString().trim();
 const main = new ethers.Wallet(PRIV, provider);
 console.log("MAIN: " + main.address);

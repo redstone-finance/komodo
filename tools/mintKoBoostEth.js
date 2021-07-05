@@ -57,6 +57,8 @@ async function checkCollateral(address) {
   setTimeout(() => checkCollateral(address), 1000)
 }
 
-//mint("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
+// mint("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
 //remove("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
-checkCollateral("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
+// checkCollateral("0xa20348912B4d38F71b54E7cb1e420D8B92D7229d");
+
+mint("0x0f1BDaDb0d60FeC16827ED5A12EC9186328CfD56");

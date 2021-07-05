@@ -68,11 +68,14 @@ async function deployKoToken(asset) {
 const PRICE_FEED_DEPLOYED = "0xc2Db922aAF4B1111fe91836A05564F6525758c78";
 
 async function deployKoTokenLite(asset) {
-  const addresses = {};
+  const addresses = {
+    priceFeed: PRICE_FEED_DEPLOYED,
+  };
   
   let koToken = await koFactory.deploy();
   await koToken.deployed();
   console.log("KoToken deployed: " + koToken.address);
+  addresses.koToken = koToken.address;
 
   const proxy = await redstoneProxyFactory.deploy(koToken.address, PRICE_FEED_DEPLOYED, REDSTONE_STOCKS_PROVIDER_ADDRESS, []);
   await proxy.deployed();
@@ -92,12 +95,13 @@ async function deployKoTokenLite(asset) {
   );
   await tx.wait();
   console.log("Ko Token initialized: " + tx.hash);
+  addresses.koTokenInitTx = tx.hash;
   
   return addresses;
 }
 
 //deployKoToken("IBM");
-deployKoTokenLite("IBM");
+// deployKoTokenLite("IBM");
 
 
 module.exports = deployKoTokenLite;

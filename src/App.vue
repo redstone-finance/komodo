@@ -25,7 +25,7 @@
         <v-select
           label="Collateral token"
           class="base-token-selector"
-          :items="['ETH', 'USDC']"
+          :items="['ETH']"
           v-model="baseToken"
           outlined
         >

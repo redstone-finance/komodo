@@ -32,6 +32,7 @@
           </v-icon>
         </v-btn>
         <v-btn
+          v-if="getUniswapTradeUrl(symbol)"
           :href="getUniswapTradeUrl(symbol)"
           target="_blank"
           color="rgb(234, 52, 122)"

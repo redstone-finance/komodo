@@ -48,14 +48,15 @@ async function getUsdcContract() {
 
 function getAddressForSymbol(symbol, addressType) {
   const tokenAddresses = deployedTokens[symbol];
-  const baseCurrency = getBaseCurrency();
-  if (!tokenAddresses || !tokenAddresses[baseCurrency]) {
+  // const baseCurrency = getBaseCurrency();
+  if (!tokenAddresses) {
     throw new Error(`Token addresses not found for token: ${symbol}`);
   }
 
-  const address = tokenAddresses[baseCurrency][addressType];
+  const address = tokenAddresses[addressType];
   if (!address) {
-    throw new Error(`No "${addressType}" address for token: ${symbol}`);
+    // throw new Error(`No "${addressType}" address for token: ${symbol}`);
+    return ""; // Quick fix for Polygon deployment
   }
   return address;
 }

@@ -102,7 +102,7 @@
             </div>
           </div>
 
-          <div v-if="balanceValueUSD > 0" class="main-text text-center">
+          <div v-if="balanceValueUSD > 0 && uniswapPoolUrl" class="main-text text-center">
             <a class="text-center" target="_blank" :href="uniswapPoolUrl">
               Add liquidity on uniswap
               <img

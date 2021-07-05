@@ -1,3 +1,5 @@
+[LIVE DEMO](https://komodo.redstone.finance) on the Kovan testnet
+
 # Komodo - Commodities trading protocol
 
 DeFi is known for its lucrative yield farming and liquidity mining possibilities. However, the newly created derivatives are becoming more and more leveraged and the trading activity is contained in a bubble detached from the real economy. We want to bridge the DeFi infrastructure to the real world and encourage DeFi users to invest in the traditional form of mining and farming by allowing them to trade commodities.  

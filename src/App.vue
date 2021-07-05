@@ -62,9 +62,10 @@ const checkEthereumNetwork = async () => {
       + "If you use Google Chrome you can install Metamask extension.");
   }
 
+  const requiredName = blockchain.getRequiredBlockchainNetworkName();
   const name = await blockchain.getNetworkName();
-  if (name !== "kovan") {
-    alert("Please switch to kovan network");
+  if (name !== requiredName) {
+    alert(`Please switch to ${requiredName} network`);
   }
 };
 

@@ -7,7 +7,7 @@ const commodities = require("../src/assets/data/commodities.json");
 
 // Set to 0 to disable limit
 const LIMIT = 1;
-const OFFSET = 26;
+const OFFSET = 0;
 
 main();
 

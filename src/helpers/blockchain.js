@@ -32,6 +32,10 @@ const formatUsdcUnits = (bn) => Number(ethers.utils.formatUnits(bn, 6));
 const parseUsdcNumber = (number) =>
   ethers.utils.parseUnits(String(Math.round(number, 6)), 6);
 
+function getRequiredBlockchainNetworkName() {
+  return process.env.VUE_APP_TARGET_BLOCKCHAIN_NETWORK || "kovan";
+}
+
 async function getAddress() {
   const signer = await getSigner();
   return signer.getAddress();
@@ -58,7 +62,12 @@ function getAddressForSymbol(symbol, addressType) {
 
 function getEtherscanUrlForToken(symbol) {
   const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
-  return 'https://kovan.etherscan.io/token/' + tokenAddress;
+  const network = getRequiredBlockchainNetworkName();
+  if (network === "kovan") {
+    return 'https://kovan.etherscan.io/token/' + tokenAddress;
+  } else {
+    return "";
+  }
 }
 
 async function getTokenContract(symbol, opts = {}) {
@@ -102,7 +111,9 @@ async function getTokenContractForTxSending(symbol) {
 async function getNetworkName() {
   await sleep(1000);
   if (provider && provider._network) {
-    return provider._network.name;
+    if (provider._network.chainId === 137) {
+      return "polygon";
+    } return provider._network.name;
   } else {
     return await getNetworkName();
   }
@@ -263,6 +274,7 @@ export default {
   calculateStakeAmount,
   getAddressForSymbol,
   getEtherscanUrlForToken,
+  getRequiredBlockchainNetworkName,
 
   // Getters
   getLiquidityForToken,

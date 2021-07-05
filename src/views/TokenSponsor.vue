@@ -28,7 +28,7 @@
             <strong>
               {{ symbol }}
             </strong>
-            <a target="_blank" :href="etherscanTokenUrl">
+            <a v-if="etherscanTokenUrl" target="_blank" :href="etherscanTokenUrl">
               Token on etherscan
               <v-icon style="margin-bottom: 1px;" color="#1976d2" x-small>mdi-open-in-new</v-icon>
             </a>

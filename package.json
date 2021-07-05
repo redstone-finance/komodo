@@ -5,6 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "serve-polygon": "vue-cli-service serve --mode polygon",
+    "build-polygon": "vue-cli-service build --mode polygon",
     "lint": "vue-cli-service lint",
     "run-ganache": "ganache-cli -s 123",
     "compile-contracts": "hardhat compile"

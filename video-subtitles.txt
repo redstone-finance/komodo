@@ -34,13 +34,21 @@ If we need more working capital we can always reduce the collateral level.
 However, we should be careful with that, and always keep the score above a safe level.
 If the solvency ratio drops below one hundred twenty percent, anyone could liquidate our position by selling the tokens for our collateral at a discounted price.
 
+It's important to notice that the collateral doesn't lie idle. We automatically deposit the funds on Aave, so the token creators can earn extra income on their positions. Globally, the constantly growing collateral pool keeps the whole system more stable.
+
 The newly minted tokens could be easily provided to the linked uniswap 3 pool, where we could specify the terms, on which, they are being offered on the market. 
 
 The biggest challenge in building a protocol for synthetic commodities was how to inject data about the plethora of assets into the EVM. 
 The Chainlink offers the most convenient way of accessing data directly on chain, but it tracks a limited amount of assets.
 UMA is efficient, but the data is not accessible directly on chain.
 If we could only match Chainlink’s convenience with the efficiency of UMA?
-It sounds like a path worth exploring. 
+It sounds like a path worth exploring.
+
+When a user sends a transaction, it’s supplemented with signed pricing data and directed to a proxy contract. 
+The proxy contract strips the data out of the transaction.
+It verifies its integrity by checking the signature and saves the data on chain. 
+The raw transaction is forwarded to the commodity token contract which may conveniently access information from on chain storage.
+The data may be erased afterwards to save the costs or kept for others. 
 
 Thank you for your attention. 
 Best regards from Alex, Jacob and David, a friend of all the Komodos.

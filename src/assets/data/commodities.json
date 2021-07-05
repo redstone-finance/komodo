@@ -1,11 +1,4 @@
 {
-  "ZCZ21": {
-    "name": "Corn",
-    "logoURI": "https://image.flaticon.com/icons/png/512/1147/1147593.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
-  },
   "ZSX21": {
     "name": "Soybean",
     "logoURI": "https://image.flaticon.com/icons/png/512/2656/2656722.png",

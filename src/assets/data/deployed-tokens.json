@@ -1,715 +1,152 @@
 {
-  "ZCZ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x4c5340B93cc40325Fa60931299D33DcE816Eeaa6",
-      "redstoneProxy": "0x0f1BDaDb0d60FeC16827ED5A12EC9186328CfD56",
-      "koTokenInitTx": "0xc23b69b5bc03ba1322d4f881607fbb0c0d1ac7efbbe41f4a8364fccb1065ee8f",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x0f1BDaDb0d60FeC16827ED5A12EC9186328CfD56&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x0f1BDaDb0d60FeC16827ED5A12EC9186328CfD56/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x4a8a7f537019242414e9ec006aa3ce0052a26999508b4142625104021ca7402f",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x2C3298CD992db5cB39b0bcB7475BAd976F378523",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xB4F890976419B1F6aF53a505E0c264698064A848",
-      "redstoneProxy": "0xf38799B941E083f2769d0FD718B5Dbb6087b31dA",
-      "koTokenInitTx": "0x4aae111610ebd50b216fdea92288fb5643d3473a1589e8430624d8d9a46c96b4",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xf38799B941E083f2769d0FD718B5Dbb6087b31dA&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xf38799B941E083f2769d0FD718B5Dbb6087b31dA/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x1f11204a88212ebed276905561477bced2fbae7b10d9c9e900578e100f3082a7",
-      "uniswapPoolTxStatus": "Failed"
-    }
-  },
   "ZSX21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x52a21EB62B55Bc4f1E755f1124483113683520ca",
-      "redstoneProxy": "0xC06031386D97fA75854FECe2B74C0a6943be411f",
-      "koTokenInitTx": "0x014703812832f9b792efdab6b9442527d9e3f163d408a86b2167e007e2520e6b",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xC06031386D97fA75854FECe2B74C0a6943be411f&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xC06031386D97fA75854FECe2B74C0a6943be411f/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x0923fdc465c82f9483e4d2a05241b75f950509a57ea4e823942e7a7c53975217",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x9aBfaf2786336D1718Fe3D3228c367D5AA4eD4ba",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x74226e3A574c2A66b00c64ea4952b5366D337699",
-      "redstoneProxy": "0x132A04D4F01AdE8c4e28E629F144CEF3A3946f80",
-      "koTokenInitTx": "0xb65b979294a715b7d257eb53d3e09fb80e0eda8f0d0daa12540e8ec3a9dd3f4f",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x132A04D4F01AdE8c4e28E629F144CEF3A3946f80&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x132A04D4F01AdE8c4e28E629F144CEF3A3946f80/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x613619aafdf1d0a0c0ea9521bdbee6186e8153934f2c433098c3f5058df1d775",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xCD699619E54f707F05207b6999409a6cd02A1E43",
+    "redstoneProxy": "0xAc8bDe0CF3b94c06BaA8b397Ef8b205bd10738d6",
+    "koTokenInitTx": "0xcd8b6792d333d58998082dcc55230b4927ba6458a20fc051ba61fe1fe0ad5605"
   },
   "ZMZ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x9a52893048eB92D66D1283d7a22d519825F87628",
-      "redstoneProxy": "0xe547586e9551f4A7c570884B107550a0e99679C7",
-      "koTokenInitTx": "0xf20c2f27bb04b5c785867ffa9c8a2cfcee32da44fd5950fba1d4a9b9653b0e7e",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xe547586e9551f4A7c570884B107550a0e99679C7&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xe547586e9551f4A7c570884B107550a0e99679C7/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x1229057fd16c1523023ae97509be3cdf76819c6c07384b6e936e2c1c3d4683f9",
-      "uniswapPoolTxStatus": "Failed"
-    },
-    "USDC": {
-      "priceFeed": "0x72538c182022d93cbA99004950BCdA242A1fa03C",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x01fc02544008fe66E9e6781D435f790B8838231B",
-      "redstoneProxy": "0x7c8a3F39a18D805BA6CE0c0bBb649Ac76Fdac1f7",
-      "koTokenInitTx": "0x2924d248c77f8b4b843da5c581fe2be52d482c3599c0511d47c11e88226d584f",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x7c8a3F39a18D805BA6CE0c0bBb649Ac76Fdac1f7&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x7c8a3F39a18D805BA6CE0c0bBb649Ac76Fdac1f7/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xa8a92ea0840a328cc2d581644c14775f0cd6063db245af383a3d91f68b8b68ef",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x258A57E30D92564E798eC5EfA833eEB651F7506a",
+    "redstoneProxy": "0x01C8C3E933a6B3eDDC3006859c3e5774ac76a3fd",
+    "koTokenInitTx": "0xd81d79ea415a0a08aae9aa80c9250f7d7e499e153eb84e87e478bf4d1902dc66"
   },
   "ZWU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xb95784882D7B85A907F2EfEfCB9920DEE0910c6E",
-      "redstoneProxy": "0x1771afCC3528Ec4C6902Ee8c7280C75Add7568E7",
-      "koTokenInitTx": "0x4720ddac8852c7d219462fa445401365f90a04139bbb144b51633403f54986db",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x1771afCC3528Ec4C6902Ee8c7280C75Add7568E7&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x1771afCC3528Ec4C6902Ee8c7280C75Add7568E7/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xfa51312fd69d564d96440f1425995b6fbf5b955e24d025bc4d72a64e2a2cf0e8",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x323753A645cb19A6008475bf3e8b9670B2e564db",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xf11D2D13Babe28Cf02aD25Ca39bAE7043EC2d187",
-      "redstoneProxy": "0xa059e24aaEb6C42a311FcF59CB32AC76102e1637",
-      "koTokenInitTx": "0x5ee3d56af4606cda1c6d924a3bdce0596b1995e072f19acdef25ad64ffb8c06d",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xa059e24aaEb6C42a311FcF59CB32AC76102e1637&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xa059e24aaEb6C42a311FcF59CB32AC76102e1637/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x405503f376a714c1188e33bd9af39e06e3049e2a0927126fd58afa39d93414a3",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x1abec771f3421759e5Ec2bdE52505c2300Cc1d9E",
+    "redstoneProxy": "0x4D797E5C5B49A8D7Bd7ba2ee2071a1a2211f0bDA",
+    "koTokenInitTx": "0x77979e822cdc8b19cdffa4b7bfe270d49f9b6184a02ef395ecf83ad1728e465f"
   },
   "KEU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xb621b029545624eA86B6277e4e32fDa0c39DbD45",
-      "redstoneProxy": "0xD08eDD7CE78E742f1fe14De5071E88717477b884",
-      "koTokenInitTx": "0x3ec22261124a86420ac0e295db1eb55bff6d64cc0899b5d1bf9ad9ab223e2c4f",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xD08eDD7CE78E742f1fe14De5071E88717477b884&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xD08eDD7CE78E742f1fe14De5071E88717477b884/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xe449e3b90a5b7ac92af9fec054abcdfe9f4655700a5c5c736f3b47e6ad376e65",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x4e56150C204A652632EA9Bf24930CFB678B0B0A1",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xf0d72700F24e36c38B4A708Bf859F247Caa94554",
-      "redstoneProxy": "0x4bcCe748f829FA3734b46C19eD7eb4ba7f823af7",
-      "koTokenInitTx": "0x3d0fa6e6b7dd3efe12ca3ec49c11b09c1851e8d183bb603c3d186b9c83198480",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x4bcCe748f829FA3734b46C19eD7eb4ba7f823af7&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x4bcCe748f829FA3734b46C19eD7eb4ba7f823af7/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xb23e3a3365a71711cbac97ae4fcace9796927428df0da300cd690c23765354f7",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x75721E2aF4Bd8d7EfbC6610f3A7cE391563073C8",
+    "redstoneProxy": "0xAbF902Ee7437Ac808596598C2Acea1B9861D4a2D",
+    "koTokenInitTx": "0x73d59741ddba9ddb9a6bcf9d5273370177442889e2a6845c9fcc898a0e087825"
   },
   "MWU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x19F80876Be3e65c924A3b12520BcE04d8101C307",
-      "redstoneProxy": "0x29EF4a93Ce7399c8F9869F4AE7bCA6639004e54f",
-      "koTokenInitTx": "0x8f38e518e6e8142be46390c17105ab99b0fdb384832e1070aa9139b3bf7dbab6",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x29EF4a93Ce7399c8F9869F4AE7bCA6639004e54f&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x29EF4a93Ce7399c8F9869F4AE7bCA6639004e54f/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x545bd189b3a41279735da4305ff328bb823a29fb4ae9db37aad837482ab468a0",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x359caE3b0051d7048cE049075EDac145A09C0988",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x48a5B3aE1B88808743C3C2BbE93bdA63CEBfa187",
-      "redstoneProxy": "0x0a95F80fF80cfEA675526d0e04477257AF74ea22",
-      "koTokenInitTx": "0x531e03a17e7bfbf3870ca0343b615d2bae809b658c940b2b4591dc4da254e432",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x0a95F80fF80cfEA675526d0e04477257AF74ea22&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x0a95F80fF80cfEA675526d0e04477257AF74ea22/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x9a5c458d132536dc82db3007489404227b1df1cd0a0729b9c15e75170df65393",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x66B6377E159dA55436fa29bC718C5F2620ea78eF",
+    "redstoneProxy": "0x33732a2e9Dc96fBB9a722297961836740d2283b0",
+    "koTokenInitTx": "0x9b307ff60915e977541a634ba023091a25ad8077c536f1aec1180b74f078abc9"
   },
   "ZOZ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xFe01cBE875eC1BaDb9228e2859aca15eE888b4dD",
-      "redstoneProxy": "0xc58dE57149a0EB730805FAb4D6eF6861c289849A",
-      "koTokenInitTx": "0x956bf90aad65110d257c973ae3a3cf0cf41cb3bcf03f24763bf4876007dbabcb",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xc58dE57149a0EB730805FAb4D6eF6861c289849A&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xc58dE57149a0EB730805FAb4D6eF6861c289849A/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x5cfb950104bd7423d9f480f552326adb1c8a5a6ee6ccaeb5ae149fef7c304efb",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xD92753C577a040E4eaC1f541FB2dD05d341A8dDd",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x4e7658Ce2C98896007cFC2B9a571ec2f794158eC",
-      "redstoneProxy": "0x8924eE1E8Fdec7e77948A2AcBB386d3A807038d7",
-      "koTokenInitTx": "0xfe56123c381eaf5a71d84ff72858b0c26cf78a1607f0bb1826ae01e3022dede0",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x8924eE1E8Fdec7e77948A2AcBB386d3A807038d7&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x8924eE1E8Fdec7e77948A2AcBB386d3A807038d7/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x079db75ff8ec030ef2ddb727191d52bdd3889487192c8f601ae8efb91829103d",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x902593C03a1DAF60d1b75872d34d0E65E1742fA4",
+    "redstoneProxy": "0x83674339b2Eea2Ee1B92429442F966d2d716ADBb",
+    "koTokenInitTx": "0xadb2c01c460b7f07c40c842d5e86ee35217e24d4429bfee32521859afe1c0dcc"
   },
   "ZRU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x16CB0594ED28C2A7bc480AA267bE81fBeAA69596",
-      "redstoneProxy": "0xb9BcDa2f3964A01a027C66c696Dd2a4102Bc1463",
-      "koTokenInitTx": "0xee9f6f5e5c7b5342d55bfd93d3a22c6ed4c4a0d2421a6e0be5b7f881d46b5069",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xb9BcDa2f3964A01a027C66c696Dd2a4102Bc1463&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xb9BcDa2f3964A01a027C66c696Dd2a4102Bc1463/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xac0daeaeba446a4ed86e5970faad59a3151f142146dc4037b185f16da3dc2ac0",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xfA49192b2919C9C120F50DecC65E05225802b5a7",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x2a178DA3b0638e42334130761540866DD5E200aC",
-      "redstoneProxy": "0x63A234722e923F17028CeEc578EA2edf15989811",
-      "koTokenInitTx": "0x4e2e9dbdb55fd4da3aae7d0892cba3035cfecf8ed59f75c1bf10e382a6b0c1c3",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x63A234722e923F17028CeEc578EA2edf15989811&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x63A234722e923F17028CeEc578EA2edf15989811/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x86b00a12ce693097ce469a7b5071b70ad34f7a76ecf72ab67b122e8a785070a2",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x9707A9732F6716da8c929645304bd915bf19E9f3",
+    "redstoneProxy": "0x87E5dc399d4BfC3c4D5fdA187D9d4a4C86ae48B2",
+    "koTokenInitTx": "0xae2d0d140d353532b6c7a2258bc3e1c424d14ebc2ec2fa0d89136316b43bf247"
   },
   "CLQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xE468c2EBCF6dCa788D249c02E97Cc5A1b314FAF9",
-      "redstoneProxy": "0x3Df849aDBe98d03F1CcE54975502c11cF436C767",
-      "koTokenInitTx": "0xad871340fa2a88332f42a7737d5391de1e629ac9f21dd3245d2f3a1d7a57526d",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x3Df849aDBe98d03F1CcE54975502c11cF436C767&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x3Df849aDBe98d03F1CcE54975502c11cF436C767/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xa4178b11cd97a498c0ed1474ce33c6e667257e3d472899467c779a562cf23b2b",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x770c83f0163819a3217d50D26304df2b264a35AE",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xbC2077A3a2c56A12d7036110d540474aA54FF60c",
-      "redstoneProxy": "0x8950aB1fAF3615A2a5F253FCEDfc31616A2f73F5",
-      "koTokenInitTx": "0x5925579e2c5e372efa81152435b74441300e15f9aa9ad4ec2018176464e42add",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x8950aB1fAF3615A2a5F253FCEDfc31616A2f73F5&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x8950aB1fAF3615A2a5F253FCEDfc31616A2f73F5/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xe5efe5b9baceb48d98a3233c481d786fff2e5e1027d2c74ee71efdc10615e90d",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x6bEf73c3Be833a9B3a578BBA1B8f4A1896eE89dF",
+    "redstoneProxy": "0x37216ca0E19fBfDbcA6111d3E50673e989F20a1b",
+    "koTokenInitTx": "0xb0e396c608a19e3c23c033dc77342bb0fc51a3e156f46510fc57152f7fc0390f"
   },
   "RBQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x0191c3e6ED2C53a10a54049e5902217F264d0759",
-      "redstoneProxy": "0x2D6c48BB450c5F0a570Ebe145ba4BaE95bc89b71",
-      "koTokenInitTx": "0x1b3eda833de244da414a613a9237b7fcafc3f2dd5ebecdf84597fc6f415b9735",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x2D6c48BB450c5F0a570Ebe145ba4BaE95bc89b71&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x2D6c48BB450c5F0a570Ebe145ba4BaE95bc89b71/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x175d14550619b762d1e04089f9362d5c5e86f294ee6a42fac40182531159e640",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xc51a6EC9A97B337B29401B9d9c57e24Cd7102349",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x7278cFF7Eaf42209484cC1AdfC71e76C61c9Cf57",
-      "redstoneProxy": "0x7811668B669631195408bC54A3b7996e81451921",
-      "koTokenInitTx": "0x8dd6703380e82e14721a3fdefbde4a34eea44b6e7ac963f37a4b868b53fc1991",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x7811668B669631195408bC54A3b7996e81451921&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x7811668B669631195408bC54A3b7996e81451921/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x193de89c3596577fa7664207d1ddac7694f6c80887dca3e20f01f7dfca078478",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x911dD8ff83786D14c46f3eCaAcCFfB81DD9E949b",
+    "redstoneProxy": "0x7fD85e349f9C06D18416bbb37259b2f4b2908deB",
+    "koTokenInitTx": "0x1f330d6ed8097f81218fa9324234c34b0cc8eb28d615c8bdab3e699c89f22fd0"
   },
   "NGQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xd547D35Ce8bdBC5f9D395E276ba9d80915fB67d5",
-      "redstoneProxy": "0x80352095D33D3B1BFaB2FbBcCaCe4e2fAeD41024",
-      "koTokenInitTx": "0x0ca1ca8d7c141b476ff1aa6b9736e4221a9025448175516dce31023e4d9acd84",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x80352095D33D3B1BFaB2FbBcCaCe4e2fAeD41024&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x80352095D33D3B1BFaB2FbBcCaCe4e2fAeD41024/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xae0c31dfd706cb95355ed6462b8bcd05ff909ac9f4200978e208d7bd079bf098",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x57FabC46759807Ef8f115452fD47cC5DEf679C8a",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x9D6f363ffdc253326353d4D5F2fd9339b9dEAfe7",
-      "redstoneProxy": "0x330D2E9f5Cd1D9fA095EC56670907Ff36FA2c589",
-      "koTokenInitTx": "0xb75769f7dd4deb487c0b328dd6c79b8447e21e4f787841a58913aeb0f336fcbe",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x330D2E9f5Cd1D9fA095EC56670907Ff36FA2c589&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x330D2E9f5Cd1D9fA095EC56670907Ff36FA2c589/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x717e79bc4636a03e6555e069bdbbc5ac42dfc746672a363a2ecbbe1c4d535d9d",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xaD0D46f39dDB70D87761CF7ebe383C2678bBDD23",
+    "redstoneProxy": "0x30eB43308D8C8086721D6F4BE319E9b49fAF11F1",
+    "koTokenInitTx": "0x1e6104bcbaceee71e9f23a781f01e5b43609c271d9c90ba87dc172c9f4712114"
   },
   "QAU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x5a66163D0BcB417873C67518a3Aeb39ce83BcA78",
-      "redstoneProxy": "0xdf96E88BB2EE3D9929095ccB0Bd674869bC50bB6",
-      "koTokenInitTx": "0x02e66793860279ac263449a06f1c5eb09d775af848785112b513ff2db759d6b7",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xdf96E88BB2EE3D9929095ccB0Bd674869bC50bB6&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xdf96E88BB2EE3D9929095ccB0Bd674869bC50bB6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x6b6cd89e4f253ca8e2f2f7f6b6f2c4dc888537988c0aebcb3b7f0734c2459f33",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x0f68a08c63927bF8fFC500a8145410413D660d54",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xFE67EB5a6CB291A91d54ddEebC088499167441Ef",
-      "redstoneProxy": "0x1a49772987180D44B01741dB26D6114F7b5584d6",
-      "koTokenInitTx": "0xf93991d22d2267bbffc2c5a199a503b4c3b401248056e852ed1e1d5af6709088",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x1a49772987180D44B01741dB26D6114F7b5584d6&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x1a49772987180D44B01741dB26D6114F7b5584d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xf412478bdda13ca9eadca7986f0e387691354d782908633667305c3f2ec47dd6",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x9ac456937De2cC22aBcA9ac6520e581321cc9255",
+    "redstoneProxy": "0xD0eC7123C92A34857513F4b4ce9081c7c11Ae721",
+    "koTokenInitTx": "0x0c5c55d87b5eef46bf45961ae493a5da4d22700f5ac9becede9bd0d4f707a874"
   },
   "GCQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x3cc18202aE752A8D54b682ECf5819e5181268335",
-      "redstoneProxy": "0x7a6F641dFc150F551184A5c4506F26096502e877",
-      "koTokenInitTx": "0xac66e7785529e5255186c7a8214e9982379ecccfc04d4ef5d71503f24c77ad51",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x7a6F641dFc150F551184A5c4506F26096502e877&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x7a6F641dFc150F551184A5c4506F26096502e877/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xcc4e5bf14e71418024e8eb6790c06ba9b2e6a05deffa9998a72c8dfbf0fa5f66",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x1ac75ABFC87DAE53cbd80d08C824259Fc28e8764",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x3D0aE9689a41c375Eff681F3ce77DC069723b633",
-      "redstoneProxy": "0x33eA95A4DdC6012E7Bf006177bfC52DF04A5Ca95",
-      "koTokenInitTx": "0x1322f66eae3abeebb4bc389829bd5ea1ad96ed1adc0abe23b32a751ef831ae79",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x33eA95A4DdC6012E7Bf006177bfC52DF04A5Ca95&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x33eA95A4DdC6012E7Bf006177bfC52DF04A5Ca95/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x240f46ac52330261d5f48938b0aa3e57d62b1ff580c9adcba7c69d10ffff338f",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x0242e888395e1F95bC3Ae3bc6fFb0F2AA661f9cc",
+    "redstoneProxy": "0x173846A2dde5726E65C76d11ce23D23D12e563D4",
+    "koTokenInitTx": "0xefccada7b119ef3b1cd2b3e74ec3e7013dac0ad1e56e7e102561d97ce0fee3df"
   },
   "SIU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xBD06a27fb42013c1ac4441a22BAC1E0732a7f266",
-      "redstoneProxy": "0xb4AA676dD133dA6C9376e4325840c422da8a6782",
-      "koTokenInitTx": "0x18abb3b7fe0f2ab2eab9d18fcf57a787b311bdd2b327209f04756ccdb4ce33b2",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xb4AA676dD133dA6C9376e4325840c422da8a6782&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xb4AA676dD133dA6C9376e4325840c422da8a6782/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xa6741c7308690c89d9e3af185fc6ef767df38600318066e4d409ebe890cc0781",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x952A3528fa94AB8b2780E98873c65553234d53C3",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xd2c75C89B9065a83ce49B2c6814449d5a1F70a98",
-      "redstoneProxy": "0x4bBb5A4112943142c39c3Db80562a565587f1380",
-      "koTokenInitTx": "0x33da34cb8060aa5f21e6f3de19658f40805fa2ac2144d9f36eca934991a0fa46",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x4bBb5A4112943142c39c3Db80562a565587f1380&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x4bBb5A4112943142c39c3Db80562a565587f1380/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xd9b5b27e629697f9abeedecf11a3965a6cecd6a8f5ebe35a49bd5c996799e345",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xC68b5934aB790344EaF9D4ff7414405682b7C19e",
+    "redstoneProxy": "0x9b3254480B9bC12a47Bbb0aC1beB3Bbbf3294A58",
+    "koTokenInitTx": "0xa1cd4473119a2a93f670ad9a5b628a112f33bd16ae791402ec6bbfb867d0f3a6"
   },
   "HGU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xE4660Ab0A46929C8F336Eeb31be2d73744fa8fC0",
-      "redstoneProxy": "0xfA6A3fE9FA23bBA69643ce2e66a4f8F668228444",
-      "koTokenInitTx": "0x6fc24f83cb46ffc23f4303640939183afd809775f996f062c4b82746d1c826ca",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xfA6A3fE9FA23bBA69643ce2e66a4f8F668228444&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xfA6A3fE9FA23bBA69643ce2e66a4f8F668228444/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x9f5947e7ad0ffca00f45ae6fc17effd0a12db551a1fede0d1d9ae977daa23287",
-      "uniswapPoolTxStatus": "Failed"
-    },
-    "USDC": {
-      "priceFeed": "0xCDCf3E98D0E37869B7968f8930A1C5FC45cbEAEd",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x13d26B3bbEEc8b4E941470af41cfFa0eD860fb3E",
-      "redstoneProxy": "0x5FaabC6573DDAa9fB57caf4ab59A5d1091D15d39",
-      "koTokenInitTx": "0x04d89008903b24c19823021c11ff59a13a4948746f3d012322e79ae5225ace69",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x5FaabC6573DDAa9fB57caf4ab59A5d1091D15d39&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x5FaabC6573DDAa9fB57caf4ab59A5d1091D15d39/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x323533db9b30544bd9bc4098cf64403a5ab09ff50527c303d136ddaad5a80a6e",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xAc6885987A36D6506A67BCc8f6A46CC24C01128A",
+    "redstoneProxy": "0x40Ebb752E444B086Ac740954558D3C123cbeA78b",
+    "koTokenInitTx": "0x20c91c1cc9e5d84736b8bd500388f64948785b49b0cc70deb164a8b30ba0c80f"
   },
   "PLV21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xc7A0a3b253C4bd6A0D8bdcAf28A0991D2a102404",
-      "redstoneProxy": "0x43521a3d1fDAb2fcBC4576328938Cc4f54c3A2f0",
-      "koTokenInitTx": "0x13346f1c10d5d6b6964389eab0b52b09822064701c47893524080fcaf516e595",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x43521a3d1fDAb2fcBC4576328938Cc4f54c3A2f0&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x43521a3d1fDAb2fcBC4576328938Cc4f54c3A2f0/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xe52484d1bbaa45cd4e3ee211d856a34c539ac3bd0934fca7250f9252cb029cf2",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x80d97B99A91d657Df4dd3B0f8BE7277e21B21f9a",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xec7df9D63e54Bb80CAABc955bcb2FADAeE7ef4b4",
-      "redstoneProxy": "0x90dCb5D441d3b660B7de14F2aa0B7899075644Be",
-      "koTokenInitTx": "0xde2b6120bba0ed09dc39d6e6ef41cf7b330ca77b0cb851cf8a3ad18bbf602342",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x90dCb5D441d3b660B7de14F2aa0B7899075644Be&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x90dCb5D441d3b660B7de14F2aa0B7899075644Be/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x8c63d08952723634e821a4da4c4a83b0a68ad66e088c87535b0730e01d33a64e",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x4a8fC65989ac15a026390601B51dAC4Eea96aCAf",
+    "redstoneProxy": "0x15541f1d10d8eA520A4f853b7b8c918BD79b452B",
+    "koTokenInitTx": "0xe74422c279fe87712640506e3d62f8f061bb4533f0272b4d927ab033d2772f26"
   },
   "PAU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x389D59F7868d2A459f6F675f057721431256cA9E",
-      "redstoneProxy": "0x903B9E5aF7075529e315E7C7458D9cCFe9A4b0c0",
-      "koTokenInitTx": "0x7edb22f75d97c7b7979d49f4b589032d0ce088d5bbad51e189fa2ae3ad9ff5df",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x903B9E5aF7075529e315E7C7458D9cCFe9A4b0c0&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x903B9E5aF7075529e315E7C7458D9cCFe9A4b0c0/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xda6e0e2525c5011095d24a3b22a931cd7b7434213c478dd76501db83f79696f6",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x6144AE69E3B0BcfB2c1E49119aa066dcfD6485A3",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x890de0e06DA3Ec1Dd54caD2EE27d55616B18C7D3",
-      "redstoneProxy": "0x711ee4D99D7DBE9c24534c5d8f6e5d713F6198C9",
-      "koTokenInitTx": "0x96a618fbe6963fb45b553a42c8864428335582ea70b597849cffc3d8f464a602",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x711ee4D99D7DBE9c24534c5d8f6e5d713F6198C9&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x711ee4D99D7DBE9c24534c5d8f6e5d713F6198C9/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xc46c2b638e6fe7c1a9f8fb17c95499032c990aaebe666f6ade108b61aa759416",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xBE36F57dC5DE900185a7C624381891afE9039b45",
+    "redstoneProxy": "0x034560Bd5e4E9BfCbe675DFC823780617d0E9c12",
+    "koTokenInitTx": "0xc529de92de3c4ed863051b297fa8bda3e1bf9bb346f47e9864c5d86855e07621"
   },
   "LEQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x7867Cd4Cd44Eb30f69B45f03c6dD77b16c18990a",
-      "redstoneProxy": "0x6Bb223a4b3A6B9A1f0872794225E2D4ccc6533E3",
-      "koTokenInitTx": "0x09762e555379241d0970a739c263b7a61c057adb2164bbb1fb340ea274722fab",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x6Bb223a4b3A6B9A1f0872794225E2D4ccc6533E3&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x6Bb223a4b3A6B9A1f0872794225E2D4ccc6533E3/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x4b30f67b7c78b996b8080a26463bcf0f78ac2f235e052bb27c3918ac02b55da3",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x2e72A722b38193dd4d1ea95138393e57970dAB20",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x3a6B5B005651D3637240d4b89719038B7842DDA3",
-      "redstoneProxy": "0xDae612F201B6BfDe745D27C2d8134775D8aAeCEE",
-      "koTokenInitTx": "0xf7fe8921d53e2f5087fd66c2e9d2fd4152f87c8bb033afe9d10f95703c2b9e99",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xDae612F201B6BfDe745D27C2d8134775D8aAeCEE&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xDae612F201B6BfDe745D27C2d8134775D8aAeCEE/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x57d1fb9dfed72c25935ee6c98de9be6338050433cb8da8872b1520288abfef1c",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x8cA1Dc3F82416426FD1cB3c2A5de09E8D84a3599",
+    "redstoneProxy": "0x604FAFF8C364B912ec5f89c63A9CbA759e8F4019",
+    "koTokenInitTx": "0xd8d74f21564a80822bb62d76080306c924dd835afc9ae6b6c4ef8453e9892af3"
   },
   "GFQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x0C2cE95dCcA96643a0457B263C375a8df4F70d1f",
-      "redstoneProxy": "0xfec3fF1f43309dc697d3AfA0E4792871c2aBdd65",
-      "koTokenInitTx": "0x37e6682011686cbad0e2f5aaa35232a05119d9e99a0750f425eb800c8ba9d214",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xfec3fF1f43309dc697d3AfA0E4792871c2aBdd65&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xfec3fF1f43309dc697d3AfA0E4792871c2aBdd65/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xdb58d9cecd2e36d8b116c0f34dbd678cea4fc1dad0a4a5949f33274bf7443d11",
-      "uniswapPoolTxStatus": "Failed"
-    },
-    "USDC": {
-      "priceFeed": "0x1D55CcBa6ae1ec23a59eAb6EA1BB0D7F71059450",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xe76aD33ae8aD7D8f88D310b3E9D923cBC3C20F96",
-      "redstoneProxy": "0xf46280BdD37641C8De1935B51160d0C8aD206132",
-      "koTokenInitTx": "0x0fd39f596e43daa20a5394b9be06749c2f98fdf11ca19ed05526a7099efe49a6",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xf46280BdD37641C8De1935B51160d0C8aD206132&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xf46280BdD37641C8De1935B51160d0C8aD206132/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xc43501604ef2756b62ab9f721b685bace84471a519460edd61615c6300d0e8f0",
-      "uniswapPoolTxStatus": "Failed"
-    }
+    "koToken": "0x43A3743Df0cB1b348a919Fe93E589241A4fB1Cf1",
+    "redstoneProxy": "0x21feDD90ac06a9312a13Bb17d51753EeF6186eaF",
+    "koTokenInitTx": "0xd36ed6b748e2db42f5cb6ba0869ca8feaf76c43ea7628c9e1af3c89c11f6b5b5"
   },
   "HEQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xAB4B585E0D392873efd7e8B8df6ABCC89c7efefC",
-      "redstoneProxy": "0xA2874Ae79a5d5044F4C125a84a41ae6C99AA78ef",
-      "koTokenInitTx": "0x95939f42dcc0f9690d41f06ee77535d5b698e30919442073595c7664dd756162",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xA2874Ae79a5d5044F4C125a84a41ae6C99AA78ef&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xA2874Ae79a5d5044F4C125a84a41ae6C99AA78ef/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xe29fc6df90d588518659ec8ff0a4eeb6e8599ac7b9c2ae474b01c6981918f139",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x49578C876a55Fa667Ad310BAA7B2BF8e69804116",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x93C8770c5ccC8Ce9005b1E17A30025E64BD08041",
-      "redstoneProxy": "0x85dD1a53a934D589c4A60F215aa5B2Ea15c838f3",
-      "koTokenInitTx": "0x1496ddadab0ad3a5364a5a267190ec55ab26a43868a82537d1124cfc589cdbfd",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x85dD1a53a934D589c4A60F215aa5B2Ea15c838f3&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x85dD1a53a934D589c4A60F215aa5B2Ea15c838f3/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x7dd29a690a8d9e353a9cec7241c935f080cdae3733f5623bc911fba227d85448",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x9FDFb6977aB2546F1b576c568126251A401eE40E",
+    "redstoneProxy": "0x8Fe822B17D01FfCcfb3C95cc67AA524Ec29BDED7",
+    "koTokenInitTx": "0xe6580114cec4941e41a7995bb64167b9ba9d6b335bf46064d13a7eda52aeb7ed"
   },
   "KMN21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x1253DaA89366F9717b75C496445033d140432B8b",
-      "redstoneProxy": "0x60CC6919b67119A4FFA20bB3E05c5A006dfB2810",
-      "koTokenInitTx": "0xa6a91d7318d952b6f731d49b09d39bd0c351b07acf176ec0c27fce6b3b5034f8",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x60CC6919b67119A4FFA20bB3E05c5A006dfB2810&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x60CC6919b67119A4FFA20bB3E05c5A006dfB2810/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xf245e5f72061f4d22a741f31f76453b6d3502ee2281c7338982d9940c7c34c97",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xB721FaA7956294b6B1D400371944f0cbe2d66833",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xf1b27A438A55C311597758da080DE4fEC664213C",
-      "redstoneProxy": "0x1f893CD47f979834bdEF92d0ef6f93680F4eeEb2",
-      "koTokenInitTx": "0x6e275d43767db8a2e0b0964275dd83be699b0b91a8329a35bd6ab09bda9aec21",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x1f893CD47f979834bdEF92d0ef6f93680F4eeEb2&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x1f893CD47f979834bdEF92d0ef6f93680F4eeEb2/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x28161557a86eb73ca83c4d3a778134b8767e0ad86c4e1cdd94a2bfa6f4a772e6",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x7DD050c2D817304d169F320273b862085fb19248",
+    "redstoneProxy": "0x3D5d65efd68b64ed364D458d84dCb0cE6A1E741A",
+    "koTokenInitTx": "0xf5c2251f54fe697d0571c2a3df8601c6acd262fe0f7cdcc50e6e192153c19c6a"
   },
   "DLN21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x75C9C7E7De7174710eeA0d09F85Be1544976427a",
-      "redstoneProxy": "0x36CDCa3525b27fF425A191660DE0ddf96CB5742E",
-      "koTokenInitTx": "0xbadb1debb8dec3e2a41bed51064d578e0d5c7ce7bfd0422a96f6723a76eb2f22",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x36CDCa3525b27fF425A191660DE0ddf96CB5742E&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x36CDCa3525b27fF425A191660DE0ddf96CB5742E/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x5de394610990dd41654d9a285ad6a27c1a2b706a40d1797766ae3e454295cfeb",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xe396a59600922229aeFa9aaDc8531f587b70E1F9",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x61FeAe1E0462D6361AeBDd538843259b2Ad0bD92",
-      "redstoneProxy": "0x2619a3886f49dD3072d987E3daAc9C2e639e664F",
-      "koTokenInitTx": "0xf2ddc0ad5e47f1c0ef4b4477a0519625373748394482e448af34ebb0ed1eb986",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x2619a3886f49dD3072d987E3daAc9C2e639e664F&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x2619a3886f49dD3072d987E3daAc9C2e639e664F/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x9561a31944e32c45af01d507dc7952a452dc2b1b9922ca5670446b045162aa0c",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x358e08c814DDFEE83bE02D07f79BC3c8427F051C",
+    "redstoneProxy": "0x63CFC0F4D3b1184Aebac6C7a408a5F0dE57Ed894",
+    "koTokenInitTx": "0xbbf44bf22e8307b41c8688949fb3ef78ba39cc09bc8c85b58fb9abedfa28bd37"
   },
   "DFQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x2695D41398a9e011D098D3Cf6621eB23cED51732",
-      "redstoneProxy": "0x6866f1CF787255E17949aC9e7eC2Cbe870622992",
-      "koTokenInitTx": "0xc8e1a2834ac19782108716044532b32e2bdbab8a9f27b43480e4a3088cd0cd4d",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x6866f1CF787255E17949aC9e7eC2Cbe870622992&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x6866f1CF787255E17949aC9e7eC2Cbe870622992/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xa5117f64dc0179e74452893aa266c827e2cbc32112211dcc98627986c0793f8f",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0xa555A2A9AC2704458EfdED706ADFB2022Cb139f1",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x81De7E93BbD64E8491630AeB240ff659Ae504EEC",
-      "redstoneProxy": "0xAc69ffEd4b8D25C89A4eCD60673918b98DCB63fc",
-      "koTokenInitTx": "0x95a9f8b11baade54b2b98f8e7cfddfc494bdc9b0bce6bd59cdd8a631bd5fa0ed",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xAc69ffEd4b8D25C89A4eCD60673918b98DCB63fc&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xAc69ffEd4b8D25C89A4eCD60673918b98DCB63fc/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x276ab0aa134e210ea771f38f475503bd53572fcc2f487b00712761edf0022883",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x3aB9D0CFda65562f79cF0FEc00D7f983773268eb",
+    "redstoneProxy": "0x7D238B7A6FB26728aB6ca162fCD715837a52375A",
+    "koTokenInitTx": "0x9ee602e0da9a63ee8f6b90b156f511e92b21fd27c693b10ece693037429f9bbb"
   },
   "BDU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x667709086A6538304AC47e460A28c2170648d9Ad",
-      "redstoneProxy": "0x62AaB5fF9f5fcECA47F617477A55CFB92D0462B4",
-      "koTokenInitTx": "0x56ac317eac0223d7fe1ae225cf45e803dcc91471093278c381581ea09710806a",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x62AaB5fF9f5fcECA47F617477A55CFB92D0462B4&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x62AaB5fF9f5fcECA47F617477A55CFB92D0462B4/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x3d216d3dfc740ddb4459aeb5c0203d092c17e5f9969b43b18fb8ed6a07a0fe37",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x36CfaE123Bb4b3b33020202D1D79fbc365423201",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x56d75f652c98CE1208e57772becB13c04Bed4F11",
-      "redstoneProxy": "0x1FF7c7f6D655D1787de2658E9d2AF43c4a3983b9",
-      "koTokenInitTx": "0xf633f6ce30026eec2436b08e2c94862dd6eec9ad56e31c57521981e2534f165e",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x1FF7c7f6D655D1787de2658E9d2AF43c4a3983b9&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x1FF7c7f6D655D1787de2658E9d2AF43c4a3983b9/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x35ef31e22ad3cfa850f4e390de5a332f66fedbe3aaba295266f99715e396b1fc",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x3F42E996Db44b110a94e04824907e85525D4bE16",
+    "redstoneProxy": "0xc9832DD566a365f1aDb1aD27Fa7E0cefAE9C0247",
+    "koTokenInitTx": "0x3bc4214ecd32069e2bac9d62fdbd46f82305f80e3b8d6d5cbb932f7963b1b682"
   },
   "BJQ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xd602BbB27F4313d9D47712c74FAA5d2646119df2",
-      "redstoneProxy": "0xf1b2342EfC7082C6277966eF9CA59d6381c760Bb",
-      "koTokenInitTx": "0xbd519079e1d04a4896447f6f675588c50786c1d94a37df1af7665b0ed7b1fdc0",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xf1b2342EfC7082C6277966eF9CA59d6381c760Bb&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xf1b2342EfC7082C6277966eF9CA59d6381c760Bb/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xc781bb4b7f476feba69fa2b31f8e7cc26b2a4c7f54c04c5d9fbe62346b9b99c7",
-      "uniswapPoolTxStatus": "Failed"
-    },
-    "USDC": {
-      "priceFeed": "0xf4b75C91b5ffF7d5212d79c0A5724eFEC484f103",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xeFE75B902F642Aab7b4C0309D1C1089F222D004D",
-      "redstoneProxy": "0xe732eFe7fC87324e57dAa9A3582088Bb79f39484",
-      "koTokenInitTx": "0x7c2b6266dbec84e9f517fc016f667500a0b552e51180498223c9cc75d2b743dc",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xe732eFe7fC87324e57dAa9A3582088Bb79f39484&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xe732eFe7fC87324e57dAa9A3582088Bb79f39484/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xeb377cf8e5b0c4342ff77a7be9f335c081ccf1d74881e46b20abf45f07951a74",
-      "uniswapPoolTxStatus": "Failed"
-    }
+    "koToken": "0xA90450E6A004275585F4D3a6F16ff299917f081D",
+    "redstoneProxy": "0x18ad2cF90f563eDa60AC22d239893789bF47A49b",
+    "koTokenInitTx": "0x00a9d7c90ec187220a87b26c579a60131be138e1ff63fe37d98b849a2ec5ebc7"
   },
   "CTZ21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x622D0061866311BebB283c43A65272FdB7A18058",
-      "redstoneProxy": "0x42EfE0574d285C28aE748dF55d5DBc137572CCe8",
-      "koTokenInitTx": "0xa81beba46cfbfcfcfddc366a498d687aea5194287a1e3f1faa5548a75c6e5fdc",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x42EfE0574d285C28aE748dF55d5DBc137572CCe8&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x42EfE0574d285C28aE748dF55d5DBc137572CCe8/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x778052fc1b034cd7b9916ffe049cd883532029df44f99d60fd1f4d8072d1f4a7",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x66Da0302Ca3F2DC159C7E8f802E1203c9b1ebfEc",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x88E91159BAd3e7Fe28AD5d351f856F1A3d57B6F7",
-      "redstoneProxy": "0xE5C2Bf99b3D0d7B9F3a11C7CD8bf1b814eE2C31c",
-      "koTokenInitTx": "0xef3f5064205c5cb3122d0c2fcfe1182b37d5618a2735d32a423e42c5530e415c",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xE5C2Bf99b3D0d7B9F3a11C7CD8bf1b814eE2C31c&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xE5C2Bf99b3D0d7B9F3a11C7CD8bf1b814eE2C31c/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x800c56429756ff8d8b83d9d17d7c252e2f927fba145c6ea4f07bcd899cd9a477",
-      "uniswapPoolTxStatus": "Failed"
-    }
+    "koToken": "0x00F65Aa37d06Cdc7298d4eFcA9146467c7175136",
+    "redstoneProxy": "0xB101F308b24c82fdB2bA300701e0F0d371487D0C",
+    "koTokenInitTx": "0x12298d936f0109b9523fdcc01b255398d4520bba84a7834696f8b4ba17ae13a0"
   },
   "KCU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xA9C1BEDE1f4dB34C7CC225C47dEAca38cFf7bAF9",
-      "redstoneProxy": "0xa7b3F1BDE97078ab8A0Db0f431c51eab77166273",
-      "koTokenInitTx": "0x5f494368577cdff807128dff02585bf72a2e6b322dacc8e84b3d8cbccf2ad0c1",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xa7b3F1BDE97078ab8A0Db0f431c51eab77166273&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xa7b3F1BDE97078ab8A0Db0f431c51eab77166273/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xe1f4e8d7acf52fac29f427777594a9dfaaf9f63f6a28c4ffab9d51b8ba4bff13",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x2dDCaFB32A6a1530926Cf14C22F3b3CAaC1B92ef",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x4E2f9f5b0A91eAF28d08486a61c5eBcc010aED8f",
-      "redstoneProxy": "0xA9F97286429D0954E93C0Be94B76F5064231600e",
-      "koTokenInitTx": "0xef20a1459b9fd5565d636bf5bab35aa858374a98abe9a5f6c0cf483855d0e08e",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xA9F97286429D0954E93C0Be94B76F5064231600e&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xA9F97286429D0954E93C0Be94B76F5064231600e/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x09490971bc9b46b98160b0832b3b4e006c72d2865a300312e12fb688344d81f0",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x125FDF686EaA5D761E2d44Ab31E88173CbaCFa41",
+    "redstoneProxy": "0x887b49D8dAEc48ff2143b5aeA5f6721faD00E238",
+    "koTokenInitTx": "0xf753d7ad1319ce8ef8796e45d47f3185373de8ebf8aa2a1327ef9616f957ffa4"
   },
   "SBV21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0xD6CC6EE97c820F34D0e45616De28883C3f26aF57",
-      "redstoneProxy": "0xf914Bd3c8ACe3dFc6E4d52fb8b24df0a4DEce37d",
-      "koTokenInitTx": "0x21eabfaef38229845f50ff46d776093d8810eadeba684b7047afd20dd1bf452e",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xf914Bd3c8ACe3dFc6E4d52fb8b24df0a4DEce37d&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xf914Bd3c8ACe3dFc6E4d52fb8b24df0a4DEce37d/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x8f4bfbba39d551529c9fa8c31305c56de5202e4d1a4e5763ae515d79dfa693c1",
-      "uniswapPoolTxStatus": "Failed"
-    },
-    "USDC": {
-      "priceFeed": "0x254784df8cc0bb79Cf6744e171eE87b399175094",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x4B9E63AEEeAB50A97c2C3Bd44b6bd07681842CFF",
-      "redstoneProxy": "0xe19281670d9F1652Fca4249B0DBCC3BA14E9454E",
-      "koTokenInitTx": "0x04437cac2e626fbe21227a616e75462d059454de40f6bb685f3406f9ac0bf916",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xe19281670d9F1652Fca4249B0DBCC3BA14E9454E&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xe19281670d9F1652Fca4249B0DBCC3BA14E9454E/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xf8b0a5afdb03c17aa8366ef262364e7bcf22d40a59aa7bf0ca7a9177cebae89e",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x57198e6489AF58Fc9d391AEDf566F1bda474e774",
+    "redstoneProxy": "0x9D93419406b8dB34176ce056a106f96ce819ca44",
+    "koTokenInitTx": "0xc29701e01d6e07ee2b0ec9d9e1866f2700c0bfef3c25c47d743b73d54fb06352"
   },
   "CCU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x7D6ca3D891B2707cb22fb722944D44CC56eC6C50",
-      "redstoneProxy": "0x2C1D2B8BC4Fc3762f7Df09a555a4899Cc58D129C",
-      "koTokenInitTx": "0xe3f086484079545c0c361accb323200ecdc7ef8190d317805040d8dd7094af37",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x2C1D2B8BC4Fc3762f7Df09a555a4899Cc58D129C&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x2C1D2B8BC4Fc3762f7Df09a555a4899Cc58D129C/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x760c8a879865f56f64663f64c4f92711502ffcc8143d3c63b54bd869d9a24622",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x310eb9b8D370BFd4b9e8f5a2274f0B0751E16897",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x236Fdc3e8e514F52EFbd030797D2dC669510341F",
-      "redstoneProxy": "0x2b143A313f98Ef7Dc08E9F8D7FA59617363B7357",
-      "koTokenInitTx": "0xb6a143ee0b2da5b4471a075cf5192922a91ed6a56e98285e18a871d00f663a19",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x2b143A313f98Ef7Dc08E9F8D7FA59617363B7357&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x2b143A313f98Ef7Dc08E9F8D7FA59617363B7357/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xfd40f7df6384842b62e0f5d042b877d964333f2c6ecb69fb0c7996e6fca2e00d",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0xcB6930691FC2E06Ce1Fe2d8bf1Cf61aBe6D583b5",
+    "redstoneProxy": "0xd923F7A38DCFB72d6D1257e5b2E995C380F7E938",
+    "koTokenInitTx": "0x1eecdce7bf79f7fd4f7953f99f8979005b35c7c971257ab17393572e08132b9e"
   },
   "LSU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x679dBEECc81288613C68C0d943bE97edEEC92ee5",
-      "redstoneProxy": "0x9E28B6e234769F816112352904AFA8c4d0fa801D",
-      "koTokenInitTx": "0x81e09179c82d30414c324b33f93a4c8b603f0c57716939afd9780210e6f2713b",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x9E28B6e234769F816112352904AFA8c4d0fa801D&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x9E28B6e234769F816112352904AFA8c4d0fa801D/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x490fdf31f8011c814f62d9a7bb4db06198893ca99a494bc42fd9b116fe9916f8",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x302C4d47c0434aBb73934dD1e2b531B76Da926c6",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0x4598664847e45c6d0b059f13Ef53ccA271C8Dec4",
-      "redstoneProxy": "0x715252Cf59e0Ef436daB38DB87576Bb4E0D2B76d",
-      "koTokenInitTx": "0x7db45fda612c17cc88a2e8f620af0e3d61dd573431e521cbdd2d4d0518eeea93",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x715252Cf59e0Ef436daB38DB87576Bb4E0D2B76d&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x715252Cf59e0Ef436daB38DB87576Bb4E0D2B76d/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0xae7f33e862e9608789fe0922dfb71415763ce481090cc7bee0518ce1098634da",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x6e24fC93AE2Cf30643F0DA14335c5c608a606589",
+    "redstoneProxy": "0x95506521759CB1dCc6335EEC6543b3557bDce886",
+    "koTokenInitTx": "0x0b2c04434d7b0e8f472ff4cad635aad882904250eec734074cfedc2d1402b1a9"
   },
   "OJU21": {
-    "ETH": {
-      "priceFeed": "0xc2Db922aAF4B1111fe91836A05564F6525758c78",
-      "koToken": "0x027abB69Bf13Ce7743F2077100c3b719d914B2fd",
-      "redstoneProxy": "0x2F4B5bA525A82e2C94A356C845d862aD261559f0",
-      "koTokenInitTx": "0x5b274a46b71cfc4bdb57542df20a56e711f2d6f2a48d54057e4bddfcd9fc7d0f",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0x2F4B5bA525A82e2C94A356C845d862aD261559f0&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x2F4B5bA525A82e2C94A356C845d862aD261559f0/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x1ee6af988b72d182df7379b4efacc3b338a666328dfc61054dca4a9a6fa1d8e7",
-      "uniswapPoolTxStatus": "Success"
-    },
-    "USDC": {
-      "priceFeed": "0x227f9fF8Db362C6c3e339CA20727EbBCe0d15CdB",
-      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-      "koToken": "0xf0A5B16d9fba6809fD1987d23Ee148eb908972Ad",
-      "redstoneProxy": "0xB2D2E4c3d8eAe4c77d39C70571f8a6F11600e13e",
-      "koTokenInitTx": "0x2809e9a127c228780059d3dfbed0e4f02b7f89e10fe53287704dcc92800ea4b1",
-      "uniswapTradeUrl": "https://app.uniswap.org/#/swap?inputCurrency=0xB2D2E4c3d8eAe4c77d39C70571f8a6F11600e13e&outputCurrency=0xe22da380ee6b445bb8273c81944adeb6e8450422",
-      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xB2D2E4c3d8eAe4c77d39C70571f8a6F11600e13e/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-      "uniswapPoolTx": "0x0406c92002f4b10e02daf236535847db73a2493d9329a0e5edf782b7e7e5ba88",
-      "uniswapPoolTxStatus": "Success"
-    }
+    "koToken": "0x9d7D52b103da1f4A9ec110e795581fECf2a60D08",
+    "redstoneProxy": "0x1f2a07719cE799940cfB9068ADc656CA13ECeE40",
+    "koTokenInitTx": "0x0be7c9fa153214a9e2e160ee755fc11639b030154caeee5515d26cfb97d0fe5e"
   }
 }

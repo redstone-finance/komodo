@@ -84,13 +84,6 @@
     "providers": ["redstone-stocks"],
     "tags": ["energies"]
   },
-  "ZKQ21": {
-    "name": "Ethanol Futures",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2927/2927426.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["energies"]
-  },
 
   "GCQ21": {
     "name": "Gold",

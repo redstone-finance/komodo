@@ -6,7 +6,7 @@ const uniswap = require("./uni");
 const commodities = require("../src/assets/data/commodities.json");
 
 // Set to 0 to disable limit
-const LIMIT = 1;
+const LIMIT = 0;
 const OFFSET = 0;
 
 main();
@@ -14,30 +14,36 @@ main();
 async function main() {
   const finalReport = {};
   let index = 0, deployedCount = 0;
-  for (const symbol in commodities) {
-    if (LIMIT > 0 && deployedCount >= LIMIT) {
-      break;
-    } else {
-      if (index >= OFFSET) {
-        console.log(`===== Deploying token: ${symbol}. Started =====`);
-        const addresses = await deployKoToken(symbol);
-        finalReport[symbol] = addresses;
-        deployedCount++;
-        console.log(`===== Deploying token: ${symbol}. Completed =====`);
-        console.log("-----------------------------------");
+
+  try {
+    for (const symbol in commodities) {
+      if (LIMIT > 0 && deployedCount >= LIMIT) {
+        break;
       } else {
-        console.log(`===== Skipping token: ${symbol} =====`);
+        if (index >= OFFSET) {
+          console.log(`===== Deploying token: ${symbol}. Started =====`);
+          const addresses = await deployKoToken(symbol);
+          finalReport[symbol] = addresses;
+          deployedCount++;
+          console.log(`===== Deploying token: ${symbol}. Completed =====`);
+          console.log("-----------------------------------");
+        } else {
+          console.log(`===== Skipping token: ${symbol} =====`);
+        }
       }
+      index++;
     }
-    index++;
+  } catch (e) {
+    console.error(e);
+    console.log("Token deployment stopped. Saving report...");
+  } finally {
+    console.log("===== Final report =====");
+    console.log(finalReport);
+
+    const filename = `./deploy-report-${Date.now()}.json`;
+    console.log(`===== Saving report to a file: ${filename} =====`);
+    fs.writeFileSync(filename, JSON.stringify(finalReport, null, 2));
   }
-
-  console.log("===== Final report =====");
-  console.log(finalReport);
-
-  const filename = `./deploy-report-${Date.now()}.json`;
-  console.log(`===== Saving report to a file: ${filename} =====`);
-  fs.writeFileSync(filename, JSON.stringify(finalReport, null, 2));
 }
 
 async function deployKoToken(symbol) {

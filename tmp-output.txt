@@ -1,9 +1,0 @@
-MAIN: 0xD372947F3D0E308C9f77ae76f1eb4C94e6388a5d
-Verifier deployed: 0xd451b5974bc7aa6a1EDfA5925696b3bC286eeAbB
-Price feed deployed: 0xe5d3206Ff168b8acDcB653a5413B3b3253093De3
-Authorized redstone signer:  0x926E370fD53c23f8B71ad2B3217b227E41A92b12
-KoToken deployed: 0x943CF6D281CDf74AB4F1667b94Ff32138A835D5f
-Redstone proxy deployed: 0xdEAbBA39EF7c36281441bc72e7A91c90B80D73CB
-Ko Token initialized: 0xda77b3181b594cda682e74bb7b5cf89fb451ae91199e699923733abf2f813722
-
-!!! Chyba nalezy uzywać tego z proxy

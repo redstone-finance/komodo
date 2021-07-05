@@ -45,4 +45,4 @@ function getAddresses(symbol) {
   }
 }
 
-main(3);
+main(4);

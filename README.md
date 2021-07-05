@@ -53,11 +53,17 @@ Currently, we support both **ETH** and **USDC** as collateral.
 
 ## Data access
 
-
+The most challenging part of our development was providing the real-world pricing data to our synthetic smart-contracts.
 
 <p align="center">
   <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-prices.png" width="600">
 </p>
+
+We've been considering multiple oracle solutions. Chainlink offers the most convenient way of accessing the data directly from on-chain storage with Price Reference Data. However, the list of supported tokens is controlled by the sponsors and it's not easy to add new positions. On the other hand, UMA is very efficient with the priceless model but the data is not available on-chain and the process of getting actual feeds requires multiple transactions. 
+
+We decided to hack our own solution that could match the convenience of Chainlink with the efficiency of UMA. We called it "flash storage" as the data is available within a context of a single transaction. When a user sends a transaction, it’s supplemented with signed pricing data and directed to a proxy contract. The proxy contract strips the data out of the transaction. It verifies its integrity by checking the signature and saves the data on-chain. 
+The raw transaction is forwarded to the commodity token contract which may conveniently access information from on-chain storage. The data may be erased afterwards to save the costs or kept for others.  
+
 
 The following diagram shows how we provide data to Komodo Token contract:
 

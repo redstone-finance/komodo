@@ -138,7 +138,7 @@
       "chainId": 42,
       "address": "0x1a49772987180D44B01741dB26D6114F7b5584d6",
       "symbol": "QAU21",
-      "name": "Crude Oil Brent (F)",
+      "name": "Crude Oil Brent F",
       "decimals": 18,
       "logoURI": "https://image.flaticon.com/icons/png/512/3129/3129663.png",
       "tags": [
@@ -292,7 +292,7 @@
       "chainId": 42,
       "address": "0xE5C2Bf99b3D0d7B9F3a11C7CD8bf1b814eE2C31c",
       "symbol": "CTZ21",
-      "name": "Cotton #2",
+      "name": "Cotton ",
       "decimals": 18,
       "logoURI": "https://image.flaticon.com/icons/png/512/3174/3174960.png",
       "tags": [
@@ -314,7 +314,7 @@
       "chainId": 42,
       "address": "0xe19281670d9F1652Fca4249B0DBCC3BA14E9454E",
       "symbol": "SBV21",
-      "name": "Sugar #11",
+      "name": "Sugar 1",
       "decimals": 18,
       "logoURI": "https://image.flaticon.com/icons/png/512/3093/3093536.png",
       "tags": [

@@ -46,8 +46,7 @@
 
         <div v-if="additionalNote && !loading" class="additional-note-container">
           <v-icon class="info-icon" small color="blue">mdi-information-outline</v-icon>
-          <div class="text">
-            {{ additionalNote }}
+          <div v-html="additionalNote" class="text">
           </div>
         </div>
 
@@ -57,7 +56,6 @@
             :disabled="loading"
             required
             v-model="value"
-            type="number"
           ></v-text-field>
         </div>
 
@@ -74,7 +72,7 @@
             outlined
             :loading="loading"
             color="#1976d2"
-            @click="onConfirmButtonClick(value)"
+            @click="onConfirmButtonClick(Number(value))"
           >
             Confirm
           </v-btn>
@@ -114,7 +112,7 @@ export default {
       title: '',
       inputLabel: '',
       additionalNoteType: '',
-      value: null,
+      value: 0.1,
       onConfirmButtonClick: null,
     };
   },
@@ -180,8 +178,9 @@ export default {
       const stakeFormatted = formatter.formatPriceBN(stake);
       const baseSymbol = this.baseCurrency;
       const balanceFormatted = formatter.formatPriceBN(this.baseBalance);
-      return `You should stake ${stakeFormatted} ${baseSymbol} to mint `
-        + `${this.value} ${this.symbol} and maintain ${DEFAULT_SOLVENCY}% solvency.`
+      return `To maintain ${DEFAULT_SOLVENCY}% solvency, `
+        + `<strong>you should stake ${stakeFormatted} ${baseSymbol}</strong> `
+        + ` to mint ${this.value} ${this.symbol}. `
         + `You have: ${balanceFormatted} ${baseSymbol}`;
     },
 
@@ -208,8 +207,8 @@ export default {
         maxToRemoveFormatted = formatter.formatPriceBN(maxAmountToRemove);
       }
 
-      return `You can remove MAX: ${maxToRemoveFormatted} `
-        + `${this.baseCurrency} to remain solvent with `
+      return `<strong>You can remove MAX: ${maxToRemoveFormatted} `
+        + `${this.baseCurrency}</strong> to remain solvent with `
         + `${MIN_SOLVENCY}% solvency`;
     },
   },
@@ -241,7 +240,7 @@ export default {
 
 .additional-note-container {
   font-size: 14px;
-  color: gray;
+  color: #333;
   padding: 4px 16px;
   margin-top: 20px;
   display: grid;

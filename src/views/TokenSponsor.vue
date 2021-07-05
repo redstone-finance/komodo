@@ -170,7 +170,7 @@
               <strong>
                 {{ (aaveApy / 100) * depositExampleAmount | price-bn }} {{ baseCurrency }}
               </strong>
-              annually.
+              annually at current rates.
             </p>
           </div>
 
@@ -465,7 +465,7 @@ export default {
 
     aaveApy() {
       if (this.baseCurrency === "ETH") {
-        return 80;
+        return 80; // Aave return rate for ETH token on kovan is 80%
       } else {
         return 1.6;
       }

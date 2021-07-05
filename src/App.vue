@@ -23,7 +23,7 @@
 
       <div class="base-token-selector-container">
         <v-select
-          label="Base token"
+          label="Collateral token"
           class="base-token-selector"
           :items="['ETH', 'USDC']"
           v-model="baseToken"
@@ -109,7 +109,7 @@ export default Vue.extend({
 }
 
 .base-token-selector-container {
-  width: 120px;
+  width: 140px;
   .base-token-selector {
     transform: scale(0.65);
     // width: 10px;

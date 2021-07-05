@@ -1,0 +1,47 @@
+Welcome to Komodo!
+Commodities trading protocol. 
+
+DeFii is a very interesting ecosystem inhabited by users who farm food coins and mine liquidity.
+This habitat is getting crowded and new protocols build derivatives on top of each other.
+This increases leverage and can lead to a dangerous bubble. 
+
+DeFii natives may find it surprising that human beings also farm and mine in the real world. 
+The commodities market is more than two hundred times bigger than the whole DeFii.
+However, it faces many problems:
+The brokerage and clearing fees are high. 
+The technology is obsolete and requires lots of paperwork. 
+And The strict regulations make trading less accessible in developing countries, a common place for farms and mines.
+
+We decided to tackle these issues by building a decentralised, commodities trading platform, powered by Ethereum smart contracts. 
+
+There are over 50 most popular commodities available grouped into a few categories. 
+It’s a hackathon time, so let us invest in coffee expecting a surge in caffeine demand. 
+On the asset's screen, we can analyze price history and buy or sell the synthetic commodity. 
+We decided to integrate with Uniswap V3. We deploy the pool automatically and manage the metadata using the token list standard.
+
+But where do the synthetic tokens come from?
+Anyone can mint them providing collateral. 
+Currently, we allow tokens to be backed either by Ether or by USDC.
+To initiate the transaction, we must lock a certain amount of collateral that exceeds the value of created tokens.
+ 
+Let’s mint the tokens….
+ 
+We can see that the tokens have been added to our balance.
+We can also flexibly managed the collateral. 
+
+Adding more to our position will increase the solvency score, which is the ratio between the value of the collateral and the real-time value of minted tokens. 
+If we need more working capital we can always reduce the collateral level. 
+However, we should be careful with that, and always keep the score above a safe level.
+If the solvency ratio drops below one hundred twenty percent, anyone could liquidate our position by selling the tokens for our collateral at a discounted price.
+
+The newly minted tokens could be easily provided to the linked uniswap 3 pool, where we could specify the terms, on which, they are being offered on the market. 
+
+The biggest challenge in building a protocol for synthetic commodities was how to inject data about the plethora of assets into the EVM. 
+The Chainlink offers the most convenient way of accessing data directly on chain, but it tracks a limited amount of assets.
+UMA is efficient, but the data is not accessible directly on chain.
+If we could only match Chainlink’s convenience with the efficiency of UMA?
+It sounds like a path worth exploring. 
+
+Thank you for your attention. 
+Best regards from Alex, Jacob and David, a friend of all the Komodos.
+Let us hope that the evolution will favour open protocols. 

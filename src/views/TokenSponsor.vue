@@ -42,7 +42,7 @@
             </span>
           </div>
 
-          <div class="small-subtitle mt-4">
+          <div class="small-subtitle mt-2">
             <v-icon class="info-icon" small color="blue">mdi-information-outline</v-icon>
             You should maintain at least 120% solvency, otherwise your tokens may be liquidated
           </div>
@@ -61,7 +61,7 @@
               Solvency:
             </span>
             <span class="value">
-              {{ solvency >= 100000 ? 'N/A' : solvency }}%
+              {{ solvency >= 100000 ? 'N/A' : solvency + '%' }}
             </span>
           </div>
         </div>
@@ -221,7 +221,6 @@ export default {
       collateral: 0,
       ethBalance: 0,
       usdcBalance: 0,
-      loadingCollateral: false,
 
       usdcApproveWaiting: false,
       usdcApproveWaitingForTxMining: false,
@@ -253,7 +252,7 @@ export default {
       repeat: true,
     },
     loadCollateral: {
-      time: 2000,
+      time: 1000,
       autostart: true,
       repeat: true,
     },
@@ -318,9 +317,14 @@ export default {
     },
 
     async loadCollateral() {
-      this.loadingCollateral = true;
-      this.collateral = await blockchain.getCollateralAmount(this.symbol);
-      this.loadingCollateral = false;
+      const newCollateralValue = await blockchain.getCollateralAmount(this.symbol);
+      if (newCollateralValue > this.collateral) {
+        this.collateral = newCollateralValue;
+      } else {
+        if (this.baseCurrency === "ETH") {
+          this.collateral += 0.000000001; // To demonstrate that it is increasing in real-time
+        }
+      }
     },
 
     mintButtonClicked() {

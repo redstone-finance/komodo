@@ -4,7 +4,8 @@ import store from "@/store";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
 
 const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
-const KO_TOKEN = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
+const KO_TOKEN_USD = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
+const KO_TOKEN_ETH = require('../../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
 const ERC20_ABI = require('../../uni-abi/ERC20.json');
 
 const DEFAULT_SOLVENCY = 150; // 150%
@@ -70,7 +71,9 @@ async function getTokenContract(symbol, opts = {}) {
     signerOrProvider = signer;
   }
 
-  let token = new ethers.Contract(tokenAddress, KO_TOKEN.abi, signerOrProvider);
+  const abi = getTokenContractAbi();
+
+  let token = new ethers.Contract(tokenAddress, abi, signerOrProvider);
 
   // Wrapping with redstone-api if needed
   if (opts.wrapWithRedstone) {
@@ -78,6 +81,15 @@ async function getTokenContract(symbol, opts = {}) {
   }
 
   return token;
+}
+
+function getTokenContractAbi() {
+  const baseCurrency = getBaseCurrency();
+  if (baseCurrency === "USDC") {
+    return KO_TOKEN_USD.abi;
+  } else {
+    return KO_TOKEN_ETH.abi;
+  }
 }
 
 async function getTokenContractForTxSending(symbol) {

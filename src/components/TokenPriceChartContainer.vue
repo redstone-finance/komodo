@@ -169,9 +169,11 @@ export default {
         // TODO: fix redstone-api fluent interface for hours and refactor this place
         if (this.selectedTimeRange.days === 0) {
           this.prices = await redstone.getHistoricalPrice(this.symbol, {
-            startDate: Date.now() - 3600 * 1000 * this.selectedTimeRange.hours,
+            // startDate: Date.now() - 3600 * 1000 * this.selectedTimeRange.hours,
+            // endDate: Date.now(),
+            startDate: '2021-07-02T11:18:37.597Z',
+            endDate: '2021-07-02T12:18:37.597Z',
             interval: 1,
-            endDate: Date.now(),
             provider: this.provider,
           });
         } else {

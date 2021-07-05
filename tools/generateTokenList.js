@@ -26,7 +26,7 @@ async function main(version = 2) {
     }
   }
 
-  template.name += `-${BASE_TOKEN}`;
+  template.name += BASE_TOKEN;
   
   template.version.minor = version;
 

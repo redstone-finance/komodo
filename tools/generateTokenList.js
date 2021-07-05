@@ -3,13 +3,11 @@ const commodities = require("../src/assets/data/commodities.json");
 const deployed = require("../src/assets/data/deployed-tokens.json");
 const template = require("../src/assets/data/tokenListTemplate.json");
 
-const BASE_TOKEN = "ETH";
-
-async function main(version = 2) {
+async function main(version = 2, baseToken) {
   template.tokens = [];
   for (const symbol in commodities) {    
       console.log(`Processing: ${symbol}.`);
-      const addresses = getAddresses(symbol);
+      const addresses = getAddresses(symbol, baseToken);
       if (addresses) {
       console.log("Address: " + addresses.redstoneProxy);
       template.tokens.push({
@@ -26,7 +24,7 @@ async function main(version = 2) {
     }
   }
 
-  template.name += BASE_TOKEN;
+  template.name += baseToken;
   
   template.version.minor = version;
 
@@ -52,11 +50,11 @@ function removeChars(str, charsToRemove) {
   return result;
 }
 
-function getAddresses(symbol) {
+function getAddresses(symbol, baseToken) {
   const allAddresses = deployed[symbol];
-  if (allAddresses && allAddresses[BASE_TOKEN]) {
-    return allAddresses[BASE_TOKEN];
+  if (allAddresses && allAddresses[baseToken]) {
+    return allAddresses[baseToken];
   }
 }
 
-main(4);
+module.exports = main;

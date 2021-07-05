@@ -301,7 +301,7 @@
     },
     {
       "chainId": 42,
-      "address": "0x312C06cBBbf5D8bb82De81600cE69EF9909Df350",
+      "address": "0xA9F97286429D0954E93C0Be94B76F5064231600e",
       "symbol": "KCU21",
       "name": "Coffee",
       "decimals": 18,
@@ -357,7 +357,7 @@
   ],
   "version": {
     "major": 0,
-    "minor": 4,
+    "minor": 5,
     "patch": 0
   }
 }

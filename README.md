@@ -82,6 +82,9 @@ Here you can find the token lists pinned on IPFS:
 * [ETH backed](https://gateway.pinata.cloud/ipfs/QmVS8vLZZwdqKf5z2V9QaBbhXFk47vpfR3GYoRzwwLhpCo) (QmVS8vLZZwdqKf5z2V9QaBbhXFk47vpfR3GYoRzwwLhpCo)
 * [USDC backed](https://gateway.pinata.cloud/ipfs/QmUQrQ7bxfUTw91GKm1Z5FR3s7gP5Tyk8TE5dDy7JeAsE1) (QmUQrQ7bxfUTw91GKm1Z5FR3s7gP5Tyk8TE5dDy7JeAsE1)
 
+<p align="center">
+  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-uniswap.png" width="800">
+</p>
 
 
 ### Aave

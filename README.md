@@ -83,7 +83,7 @@ Here you can find the token lists pinned on IPFS:
 * [USDC backed](https://gateway.pinata.cloud/ipfs/QmUQrQ7bxfUTw91GKm1Z5FR3s7gP5Tyk8TE5dDy7JeAsE1) (QmUQrQ7bxfUTw91GKm1Z5FR3s7gP5Tyk8TE5dDy7JeAsE1)
 
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-uniswap.png" width="800">
+  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-uniswap.png" width="400">
 </p>
 
 
@@ -93,7 +93,7 @@ We integrated with both the ETH and the USD lending pools on Kovan.
 We also use the real-time value of the deposited collateral in the calculation of account solvency and our interface. 
 
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-aave.gif" width="800">
+  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-aave.gif" width="600">
 </p>
 
 

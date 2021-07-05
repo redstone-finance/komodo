@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import sleep from "./sleep";
+import store from "@/store";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
 
 const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
@@ -14,10 +15,15 @@ const USDC_ADDRESS = "e22da380ee6b445bb8273c81944adeb6e8450422";
 const { ethereum, web3 } = window;
 
 // Connect app to metamask
-ethereum.enable();
+if (ethereum) {
+  ethereum.enable();
+}
 
 // Will use metamask web3
-const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+let provider;
+if (web3) {
+  provider = new ethers.providers.Web3Provider(web3.currentProvider);
+}
 
 const parseNumber = (number) => ethers.utils.parseEther(String(number));
 const bigNumberPriceToNumber = (bn) => Number(ethers.utils.formatEther(bn));
@@ -37,10 +43,12 @@ async function getUsdcContract() {
 
 function getAddressForSymbol(symbol, addressType) {
   const tokenAddresses = deployedTokens[symbol];
-  if (!tokenAddresses) {
+  const baseCurrency = getBaseCurrency();
+  if (!tokenAddresses || !tokenAddresses[baseCurrency]) {
     throw new Error(`Token addresses not found for token: ${symbol}`);
   }
-  const address = tokenAddresses[addressType];
+
+  const address = tokenAddresses[baseCurrency][addressType];
   if (!address) {
     throw new Error(`No "${addressType}" address for token: ${symbol}`);
   }
@@ -50,10 +58,6 @@ function getAddressForSymbol(symbol, addressType) {
 function getEtherscanUrlForToken(symbol) {
   const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
   return 'https://kovan.etherscan.io/token/' + tokenAddress;
-}
-
-function getEtherscanUrlForBoostedCollateral() {
-  return "https://kovan.etherscan.io/address/0xe12AFeC5aa12Cf614678f9bFeeB98cA9Bb95b5B0";
 }
 
 async function getTokenContract(symbol, opts = {}) {
@@ -70,8 +74,6 @@ async function getTokenContract(symbol, opts = {}) {
 
   // Wrapping with redstone-api if needed
   if (opts.wrapWithRedstone) {
-    // TODO: uncomment
-    // token = wrapContract(token, REDSTONE_STOCKS_PROVIDER, symbol);
     token = wrapContract(token, REDSTONE_STOCKS_PROVIDER, symbol);
   }
 
@@ -94,11 +96,6 @@ async function getNetworkName() {
   }
 }
 
-// Value taken from https://loanscan.io/
-async function getCurrentInterestRateForUsdcOnAave() {
-  return 1.6 + Math.random() / 100; // 1.6 %
-}
-
 function onNetworkChange(callback) {
   window.ethereum.on('chainChanged', chainId => {
     callback(chainId);
@@ -119,23 +116,37 @@ async function getSigner() {
 
 async function mint(symbol, amount, stakeAmount) {
   const token = await getTokenContractForTxSending(symbol);
+  const baseCurrency = getBaseCurrency();
 
-  return await token.mintWithPrices(
-    parseNumber(amount),
-    parseUsdcNumber(stakeAmount));
+  if (baseCurrency === "USDC") {
+    return await token.mintWithPrices(
+      parseNumber(amount),
+      parseUsdcNumber(stakeAmount));
+  } else if (baseCurrency === "ETH") {
+    return await token.mintWithPrices(parseNumber(amount), {
+      value: parseNumber(stakeAmount),
+    });
+  }
 }
 
 async function burn(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-
-  return await token.burn(parseNumber(amount), {
-    gasLimit: 1000000,
-  });
+  return await token.burn(parseNumber(amount));
+  // TODO: remove
+  // return await token.burn(parseNumber(amount), {
+  //   gasLimit: 1000000,
+  // });
 }
 
 async function addCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-  return await token.addCollateral(parseUsdcNumber(amount));
+  const baseCurrency = getBaseCurrency();
+
+  if (baseCurrency === "USDC") {
+    return await token.addCollateral(parseUsdcNumber(amount));  
+  } else if (baseCurrency === "ETH") {
+    return await token.addCollateral({ value: parseNumber(amount) });
+  }
 }
 
 async function approveUsdcSpending(amount, symbol) {
@@ -147,16 +158,16 @@ async function approveUsdcSpending(amount, symbol) {
 
 async function removeCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-  return await token.removeCollateralWithPrices(parseUsdcNumber(amount));
+  const baseCurrencyParser = getBaseCurrencyParser();
+  return await token.removeCollateralWithPrices(baseCurrencyParser(amount));
 }
 
 async function getCollateralAmount(symbol) {
   const token = await getTokenContractForTxSending(symbol);
   const address = await getAddress();
-
   const collateral = await token.collateralOf(address);
-  
-  return formatUsdcUnits(collateral);
+  const formatter = getBaseCurrencyFormatter();
+  return formatter(collateral);
 }
 
 async function getSolvency(symbol) {
@@ -194,10 +205,39 @@ async function getUsdcBalance() {
 function calculateStakeAmount({
   tokenAmount,
   tokenPrice,
+  ethPrice,
   solvency = DEFAULT_SOLVENCY,
 }) {
-  const stake = (solvency / 100) * tokenAmount * tokenPrice;
-  return stake;
+  const baseCurrency = getBaseCurrency();
+  if (baseCurrency === "USDC") {
+    return (solvency / 100) * tokenAmount * tokenPrice;
+  } else {
+    const currentTokenEthPrice = tokenPrice / ethPrice;
+    return (solvency / 100) * tokenAmount * currentTokenEthPrice;
+  }
+}
+
+// Internal function for getting baseCurrency from global Vuex state
+function getBaseCurrency() {
+  return store.state.baseCurrency;
+}
+
+function getBaseCurrencyParser() {
+  const baseCurrency = getBaseCurrency();
+  if (baseCurrency === "USDC") {
+    return parseUsdcNumber;
+  } else {
+    return parseNumber;
+  }
+}
+
+function getBaseCurrencyFormatter() {
+  const baseCurrency = getBaseCurrency();
+  if (baseCurrency === "USDC") {
+    return formatUsdcUnits;
+  } else {
+    return bigNumberPriceToNumber;
+  }
 }
 
 // async function getLiquidityUSD(symbol) {
@@ -211,7 +251,6 @@ export default {
   calculateStakeAmount,
   getAddressForSymbol,
   getEtherscanUrlForToken,
-  getEtherscanUrlForBoostedCollateral,
 
   // Getters
   getLiquidityForToken,
@@ -220,7 +259,6 @@ export default {
   getBalance,
   getEthBalance,
   getUsdcBalance,
-  getCurrentInterestRateForUsdcOnAave,
 
   // Network
   getNetworkName,

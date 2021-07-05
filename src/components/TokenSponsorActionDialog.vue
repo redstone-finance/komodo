@@ -54,6 +54,7 @@
         <div class="input-container">
           <v-text-field
             :label="inputLabel"
+            :disabled="loading"
             required
             v-model="value"
             type="number"
@@ -84,6 +85,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import blockchain from "@/helpers/blockchain";
 import formatter from "@/helpers/formatter";
 
@@ -136,6 +138,8 @@ export default {
   },
 
   computed: {
+    ...mapState(['baseCurrency']),
+
     additionalNote() {
       switch (this.additionalNoteType) {
         case 'mint':
@@ -158,17 +162,27 @@ export default {
         || this.txWaitingForMining;
     },
 
+    baseBalance() {
+      if (this.baseCurrency === "USDC") {
+        return this.usdcBalance;
+      } else {
+        return this.ethBalance;
+      }
+    },
+
     additionalNoteForMint() {
       const stake = blockchain.calculateStakeAmount({
         tokenAmount: this.value,
+        ethPrice: this.ethPrice.value,
         tokenPrice: this.currentPrice.value,
         solvency: DEFAULT_SOLVENCY,
       });
       const stakeFormatted = formatter.formatPriceBN(stake);
-      const usdcBalanceFormatted = formatter.formatPriceBN(this.usdcBalance)
-      return `You should stake ${stakeFormatted} USDC to mint `
+      const baseSymbol = this.baseCurrency;
+      const balanceFormatted = formatter.formatPriceBN(this.baseBalance);
+      return `You should stake ${stakeFormatted} ${baseSymbol} to mint `
         + `${this.value} ${this.symbol} and maintain ${DEFAULT_SOLVENCY}% solvency.`
-        + `You have: ${usdcBalanceFormatted} USDC`;
+        + `You have: ${balanceFormatted} ${baseSymbol}`;
     },
 
     additionalNoteForBurn() {
@@ -176,16 +190,27 @@ export default {
     },
 
     additionalNoteForAddCollateral() {
-      const usdcBalanceFormatted = formatter.formatPriceBN(this.usdcBalance);
-      return `Max: ${usdcBalanceFormatted} USDC`;
+      const baseBalanceFormatted = formatter.formatPriceBN(this.baseBalance);
+      return `Max: ${baseBalanceFormatted} ${this.baseCurrency}`;
     },
 
     additionalNoteForRemoveCollateral() {
-      const minCollateral = (MIN_SOLVENCY / 100) * this.balance * this.currentPrice.value;
-      const maxAmountToRemove = Math.max(this.collateral - minCollateral, 0);
-      const maxToRemoveFormatted = formatter.formatPriceBN(maxAmountToRemove);
-      return `You can remove MAX: ${maxToRemoveFormatted} USDC to `
-        + `remain solvent with ${MIN_SOLVENCY}% solvency`;
+      let maxToRemoveFormatted = 0;
+
+      if (this.baseCurrency === "USDC") {
+        const minCollateral = (MIN_SOLVENCY / 100) * this.balance * this.currentPrice.value;
+        const maxAmountToRemove = Math.max(this.collateral - minCollateral, 0);
+        maxToRemoveFormatted = formatter.formatPriceBN(maxAmountToRemove);
+      } else if (this.baseCurrency === "ETH") {
+        const currentTokenEthPrice = this.currentPrice.value / this.ethPrice.value;
+        const minCollateral = (MIN_SOLVENCY / 100) * this.balance * currentTokenEthPrice;
+        const maxAmountToRemove = Math.max(this.collateral - minCollateral, 0);
+        maxToRemoveFormatted = formatter.formatPriceBN(maxAmountToRemove);
+      }
+
+      return `You can remove MAX: ${maxToRemoveFormatted} `
+        + `${this.baseCurrency} to remain solvent with `
+        + `${MIN_SOLVENCY}% solvency`;
     },
   },
 }
@@ -211,7 +236,6 @@ export default {
   img {
     width: 100%;
     border-radius: 10px;
-    // margin: 5px;
   }
 }
 

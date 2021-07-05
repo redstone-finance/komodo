@@ -38,7 +38,7 @@
             <v-icon class="info-icon" small color="blue">mdi-currency-usd</v-icon>
             You have
             <span class="value">
-              {{ usdcBalance | price-bn }} USDC
+              {{ baseTokenBalance | price-bn }} {{ baseCurrency }}
             </span>
           </div>
 
@@ -142,12 +142,7 @@
             </div>
             <div class="value">
               <div class="main-currency-value">
-                <template v-if="!loadingCollateral">
-                  {{ collateralToDisplay | format-collateral }} USDC
-                </template>
-                <template v-else>
-                  ...
-                </template>
+                {{ collateral | format-collateral }} {{ baseCurrency }}
               </div>
               <hr />
               <div class="usd-value">
@@ -169,11 +164,11 @@
               So while you are depositting your collateral for {{ symbol }} tokens you also make money.
               For each depositted
               <strong>
-                {{ depositExampleUsdcAmount }} USDC
+                {{ depositExampleAmount }} {{ baseCurrency }}
               </strong>
               you will make
               <strong>
-                {{ (aaveApyForUsdc / 100) * depositExampleUsdcAmount | price-bn }} USDC
+                {{ (aaveApy / 100) * depositExampleAmount | price-bn }} {{ baseCurrency }}
               </strong>
               annually.
             </p>
@@ -207,6 +202,7 @@
 <script>
 import redstone from "redstone-api";
 import VueGauge from 'vue-gauge';
+import { mapState } from 'vuex';
 import blockchain from "@/helpers/blockchain";
 import commoditiesData from "@/assets/data/commodities.json";
 import TokenSponsorActionDialog from "@/components/TokenSponsorActionDialog";
@@ -223,7 +219,6 @@ export default {
       tab: 0,
       solvency: 0,
       collateral: 0,
-      collateralToDisplay: 0,
       ethBalance: 0,
       usdcBalance: 0,
       loadingCollateral: false,
@@ -233,8 +228,7 @@ export default {
       txWaitingForMining: false,
       txWaitingForConfirmation: false,
 
-      depositExampleUsdcAmount: 1000,
-      aaveApyForUsdc: 1.6,
+      depositExampleAmount: 1000,
     };
   },
 
@@ -258,12 +252,7 @@ export default {
       autostart: true,
       repeat: true,
     },
-    loadAaveInterestRate: {
-      time: 2000,
-      autostart: true,
-      repeat: true,
-    },
-    increaseCollateral: {
+    loadCollateral: {
       time: 2000,
       autostart: true,
       repeat: true,
@@ -279,7 +268,6 @@ export default {
       this.loadEthPrice();
       this.loadEthBalance();
       this.loadUsdcBalance();
-      this.loadAaveInterestRate();
     },
 
     async loadCurrentPrice() {
@@ -292,8 +280,6 @@ export default {
         ...price,
         value: price.value + (Math.random() / 10),
       };
-
-      console.log("Loaded current price: " + this.currentPrice.value);
     },
 
     async loadUsdcPrice() {
@@ -303,8 +289,6 @@ export default {
         ...price,
         value: price.value + (Math.random() / 1000),
       };
-      
-      console.log("Loaded USDC price: " + this.usdcPrice.value);
     },
 
     async loadEthBalance() {
@@ -327,8 +311,6 @@ export default {
         ...price,
         value: price.value + (Math.random() / 10),
       };
-
-      console.log("Loaded ETH price: " + this.ethPrice.value);
     },
 
     async loadSolvency() {
@@ -338,19 +320,7 @@ export default {
     async loadCollateral() {
       this.loadingCollateral = true;
       this.collateral = await blockchain.getCollateralAmount(this.symbol);
-      this.collateralToDisplay = this.collateral;
       this.loadingCollateral = false;
-    },
-
-    async loadAaveInterestRate() {
-      this.aaveApyForUsdc = await blockchain.getCurrentInterestRateForUsdcOnAave();
-    },
-
-    increaseCollateral() {
-      if (this.aaveApyForUsdc && this.collateral) {
-        const madeInLast2Seconds = (this.aaveApyForUsdc / 100) / (365 * 24 * 1800) * this.collateral;
-        this.collateralToDisplay += madeInLast2Seconds;
-      }
     },
 
     mintButtonClicked() {
@@ -373,18 +343,20 @@ export default {
     },
 
     addCollateralButtonClicked() {
+      const baseSymbol = this.baseCurrency;
       this.opendDialog({
-        title: `Add USDC tokens to your collateral`,
-        inputLabel: `Amount in USDC`,
+        title: `Add ${baseSymbol} tokens to your collateral`,
+        inputLabel: `Amount in ${baseSymbol}`,
         additionalNoteType: 'add-collateral',
         onConfirmButtonClick: (value) => this.addCollateral(value),
       });
     },
 
     removeCollateralButtonClicked() {
+      const baseSymbol = this.baseCurrency;
       this.opendDialog({
-        title: `Remove USDC tokens from your collateral`,
-        inputLabel: `Amount in USDC`,
+        title: `Remove ${baseSymbol} tokens from your collateral`,
+        inputLabel: `Amount in ${baseSymbol}`,
         additionalNoteType: 'remove-collateral',
         onConfirmButtonClick: (value) => this.removeCollateral(value),
       });
@@ -397,7 +369,9 @@ export default {
         ethPrice: this.ethPrice.value,
         solvency: blockchain.DEFAULT_SOLVENCY,
       });
-      await this.approveUsdcSpending(stake);
+      if (this.baseCurrency === "USDC") {
+        await this.approveUsdcSpending(stake);
+      }
       await this.sendBlockchainTransaction(
         async () => await blockchain.mint(this.symbol, value, stake));
     },
@@ -408,7 +382,9 @@ export default {
     },
 
     async addCollateral(value) {
-      await this.approveUsdcSpending(value);
+      if (this.baseCurrency === "USDC") {
+        await this.approveUsdcSpending(value);
+      }
       await this.sendBlockchainTransaction(
         async () => await blockchain.addCollateral(this.symbol, value));
     },
@@ -469,8 +445,26 @@ export default {
   },
 
   computed: {
+    ...mapState(['baseCurrency']),
+
     symbol() {
       return this.$route.params.symbol;
+    },
+
+    baseTokenBalance() {
+      if (this.baseCurrency === "USDC") {
+        return this.usdcBalance;
+      } else {
+        return this.ethBalance;
+      }
+    },
+
+    aaveApy() {
+      if (this.baseCurrency === "ETH") {
+        return 80;
+      } else {
+        return 1.6;
+      }
     },
 
     uniswapPoolUrl() {
@@ -490,8 +484,10 @@ export default {
     },
 
     collateralValueUSD() {
-      if (this.usdcPrice) {
+      if (this.baseCurrency === "USDC" && this.usdcPrice) {
         return this.usdcPrice.value * this.collateral;
+      } else if (this.ethPrice) {
+        return this.ethPrice.value * this.collateral;
       } else {
         return '...';
       }

@@ -1,35 +1,26 @@
 {
   "ZCZ21": {
-    "priceFeed": "0xbD1AFd5b003B9B474927A33F3388a5053759Bbbf",
-    "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-    "koToken": "0x6f5194c4EDCA5172109B8BE86b23D2e9b3A68d43",
-    "redstoneProxy": "0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6",
-    "koTokenInitTx": "0x8ced3685e49a4d288785ed91f06f1fdc7e4a59e7739444cb8c00e2f0657213ae",
-    "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapPoolTx": "0x66c50eea02f0b97e2af5bd8745b8849c37bc92ad69ddbe361cb9ca071e44680b",
-    "uniswapTradeUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapPoolTxStatus": "Success"
-  },
-  "ZSX21": {
-    "priceFeed": "0xf21C91A60C242c4B4121D51e8b2c07542C9F873a",
-    "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-    "koToken": "0xe9C4feA4501129619Fda9D22dFf68c0583aA42CF",
-    "redstoneProxy": "0xf2d34fa5bCb8D9840bf07D927c4858bE71ED813C",
-    "koTokenInitTx": "0x17aa77356b6b7d0b3f4bab13df0b3fa076c1f3f5413ab16e96ea980b46216c80",
-    "uniswapPoolUrl": "https://app.uniswap.org/#/add/0xf2d34fa5bCb8D9840bf07D927c4858bE71ED813C/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapTradeUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapPoolTx": "0x6a7f3750748aeed9e1badaca8a8bba954030b0e0d74b2d7d8a99c4f19985284c",
-    "uniswapPoolTxStatus": "Failed"
-  },
-  "ZMZ21": {
-    "priceFeed": "0x66e131B6ECDa6ADd74b8B1Cc0b6174Da2f926Ba9",
-    "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
-    "koToken": "0xA602688B54de7f832689b67509f3205ac35a1ADA",
-    "redstoneProxy": "0x63f74FbF0280139a4a974f1AABD9D1F4959D9E80",
-    "koTokenInitTx": "0x0d97de1103f212331495bc3aa6d81432830c5c3799ec8f28def5036be1e342c7",
-    "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x63f74FbF0280139a4a974f1AABD9D1F4959D9E80/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapTradeUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
-    "uniswapPoolTx": "0xa8b23f6d21df973c9a95af87db54038b96976aa35ec7271facbfb2370f8158ed",
-    "uniswapPoolTxStatus": "Success"
+    "ETH": {
+      "priceFeed": "0xbD1AFd5b003B9B474927A33F3388a5053759Bbbf",
+      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
+      "koToken": "0x6f5194c4EDCA5172109B8BE86b23D2e9b3A68d43",
+      "redstoneProxy": "0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6",
+      "koTokenInitTx": "0x8ced3685e49a4d288785ed91f06f1fdc7e4a59e7739444cb8c00e2f0657213ae",
+      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
+      "uniswapPoolTx": "0x66c50eea02f0b97e2af5bd8745b8849c37bc92ad69ddbe361cb9ca071e44680b",
+      "uniswapTradeUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
+      "uniswapPoolTxStatus": "Success"
+    },
+    "USDC": {
+      "priceFeed": "0xbD1AFd5b003B9B474927A33F3388a5053759Bbbf",
+      "authorizedRedstoneSigner": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
+      "koToken": "0x6f5194c4EDCA5172109B8BE86b23D2e9b3A68d43",
+      "redstoneProxy": "0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6",
+      "koTokenInitTx": "0x8ced3685e49a4d288785ed91f06f1fdc7e4a59e7739444cb8c00e2f0657213ae",
+      "uniswapPoolUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
+      "uniswapPoolTx": "0x66c50eea02f0b97e2af5bd8745b8849c37bc92ad69ddbe361cb9ca071e44680b",
+      "uniswapTradeUrl": "https://app.uniswap.org/#/add/0x9E33F474BD8fccD5b186EB7757c4Aa4C43CbE4d6/0xe22da380ee6b445bb8273c81944adeb6e8450422/10000",
+      "uniswapPoolTxStatus": "Success"
+    }
   }
 }

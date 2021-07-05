@@ -7,21 +7,30 @@
       dense
       flat
     >
-      <!-- <div > -->
-        <a class="logo-link d-flex align-center" href="/#/">
-          <v-img
-            alt="Komodo Logo"
-            class="shrink mr-2"
-            contain
-            src="komodo-icon.png"
-            transition="scale-transition"
-            width="40"
-          />
-          <h2>Komodo</h2>
-        </a>
-      <!-- </div> -->
+      <a class="logo-link d-flex align-center" href="/#/">
+        <v-img
+          alt="Komodo Logo"
+          class="shrink mr-2"
+          contain
+          src="komodo-icon.png"
+          transition="scale-transition"
+          width="40"
+        />
+        <h2>Komodo</h2>
+      </a>
 
       <v-spacer></v-spacer>
+
+      <div class="base-token-selector-container">
+        <v-select
+          label="Base token"
+          class="base-token-selector"
+          :items="['ETH', 'USDC']"
+          v-model="baseToken"
+          outlined
+        >
+        </v-select>
+      </div>
 
       <a class="nav-link" href="/#/commodities">
         <span>
@@ -37,7 +46,7 @@
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
+      <router-view :key="baseToken"></router-view>
     </v-main>
   </v-app>
 </template>
@@ -47,6 +56,12 @@ import Vue from 'vue';
 import blockchain from '@/helpers/blockchain';
 
 const checkEthereumNetwork = async () => {
+  if (!window.web3 || !window.ethereum) {
+    alert(
+      "Please use web3-enabled browser. "
+      + "If you use Google Chrome you can install Metamask extension.");
+  }
+
   const name = await blockchain.getNetworkName();
   if (name !== "kovan") {
     alert("Please switch to kovan network");
@@ -57,7 +72,6 @@ export default Vue.extend({
   name: 'App',
 
   data: () => ({
-    //
   }),
 
   async mounted() {
@@ -66,6 +80,17 @@ export default Vue.extend({
       checkEthereumNetwork();
     });
   },
+
+  computed: {
+    baseToken: {
+      get() {
+        return this.$store.state.baseCurrency;
+      },
+      set(value) {
+        this.$store.dispatch('setBaseCurrency', value);
+      },
+    }
+  }
 
 });
 </script>
@@ -80,6 +105,16 @@ export default Vue.extend({
   text-decoration: none;
   h2 {
     color: white;
+  }
+}
+
+.base-token-selector-container {
+  width: 120px;
+  .base-token-selector {
+    transform: scale(0.65);
+    // width: 10px;
+    position: relative;
+    top: 10px;
   }
 }
 

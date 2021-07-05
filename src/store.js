@@ -8,6 +8,7 @@ export default new Vuex.Store({
     prices: {},
     liquidity: {},
     liquidityLoadingCompleted: false,
+    baseCurrency: 'ETH', // possible values: ETH, USDC
   },
   mutations: {
     updatePrices(state, payload) {
@@ -23,7 +24,11 @@ export default new Vuex.Store({
 
     completeLiquidityLoading(state) {
       state.liquidityLoadingCompleted = true;
-    }
+    },
+
+    setBaseCurrency(state, payload) {
+      state.baseCurrency = payload;
+    },
   },
   actions: {
     updatePrices({ commit }, prices) {
@@ -36,6 +41,10 @@ export default new Vuex.Store({
 
     completeLiquidityLoading({ commit }) {
       commit('completeLiquidityLoading');
+    },
+
+    setBaseCurrency({ commit }, baseCurrency) {
+      commit('setBaseCurrency', baseCurrency);
     },
   },
 });

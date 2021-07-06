@@ -102,6 +102,9 @@ We also use the real-time value of the deposited collateral in the calculation o
   <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-aave.gif" width="600">
 </p>
 
+### Polygon
+The project is deployed on the Polygon main network: https://komodo-polygon.redstone.finance/
+
 
 # Project setup & deployment
 

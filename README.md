@@ -1,4 +1,4 @@
-[WATCH THE DEMO](https://www.youtube.com/watch?v=NWzhxIb5Y0s) on the Kovan testnet
+[WATCH THE DEMO](https://www.youtube.com/watch?v=NWzhxIb5Y0s)
 
 # Komodo - Commodities trading protocol
 

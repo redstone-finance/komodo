@@ -41,8 +41,8 @@ The newly minted tokens could be easily provided to the linked uniswap 3 pool, w
 The biggest challenge in building a protocol for synthetic commodities was how to inject data about the plethora of assets into the EVM. 
 The Chainlink offers the most convenient way of accessing data directly on chain, but it tracks a limited amount of assets.
 UMA is efficient, but the data is not accessible directly on chain.
-If we could only match Chainlink’s convenience with the efficiency of UMA?
-It sounds like a path worth exploring.
+
+Therefore we have the solution, that combines chainlink's convenience with the efficiency of UMA, which we call flash storage.
 
 When a user sends a transaction, it’s supplemented with signed pricing data and directed to a proxy contract. 
 The proxy contract strips the data out of the transaction.

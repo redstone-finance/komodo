@@ -9,7 +9,8 @@
     "build-polygon": "vue-cli-service build --mode polygon",
     "lint": "vue-cli-service lint",
     "run-ganache": "ganache-cli -s 123",
-    "compile-contracts": "hardhat compile"
+    "compile-contracts": "hardhat compile",
+    "test": "yarn compile-contracts && hardhat test"
   },
   "dependencies": {
     "@aave/protocol-v2": "^1.0.1",
@@ -33,7 +34,7 @@
     "hardhat-typechain": "^0.3.5",
     "lodash": "^4.17.21",
     "redstone-api": "^0.4.3",
-    "redstone-flash-storage": "^1.1.0",
+    "redstone-flash-storage": "^1.3.0",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4",
     "vue": "^2.6.10",

@@ -20,14 +20,13 @@ contract KoTokenBoostedETH is KoTokenETH {
         bytes32 asset_,
         string memory name_,
         string memory symbol_,
-        IPriceFeed priceFeed_,
         IWETHGateway wethGateway_,
         address ethLendingPool_,
         ERC20 aETH_
     ) external {
         require(!bInitialized);
 
-        this.initialize(asset_, name_, symbol_, priceFeed_);
+        this.initialize(asset_, name_, symbol_);
 
         wethGateway = wethGateway_;
         ethLendingPool = ethLendingPool_;
@@ -73,5 +72,4 @@ contract KoTokenBoostedETH is KoTokenETH {
     
 
     receive() external payable {}
-
 }

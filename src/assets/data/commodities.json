@@ -1,223 +1,398 @@
 {
-  "ZCZ21": {
+  "ZC=F": {
     "name": "Corn",
-    "logoURI": "https://image.flaticon.com/icons/png/512/1147/1147593.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zc=f.png",
+    "url": "https://www.google.com/search?q=ZC=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "ZSX21": {
+  "ZS=F": {
     "name": "Soybean",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2656/2656722.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zs=f.png",
+    "url": "https://www.google.com/search?q=ZS=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "ZMZ21": {
+  "ZM=F": {
     "name": "Soybean Meal",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2329/2329834.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zm=f.png",
+    "url": "https://www.google.com/search?q=ZM=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "ZWU21": {
+  "ZW=F": {
     "name": "Wheat",
-    "logoURI": "https://image.flaticon.com/icons/png/512/575/575435.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zw=f.png",
+    "url": "https://www.google.com/search?q=ZW=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "KEU21": {
+  "KE=F": {
     "name": "Hard Red Wheat",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2595/2595224.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/ke=f.png",
+    "url": "https://www.google.com/search?q=KE=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "MWU21": {
-    "name": "Spring Wheat",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2613/2613953.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
-  },
-  "ZOZ21": {
+  "ZO=F": {
     "name": "Oats",
-    "logoURI": "https://image.flaticon.com/icons/png/512/4391/4391646.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zo=f.png",
+    "url": "https://www.google.com/search?q=ZO=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-  "ZRU21": {
+  "ZR=F": {
     "name": "Rough Rice",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2714/2714041.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["grains"]
+    "logoURI": "https://cdn.redstone.finance/symbols/zr=f.png",
+    "url": "https://www.google.com/search?q=ZR=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
   },
-
-  "CLQ21": {
+  "CL=F": {
     "name": "Crude Oil WTI",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3129/3129632.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["energies"]
+    "logoURI": "https://cdn.redstone.finance/symbols/cl=f.png",
+    "url": "https://www.google.com/search?q=CL=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "energies"
+    ]
   },
-  "RBQ21": {
+  "RB=F": {
     "name": "Gasoline RBOB",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2933/2933939.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["energies"]
+    "logoURI": "https://cdn.redstone.finance/symbols/rb=f.png",
+    "url": "https://www.google.com/search?q=RB=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "energies"
+    ]
   },
-  "NGQ21": {
+  "NG=F": {
     "name": "Natural Gas",
-    "logoURI": "https://image.flaticon.com/icons/png/512/869/869785.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["energies"]
+    "logoURI": "https://cdn.redstone.finance/symbols/ng=f.png",
+    "url": "https://www.google.com/search?q=NG=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "energies"
+    ]
   },
-  "QAU21": {
+  "QA=F": {
     "name": "Crude Oil Brent (F)",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3129/3129663.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["energies"]
+    "logoURI": "https://cdn.redstone.finance/symbols/qa=f.png",
+    "url": "https://www.google.com/search?q=QA=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "energies"
+    ]
   },
-
-  "GCQ21": {
+  "EH=F": {
+    "name": "Ethanol Futures",
+    "logoURI": "https://cdn.redstone.finance/symbols/eh=f.png",
+    "url": "https://www.google.com/search?q=EH=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "energies"
+    ]
+  },
+  "GC=F": {
     "name": "Gold",
-    "logoURI": "https://image.flaticon.com/icons/png/512/1473/1473504.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["metals"]
+    "logoURI": "https://cdn.redstone.finance/symbols/gc=f.png",
+    "url": "https://www.google.com/search?q=GC=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "metals"
+    ]
   },
-  "SIU21": {
+  "SI=F": {
     "name": "Silver",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3521/3521355.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["metals"]
+    "logoURI": "https://cdn.redstone.finance/symbols/si=f.png",
+    "url": "https://www.google.com/search?q=SI=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "metals"
+    ]
   },
-  "HGU21": {
+  "HG=F": {
     "name": "High Grade Copper",
-    "logoURI": "https://image.flaticon.com/icons/png/512/651/651881.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["metals"]
+    "logoURI": "https://cdn.redstone.finance/symbols/hg=f.png",
+    "url": "https://www.google.com/search?q=HG=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "metals"
+    ]
   },
-  "PLV21": {
+  "PL=F": {
     "name": "Platinum",
-    "logoURI": "https://image.flaticon.com/icons/png/512/4027/4027270.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["metals"]
+    "logoURI": "https://cdn.redstone.finance/symbols/pl=f.png",
+    "url": "https://www.google.com/search?q=PL=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "metals"
+    ]
   },
-  "PAU21": {
-    "name": "Palladium",
-    "logoURI": "https://cdn4.vectorstock.com/i/1000x1000/33/23/periodic-table-element-palladium-icon-vector-20543323.jpg",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["metals"]
+  "PA=F": {
+    "name": "Palladium (Sep '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/pa=f.jpg",
+    "url": "https://www.google.com/search?q=PA=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "metals"
+    ]
   },
-
-  "LEQ21": {
+  "LE=F": {
     "name": "Live Cattle",
-    "logoURI": "https://image.flaticon.com/icons/png/512/676/676157.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "logoURI": "https://cdn.redstone.finance/symbols/le=f.png",
+    "url": "https://www.google.com/search?q=LE=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "GFQ21": {
+  "GF=F": {
     "name": "Feeder Cattle",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2194/2194839.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "logoURI": "https://cdn.redstone.finance/symbols/gf=f.png",
+    "url": "https://www.google.com/search?q=GF=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "HEQ21": {
+  "HE=F": {
     "name": "Lean Hogs",
-    "logoURI": "https://image.flaticon.com/icons/png/512/4406/4406697.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "logoURI": "https://cdn.redstone.finance/symbols/he=f.png",
+    "url": "https://www.google.com/search?q=HE=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "KMN21": {
+  "PRK=F": {
     "name": "Pork Cutout",
-    "logoURI": "https://image.flaticon.com/icons/png/512/1391/1391338.png",
-    "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "logoURI": "https://cdn.redstone.finance/symbols/prk=f.png",
+    "url": "https://www.google.com/search?q=PRK=F",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "DLN21": {
-    "name": "Class III Milk",
-    "logoURI": "https://image.flaticon.com/icons/png/512/684/684631.png",
+  "DC=F": {
+    "name": "Milk",
+    "logoURI": "https://cdn.redstone.finance/symbols/dc=f.png",
+    "tags": [
+      "livestocks"
+    ],
+    "url": "https://www.google.com/search?q=DC=F",
+    "providers": [
+      "redstone-stocks"
+    ]
+  },
+  "GNF=F": {
+    "name": "Milk",
+    "logoURI": "https://cdn.redstone.finance/symbols/gnf=f.png",
+    "tags": [
+      "livestocks"
+    ],
+    "url": "https://www.google.com/search?q=GNF=F",
+    "providers": [
+      "redstone-stocks"
+    ]
+  },
+  "CB=F": {
+    "name": "Butter Cash-Settled",
+    "logoURI": "https://cdn.redstone.finance/symbols/cb=f.png",
+    "tags": [
+      "livestocks"
+    ],
+    "url": "https://www.google.com/search?q=CB=F",
+    "providers": [
+      "redstone-stocks"
+    ]
+  },
+  "CSC=F": {
+    "name": "Cheese Cash-Settled",
+    "logoURI": "https://cdn.redstone.finance/symbols/csc=f.png",
+    "tags": [
+      "livestocks"
+    ],
+    "url": "https://www.google.com/search?q=CSC=F",
+    "providers": [
+      "redstone-stocks"
+    ]
+  },
+  "MW=F": {
+    "name": "Spring Wheat",
+    "logoURI": "https://cdn.redstone.finance/symbols/mw=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "grains"
+    ]
+  },
+  "DLM21": {
+    "name": "Class III Milk (Jun '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/dlm21.png",
+    "url": "",
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
   "DFQ21": {
-    "name": "Nonfat Dry Milk",
-    "logoURI": "https://image.flaticon.com/icons/png/512/4329/4329615.png",
+    "name": "Nonfat Dry Milk (Aug '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/dfq21.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "BDU21": {
-    "name": "Butter Cash-Settled",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2915/2915843.png",
+  "BD=F": {
+    "name": "Butter Cash-Settled (Sep '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/bd=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-  "BJQ21": {
+  "BJ=F": {
     "name": "Cheese Cash-Settled",
-    "logoURI": "https://image.flaticon.com/icons/png/512/1071/1071146.png",
+    "logoURI": "https://cdn.redstone.finance/symbols/bj=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["livestocks"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "livestocks"
+    ]
   },
-
   "CTZ21": {
-    "name": "Cotton #2",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3174/3174960.png",
+    "name": "Cotton #2 (Dec '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/ctz21.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   },
-  "KCU21": {
-    "name": "Coffee",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2302/2302566.png",
+  "KC=F": {
+    "name": "Coffee (Sep '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/kc=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   },
-  "SBV21": {
+  "SB=F": {
     "name": "Sugar #11",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3093/3093536.png",
+    "logoURI": "https://cdn.redstone.finance/symbols/sb=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   },
-  "CCU21": {
-    "name": "Cocoa",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3185/3185082.png",
+  "CC=F": {
+    "name": "Cocoa (Sep '21)",
+    "logoURI": "https://cdn.redstone.finance/symbols/cc=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   },
-  "LSU21": {
+  "LS=F": {
     "name": "Lumber",
-    "logoURI": "https://image.flaticon.com/icons/png/512/3275/3275760.png",
+    "logoURI": "https://cdn.redstone.finance/symbols/ls=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   },
-  "OJU21": {
+  "OJ=F": {
     "name": "Orange Juice",
-    "logoURI": "https://image.flaticon.com/icons/png/512/2442/2442019.png",
+    "logoURI": "https://cdn.redstone.finance/symbols/oj=f.png",
     "url": "",
-    "providers": ["redstone-stocks"],
-    "tags": ["softs"]
+    "providers": [
+      "redstone-stocks"
+    ],
+    "tags": [
+      "softs"
+    ]
   }
 }

@@ -17,6 +17,5 @@ contract MockUSD is ERC20, Ownable {
     function mint(address target, uint256 amount) external onlyOwner {
         super._mint(target, amount);
     }
-    
 
 }

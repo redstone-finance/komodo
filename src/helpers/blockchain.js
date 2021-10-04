@@ -3,7 +3,7 @@ import sleep from "./sleep";
 import store from "@/store";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
 
-const { wrapContract } = require("redstone-flash-storage/lib/utils/contract-wrapper");
+const { WrapperBuilder } = require("redstone-flash-storage");
 const KO_TOKEN_USD = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
 const KO_TOKEN_ETH = require('../../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
 const ERC20_ABI = require('../../uni-abi/ERC20.json');
@@ -86,7 +86,9 @@ async function getTokenContract(symbol, opts = {}) {
 
   // Wrapping with redstone-api if needed
   if (opts.wrapWithRedstone) {
-    token = wrapContract(token, REDSTONE_STOCKS_PROVIDER, symbol);
+    token = WrapperBuilder
+      .wrapLite(token)
+      .usingPriceFeed("redstone-stocks", symbol);
   }
 
   return token;

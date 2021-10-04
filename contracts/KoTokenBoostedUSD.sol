@@ -18,13 +18,12 @@ contract KoTokenBoostedUSD is KoTokenUSD {
         ERC20 usd_,
         string memory name_,
         string memory symbol_,
-        IPriceFeed priceFeed_,
         ILendingPool lendingPool_,        
         ERC20 aUSD_
     ) external {
         require(!bInitialized);
 
-        this.initialize(asset_, usd_, name_, symbol_, priceFeed_);
+        this.initialize(asset_, usd_, name_, symbol_);
 
         lendingPool = lendingPool_;
         aUSD = aUSD_;

@@ -59,6 +59,4 @@ contract KoTokenBoostedUSD is KoTokenUSD {
     }
 
 
-    
-
 }

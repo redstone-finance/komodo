@@ -1,16 +1,15 @@
 import { ethers } from "ethers";
 import sleep from "./sleep";
 import store from "@/store";
+import { WrapperBuilder } from "redstone-flash-storage";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
 
-const { WrapperBuilder } = require("redstone-flash-storage");
 const KO_TOKEN_USD = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
 const KO_TOKEN_ETH = require('../../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
 const ERC20_ABI = require('../../uni-abi/ERC20.json');
 
 const DEFAULT_SOLVENCY = 150; // 150%
 const MIN_SOLVENCY = 121; // 121%
-const REDSTONE_STOCKS_PROVIDER = "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc";
 const USDC_ADDRESS = "e22da380ee6b445bb8273c81944adeb6e8450422";
 
 const { ethereum, web3 } = window;
@@ -61,7 +60,7 @@ function getAddressForSymbol(symbol, addressType) {
 }
 
 function getEtherscanUrlForToken(symbol) {
-  const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
+  const tokenAddress = getAddressForSymbol(symbol, "koToken");
   const network = getRequiredBlockchainNetworkName();
   if (network === "kovan") {
     return 'https://kovan.etherscan.io/token/' + tokenAddress;
@@ -71,7 +70,7 @@ function getEtherscanUrlForToken(symbol) {
 }
 
 async function getTokenContract(symbol, opts = {}) {
-  const tokenAddress = getAddressForSymbol(symbol, "redstoneProxy");
+  const tokenAddress = getAddressForSymbol(symbol, "koToken");
 
   // Getting signer if needed
   let signerOrProvider = provider;
@@ -88,7 +87,7 @@ async function getTokenContract(symbol, opts = {}) {
   if (opts.wrapWithRedstone) {
     token = WrapperBuilder
       .wrapLite(token)
-      .usingPriceFeed("redstone-stocks", symbol);
+      .usingPriceFeed("redstone-stocks");
   }
 
   return token;
@@ -144,11 +143,11 @@ async function mint(symbol, amount, stakeAmount) {
   const baseCurrency = getBaseCurrency();
 
   if (baseCurrency === "USDC") {
-    return await token.mintWithPrices(
+    return await token.mint(
       parseNumber(amount),
       parseUsdcNumber(stakeAmount));
   } else if (baseCurrency === "ETH") {
-    return await token.mintWithPrices(parseNumber(amount), {
+    return await token.mint(parseNumber(amount), {
       value: parseNumber(stakeAmount),
     });
   }
@@ -157,10 +156,6 @@ async function mint(symbol, amount, stakeAmount) {
 async function burn(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
   return await token.burn(parseNumber(amount));
-  // TODO: remove
-  // return await token.burn(parseNumber(amount), {
-  //   gasLimit: 1000000,
-  // });
 }
 
 async function addCollateral(symbol, amount) {
@@ -184,7 +179,7 @@ async function approveUsdcSpending(amount, symbol) {
 async function removeCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
   const baseCurrencyParser = getBaseCurrencyParser();
-  return await token.removeCollateralWithPrices(baseCurrencyParser(amount));
+  return await token.removeCollateral(baseCurrencyParser(amount));
 }
 
 async function getCollateralAmount(symbol) {
@@ -198,7 +193,7 @@ async function getCollateralAmount(symbol) {
 async function getSolvency(symbol) {
   const token = await getTokenContractForTxSending(symbol);
   const address = await getAddress();
-  const solvency = await token.solvencyOfWithPrices(address);
+  const solvency = await token.solvencyOf(address);
 
   if (solvency.gt(100000)) {
     return 100000;
@@ -264,12 +259,6 @@ function getBaseCurrencyFormatter() {
     return bigNumberPriceToNumber;
   }
 }
-
-// async function getLiquidityUSD(symbol) {
-//   const token = await getTokenContractForTxSending(symbol);
-//   const totalValueBN = await token.totalValueWithPrices();
-//   return bigNumberPriceToNumber(totalValueBN);
-// }
 
 export default {
   // Utils

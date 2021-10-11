@@ -84,7 +84,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
      * @dev Collateral value expressed in USD
      */
     function collateralValueOf(address account) public view returns(uint256) {
-        return collateralOf(account) * getCurrentPriceForAsset(COLLATERAL_TOKEN);
+        return collateralOf(account) * getPriceFromMsg(COLLATERAL_TOKEN);
     }
 
 
@@ -100,7 +100,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
      * @dev Debt of the account expressed in USD
      */
     function debtValueOf(address account) public view returns(uint256) {
-        return debt[account] * getCurrentPriceForAsset(asset);
+        return debt[account] * getPriceFromMsg(asset);
     }
 
 
@@ -122,7 +122,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
      * @dev Value of komodo tokens held by given account at the current market price
      */
     function balanceValueOf(address account) public view returns(uint256) {
-        return balanceOf(account) * getCurrentPriceForAsset(asset); 
+        return balanceOf(account) * getPriceFromMsg(asset); 
     }
 
 
@@ -130,7 +130,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
      * @dev Total value of all minted komodo tokens at the current market price
      */
     function totalValue() public view returns(uint256) {
-        return totalSupply() * getCurrentPriceForAsset(asset);
+        return totalSupply() * getPriceFromMsg(asset);
     }
 
 
@@ -141,7 +141,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
         debt[account] -= amount;
 
         // Liquidator reward
-        uint256 collateralRepayment = amount * getCurrentPriceForAsset(asset) / getCurrentPriceForAsset(COLLATERAL_TOKEN);
+        uint256 collateralRepayment = amount * getPriceFromMsg(asset) / getPriceFromMsg(COLLATERAL_TOKEN);
         uint256 bonus = collateralRepayment * LIQUIDATION_BONUS / SOLVENCY_PRECISION;
 
         uint256 repaymentWithBonus = collateralRepayment + bonus;
@@ -151,14 +151,9 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
         require(solvencyOf(account) >= MIN_SOLVENCY, "Account must be solvent after liquidation");
     }
 
-    function getCurrentPriceForAsset(bytes32 _asset) private view returns(uint256) {
-        return getPriceFromMsg(_asset) / 10 ** 8;
-    }
-    
-
     modifier remainsSolvent() {
         _;
-        require(solvencyOf(msg.sender) >= MIN_SOLVENCY, "The account must remain solvent");        
+        require(solvencyOf(msg.sender) >= MIN_SOLVENCY, "The account must remain solvent");
     }
 
 

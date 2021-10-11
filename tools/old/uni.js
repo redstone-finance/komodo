@@ -12,7 +12,7 @@ const USDC_ADDRESS = "0xe22da380ee6b445bb8273c81944adeb6e8450422";
 const ERC20_ABI = require("../uni-abi/ERC20.json");
 
 const main = new ethers.Wallet(PRIV, provider);
-console.log("Main address: " + main.address);
+console.log("MAIN: " + main.address);
 
 const nftManager = new ethers.Contract(NFT_MANAGER_ADDRESS, NFT_MANAGER_ABI, main);
 const usdc = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, main);

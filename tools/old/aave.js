@@ -15,7 +15,7 @@ const WETH_GATEWAY = require("../artifacts/contracts/IWethGateway.sol/IWethGatew
 const WETH_GATEWAY_RESERVE = "0xe0fba4fc209b4948668006b2be61711b7f465bae";
 
 const USDC_ADDRESS = "0xe22da380ee6b445bb8273c81944adeb6e8450422";
-const ERC20_ABI = require("../uni-abi/ERC20.json");
+const ERC20_ABI = require("../../uni-abi/ERC20.json");
 const AWETH = "0x87b1f4cf9bd63f7bbd3ee1ad04e8f52540349347";
 
 const main = new ethers.Wallet(PRIV, provider);

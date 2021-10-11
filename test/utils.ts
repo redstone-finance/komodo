@@ -22,9 +22,23 @@ async function syncTime() {
   }
 };
 
+const toEth = function(val: Number) {
+  return ethers.utils.parseEther(val.toString());
+}
+const toVal = function(val: Number) {
+  return ethers.utils.parseUnits(val.toString(), 26);
+}
+const toUsd = function(val: Number) {
+  return ethers.utils.parseUnits(val.toString(), 6);
+}
+
 export default {
   toBytes32,
   fromBytes32,
   mockPrices,
   syncTime,
+
+  toEth,
+  toVal,
+  toUsd,
 };

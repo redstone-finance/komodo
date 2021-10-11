@@ -33,7 +33,7 @@ contract KoTokenBoostedETH is KoTokenETH {
         aETH = aETH_;
 
         aETH.approve(address(wethGateway), 2**256 - 1);
-        
+
         bInitialized = true;
     }
 
@@ -67,9 +67,13 @@ contract KoTokenBoostedETH is KoTokenETH {
      * @dev Collateral amount expressed in ETH
      */
     function collateralOf(address account) public override view returns(uint256) {
-        return collateral[account] * aETH.balanceOf(address(this)) / totalCollateral;
+        if (totalCollateral > 0) {
+            return collateral[account] * aETH.balanceOf(address(this)) / totalCollateral;
+        } else {
+            return collateral[account];
+        }
     }
-    
+
 
     receive() external payable {}
 }

@@ -584,7 +584,7 @@ h1 {
   color: #555;
 
   a {
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: none;
     color: #ea347a;
 

@@ -10,6 +10,7 @@
     "lint": "vue-cli-service lint",
     "run-ganache": "ganache-cli -s 123",
     "compile-contracts": "hardhat compile",
+    "deploy:kovan": "yarn compile-contracts && node tools/deploy-all.js",
     "test": "yarn compile-contracts && hardhat test"
   },
   "dependencies": {
@@ -34,7 +35,7 @@
     "hardhat-typechain": "^0.3.5",
     "lodash": "^4.17.21",
     "redstone-api": "^0.4.3",
-    "redstone-flash-storage": "^1.3.0",
+    "redstone-flash-storage": "^1.3.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4",
     "vue": "^2.6.10",
@@ -65,6 +66,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "chai": "^4.3.4",
+    "chai-almost": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "eth-sig-util": "^3.0.1",
@@ -74,6 +76,7 @@
     "hardhat-typechain": "^0.3.5",
     "lodash": "^4.17.21",
     "node-sass": "^4.12.0",
+    "redstone-node": "^0.4.19",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
     "ts-node": "^10.0.0",

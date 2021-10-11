@@ -25,7 +25,7 @@
         <v-select
           label="Collateral token"
           class="base-token-selector"
-          :items="['ETH', 'USDC']"
+          :items="baseTokens"
           v-model="baseToken"
           outlined
         >
@@ -73,6 +73,10 @@ export default Vue.extend({
   name: 'App',
 
   data: () => ({
+    baseTokens: [
+      'ETH',
+      'USDC',
+    ],
   }),
 
   async mounted() {

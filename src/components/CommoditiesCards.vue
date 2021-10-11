@@ -16,13 +16,13 @@
               <v-avatar class="commodity-avatar" size="52">
                 <img alt="commodity-logo" class="pa-3" :src="commodity.logoURI" />
               </v-avatar>
-              <p class="ml-6 pt-4">
+              <p class="ml-6 pt-4 commodity-title">
                 <span>
-                  {{ commodity.symbol }}
+                  {{ commodity.name }}
                 </span>
                 <br />
-                <span class="commodity-name">
-                  {{ commodity.name }}
+                <span class="commodity-subtitle">
+                  Symbol: {{ commodity.symbol }}
                 </span>
               </p>
             </v-card-title>
@@ -131,16 +131,20 @@ export default {
 
 .tag {
   position: absolute;
-  right: 60px;
-  top: 43px;
+  right: 15px;
+  top: 15px;
 }
 
 .commodity-avatar {
   border: 3px solid #2196F3;
 }
 
-.commodity-name {
-  font-size: 12px;
+.commodity-title {
+  font-size: 16px;
+}
+
+.commodity-subtitle {
+  font-size: 10px;
   color: #555;
 }
 

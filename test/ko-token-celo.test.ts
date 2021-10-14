@@ -5,7 +5,7 @@ import utils from "./utils";
 const { expect } = require("chai");
 
 
-describe("KoTokenETH", function() {
+describe("KoTokenCELO", function() {
   
   let koToken: any, wrappedKoToken: any;
   let buyer: SignerWithAddress;
@@ -14,16 +14,16 @@ describe("KoTokenETH", function() {
   it("Should deploy koToken with the asset symbol", async function() {
     [buyer, maker] = await ethers.getSigners();
 
-    const KoToken = await ethers.getContractFactory("KoTokenETH");
+    const KoToken = await ethers.getContractFactory("KoTokenCELO");
     koToken = await KoToken.deploy() as any;
-    await koToken.initialize(utils.toBytes32("CL=F"), "komodo-OIL-token", "kOIL");
+    await koToken.initialize(utils.toBytes32("CL=F"), "komodo-corn-token", "kCORN");
     await koToken.deployed();
 
     expect(utils.fromBytes32(await koToken.asset())).to.equal("CL=F");
 
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken)
-      .using({"ETH": 2000, "CL=F": 200});
+      .using({"CELO": 2000, "CL=F": 200});
 
     await wrappedKoToken.authorizeProvider();
 
@@ -41,7 +41,7 @@ describe("KoTokenETH", function() {
   it("Should mint", async function() {
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken.connect(maker))
-      .using({"ETH": 2000, "CL=F": 200});
+      .using({"CELO": 2000, "CL=F": 200});
 
     await wrappedKoToken.mint(utils.toEth(100), {value: utils.toEth(20)});
 
@@ -63,7 +63,7 @@ describe("KoTokenETH", function() {
   it("Should burn", async function() {
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken.connect(maker))
-      .using({"ETH": 2000, "CL=F": 200});
+      .using({"CELO": 2000, "CL=F": 200});
       
     await wrappedKoToken.burn(utils.toEth(20));
     await utils.syncTime(); // recommended for hardhat test
@@ -118,7 +118,7 @@ describe("KoTokenETH", function() {
 
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken.connect(buyer))
-      .using({"ETH": 2000, "CL=F": 200});
+      .using({"CELO": 2000, "CL=F": 200});
 
     await expect(wrappedKoToken.liquidate(maker.address, utils.toEth(10)))
       .to.be.revertedWith('Cannot liquidate a solvent account');
@@ -129,7 +129,7 @@ describe("KoTokenETH", function() {
 
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken.connect(buyer))
-      .using({"ETH": 315, "CL=F": 200});
+      .using({"CELO": 315, "CL=F": 200});
 
     expect(await wrappedKoToken.debtOf(maker.address)).to.equal(utils.toEth(80));
     expect(await wrappedKoToken.debtValueOf(maker.address)).to.equal(utils.toVal(16000));
@@ -149,7 +149,7 @@ describe("KoTokenETH", function() {
 
     wrappedKoToken = WrapperBuilder
       .mockLite(koToken.connect(buyer))
-      .using({"ETH": 319, "CL=F": 200});
+      .using({"CELO": 319, "CL=F": 200});
 
     expect(await wrappedKoToken.debtOf(maker.address)).to.equal(utils.toEth(80));
     expect(await wrappedKoToken.debtValueOf(maker.address)).to.equal(utils.toVal(16000));

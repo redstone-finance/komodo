@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 import { MockUsd } from "../typechain/MockUsd";
-import { KoTokenUsd } from "../typechain/KoTokenUSD";
+import { KoTokenCusd } from "../typechain/KoTokenCusd";
 import { WrapperBuilder } from "redstone-flash-storage";
 import utils from "./utils";
 import {SignerWithAddress} from "@nomiclabs/hardhat-ethers/signers";
@@ -14,16 +14,14 @@ describe("KoTokenUSD", function() {
   let maker: SignerWithAddress;
   let usd: MockUsd;
 
-
-
   it("Should deploy wrappedKoToken with the asset symbol", async function() {
     [maker, buyer] = await ethers.getSigners();
 
     const MockUsd = await ethers.getContractFactory("MockUSD");
     usd = await MockUsd.deploy() as MockUsd;
 
-    const KoToken = await ethers.getContractFactory("KoTokenUSD");
-    koToken = await KoToken.deploy() as KoTokenUsd;
+    const KoToken = await ethers.getContractFactory("KoTokenCUSD");
+    koToken = await KoToken.deploy() as KoTokenCusd;
     await koToken.initialize(utils.toBytes32("OIL"), usd.address, "komodo-OIL-token", "kOIL");
     await koToken.deployed();
 

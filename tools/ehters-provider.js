@@ -1,5 +1,6 @@
 const ethers = require('ethers');
+const { CeloProvider } = require('@celo-tools/celo-ethers-wrapper');
 
-const kovanProvider = ethers.getDefaultProvider('kovan');
+const provider = new CeloProvider('https://alfajores-forno.celo-testnet.org');
 
-module.exports = kovanProvider;
+module.exports = provider;

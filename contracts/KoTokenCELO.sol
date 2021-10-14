@@ -6,14 +6,14 @@ import "./ERC20Initializable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "redstone-flash-storage/lib/contracts/message-based/PriceAware.sol";
 
-contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
+contract KoTokenCELO is ERC20Initializable, Ownable, PriceAware {
 
     bool private initialized;
     bytes32 public asset;
     address public broker;
 
     uint256 constant public MAX_SOLVENCY = 2**256 - 1;
-    bytes32 constant public COLLATERAL_TOKEN  = "ETH"; 
+    bytes32 constant public COLLATERAL_TOKEN  = "CELO"; 
     uint256 constant public SOLVENCY_PRECISION  = 1000; // 100%, 1 unit = 0.1% 
     uint256 constant public MIN_SOLVENCY  = 1200; // 120%, 1 unit = 0.1% 
     uint256 constant public LIQUIDATION_BONUS = 50; // 5%, 1 unit = 0.1% 
@@ -73,7 +73,7 @@ contract KoTokenETH is ERC20Initializable, Ownable, PriceAware {
 
 
     /**
-     * @dev Collateral amount expressed in ETH
+     * @dev Collateral amount expressed in CELO
      */
     function collateralOf(address account) public virtual view returns(uint256) {
         return collateral[account];

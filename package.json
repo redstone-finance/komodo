@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@aave/protocol-v2": "^1.0.1",
+    "@celo-tools/celo-ethers-wrapper": "^0.0.5",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^4.1.0",

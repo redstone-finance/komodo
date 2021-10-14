@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "redstone-flash-storage/lib/contracts/message-based/PriceAware.sol";
 
 
-contract KoTokenUSD is ERC20Initializable, Ownable, PriceAware {
+contract KoTokenCUSD is ERC20Initializable, Ownable, PriceAware {
 
     bool private initialized;
     bytes32 public asset;

@@ -74,8 +74,8 @@ export default Vue.extend({
 
   data: () => ({
     baseTokens: [
-      'ETH',
-      'USDC',
+      'CELO',
+      'cUSD',
     ],
   }),
 

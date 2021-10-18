@@ -36,7 +36,7 @@ If the solvency ratio drops below one hundred twenty percent, anyone could liqui
 
 It's important to notice that the collateral doesn't lie idle. We automatically deposit the funds on Aave, so the token creators can earn extra income on their positions. Globally, the constantly growing collateral pool keeps the whole system more stable.
 
-The newly minted tokens could be easily provided to the linked uniswap 3 pool, where we could specify the terms, on which, they are being offered on the market. 
+The newly minted tokens could be easily provided to the linked ubeswap 3 pool, where we could specify the terms, on which, they are being offered on the market. 
 
 The biggest challenge in building a protocol for synthetic commodities was how to inject data about the plethora of assets into the EVM. 
 The Chainlink offers the most convenient way of accessing data directly on chain, but it tracks a limited amount of assets.

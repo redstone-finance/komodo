@@ -8,7 +8,7 @@ export default new Vuex.Store({
     prices: {},
     liquidity: {},
     liquidityLoadingCompleted: false,
-    baseCurrency: 'ETH', // possible values: ETH, USDC
+    baseCurrency: localStorage.baseCurrency || 'CELO', // possible values: CELO, cUSD
   },
   mutations: {
     updatePrices(state, payload) {
@@ -44,6 +44,7 @@ export default new Vuex.Store({
     },
 
     setBaseCurrency({ commit }, baseCurrency) {
+      localStorage.baseCurrency = baseCurrency;
       commit('setBaseCurrency', baseCurrency);
     },
   },

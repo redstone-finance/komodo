@@ -3,14 +3,14 @@
 
     <TokenSponsorActionDialog
       :currentPrice="currentPrice"
-      :ethPrice="ethPrice"
+      :ethPrice="celoPrice"
       :balance="balance"
       :collateral="collateral"
       :ethBalance="ethBalance"
-      :usdcBalance="usdcBalance"
+      :cusdBalance="cusdBalance"
       :symbol="symbol"
-      :usdcApproveWaiting="usdcApproveWaiting"
-      :usdcApproveWaitingForTxMining="usdcApproveWaitingForTxMining"
+      :cusdApproveWaiting="cusdApproveWaiting"
+      :cusdApproveWaitingForTxMining="cusdApproveWaitingForTxMining"
       :txWaitingForConfirmation="txWaitingForConfirmation"
       :txWaitingForMining="txWaitingForMining"
       ref="dialog" />
@@ -29,7 +29,7 @@
               {{ symbol }}
             </strong>
             <a v-if="etherscanTokenUrl" target="_blank" :href="etherscanTokenUrl">
-              Token on etherscan
+              Token on blockscout
               <v-icon style="margin-bottom: 1px;" color="#1976d2" x-small>mdi-open-in-new</v-icon>
             </a>
           </div>
@@ -103,11 +103,11 @@
           </div>
 
           <div v-if="balanceValueUSD > 0" class="main-text text-center">
-            <a class="text-center" target="_blank" :href="uniswapPoolUrl">
-              Add liquidity on uniswap
+            <a class="text-center" target="_blank" :href="ubeswapPoolUrl">
+              Add liquidity on ubeswap
               <img
-                class="uniswap-logo"
-                src="https://cryptologos.cc/logos/uniswap-uni-logo.svg?v=010"
+                class="ubeswap-logo"
+                src="https://app.ubeswap.org/static/media/icon-ube.73779bdc.svg"
               />
             </a>
           </div>
@@ -151,12 +151,12 @@
             </div>
           </div>
 
-          <div class="main-text">
+          <!-- <div class="main-text">
             <h4 class="text-center mb-1">Your collateral makes additional money for you</h4>
             <p>
               Your collateral is being automatically staked on
               <a
-                href="https://app.aave.com/borrow/USDC-0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb480xb53c1a33016b2dc2ff3653530bff1848a515c8c5"
+                href="https://app.aave.com/borrow/cUSD-0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb480xb53c1a33016b2dc2ff3653530bff1848a515c8c5"
                 target="_blank"
               >
                 Aave protocol
@@ -172,7 +172,7 @@
               </strong>
               annually at current rates.
             </p>
-          </div>
+          </div> -->
 
           <div class="buttons">
             <div class="button-container">
@@ -213,17 +213,17 @@ export default {
   data() {
     return {
       currentPrice: null,
-      ethPrice: null,
-      usdcPrice: null,
+      celoPrice: null,
+      cusdPrice: null,
       balance: null,
       tab: 0,
       solvency: 0,
       collateral: 0,
       ethBalance: 0,
-      usdcBalance: 0,
+      cusdBalance: 0,
 
-      usdcApproveWaiting: false,
-      usdcApproveWaitingForTxMining: false,
+      cusdApproveWaiting: false,
+      cusdApproveWaitingForTxMining: false,
       txWaitingForMining: false,
       txWaitingForConfirmation: false,
 
@@ -241,12 +241,12 @@ export default {
       autostart: true,
       repeat: true,
     },
-    loadEthPrice: {
+    loadCeloPrice: {
       time: 2000,
       autostart: true,
       repeat: true,
     },
-    loadUsdcPrice: {
+    loadCusdPrice: {
       time: 2000,
       autostart: true,
       repeat: true,
@@ -255,7 +255,7 @@ export default {
       time: 1000,
       autostart: true,
       repeat: true,
-    },
+    }
   },
 
   methods: {
@@ -264,8 +264,8 @@ export default {
       this.loadSolvency();
       this.loadCollateral();
       this.loadBalance();
-      this.loadEthPrice();
-      this.loadEthBalance();
+      this.loadCeloPrice();
+      this.loadCeloBalance();
       this.loadUsdcBalance();
     },
 
@@ -281,32 +281,29 @@ export default {
       };
     },
 
-    async loadUsdcPrice() {
-      const price = await redstone.getPrice("USDC");
-
-      this.usdcPrice = {
-        ...price,
-        value: price.value + (Math.random() / 1000),
+    async loadCusdPrice() {
+      this.cusdPrice = {
+        value: 1 + (Math.random() / 1000),
       };
     },
 
-    async loadEthBalance() {
-      this.ethBalance = await blockchain.getEthBalance();
+    async loadCeloBalance() {
+      this.ethBalance = await blockchain.getCeloBalance();
     },
 
     async loadUsdcBalance() {
-      this.usdcBalance = await blockchain.getUsdcBalance();
+      this.cusdBalance = await blockchain.getCusdBalance();
     },
 
     async loadBalance() {
       this.balance = await blockchain.getBalance(this.symbol);
     },
 
-    async loadEthPrice() {
-      const price = await redstone.getPrice("ETH");
+    async loadCeloPrice() {
+      const price = await redstone.getPrice("CELO");
 
       // Simulating frequent updates
-      this.ethPrice = {
+      this.celoPrice = {
         ...price,
         value: price.value + (Math.random() / 10),
       };
@@ -370,11 +367,11 @@ export default {
       const stake = blockchain.calculateStakeAmount({
         tokenAmount: value,
         tokenPrice: this.currentPrice.value,
-        ethPrice: this.ethPrice.value,
+        ethPrice: this.celoPrice.value,
         solvency: blockchain.DEFAULT_SOLVENCY,
       });
-      if (this.baseCurrency === "USDC") {
-        await this.approveUsdcSpending(stake);
+      if (this.baseCurrency === "cUSD") {
+        await this.approveCusdSpending(stake);
       }
       await this.sendBlockchainTransaction(
         async () => await blockchain.mint(this.symbol, value, stake));
@@ -386,8 +383,8 @@ export default {
     },
 
     async addCollateral(value) {
-      if (this.baseCurrency === "USDC") {
-        await this.approveUsdcSpending(value);
+      if (this.baseCurrency === "cUSD") {
+        await this.approveCusdSpending(value);
       }
       await this.sendBlockchainTransaction(
         async () => await blockchain.addCollateral(this.symbol, value));
@@ -398,21 +395,21 @@ export default {
         async () => await blockchain.removeCollateral(this.symbol, value));
     },
 
-    async approveUsdcSpending(value) {
+    async approveCusdSpending(value) {
       try {
-        this.usdcApproveWaiting = true;
-        this.$toast.info("Please approve USDC spending");
-        const tx = await blockchain.approveUsdcSpending(value, this.symbol);
-        this.usdcApproveWaiting = false;
-        this.usdcApproveWaitingForTxMining = true;
+        this.cusdApproveWaiting = true;
+        this.$toast.info("Please approve cUSD spending");
+        const tx = await blockchain.approveCusdSpending(value, this.symbol);
+        this.cusdApproveWaiting = false;
+        this.cusdApproveWaitingForTxMining = true;
         await tx.wait();
-        this.$toast.success("USDC spending approved");
+        this.$toast.success("cUSD spending approved");
       } catch (e) {
-        this.$toast.error("USDC spending approve failed");
+        this.$toast.error("cUSD spending approve failed");
         console.error(e);
       } finally {
-        this.usdcApproveWaiting = false;
-        this.usdcApproveWaitingForTxMining = false;
+        this.cusdApproveWaiting = false;
+        this.cusdApproveWaitingForTxMining = false;
       }
       
     },
@@ -456,8 +453,8 @@ export default {
     },
 
     baseTokenBalance() {
-      if (this.baseCurrency === "USDC") {
-        return this.usdcBalance;
+      if (this.baseCurrency === "cUSD") {
+        return this.cusdBalance;
       } else {
         return this.ethBalance;
       }
@@ -471,9 +468,9 @@ export default {
       }
     },
 
-    uniswapPoolUrl() {
+    ubeswapPoolUrl() {
       if (this.symbol) {
-        return blockchain.getAddressForSymbol(this.symbol, "uniswapPoolUrl");
+        return blockchain.getAddressForSymbol(this.symbol, "ubeswapPoolUrl");
       } else {
         return "";
       }
@@ -488,10 +485,10 @@ export default {
     },
 
     collateralValueUSD() {
-      if (this.baseCurrency === "USDC" && this.usdcPrice) {
-        return this.usdcPrice.value * this.collateral;
-      } else if (this.ethPrice) {
-        return this.ethPrice.value * this.collateral;
+      if (this.baseCurrency === "cUSD" && this.cusdPrice) {
+        return this.cusdPrice.value * this.collateral;
+      } else if (this.celoPrice) {
+        return this.celoPrice.value * this.collateral;
       } else {
         return '...';
       }
@@ -586,14 +583,14 @@ h1 {
   a {
     font-size: 12px;
     text-decoration: none;
-    color: #ea347a;
+    color: #6b6296;
 
     &:hover {
       text-decoration: underline;
     } 
   }
 
-  .uniswap-logo {
+  .ubeswap-logo {
     height: 18px;
     position: relative;
     top: 2px;

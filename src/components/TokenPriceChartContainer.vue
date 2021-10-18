@@ -34,15 +34,15 @@
         <v-btn
           :href="getUniswapTradeUrl(symbol)"
           target="_blank"
-          color="rgb(234, 52, 122)"
+          color="#6b6296"
           outlined
           small
           class="ml-2"
         >
-          Trade on uniswap
+          Trade on ubeswap
           <img
-            class="uniswap-logo"
-            src="https://cryptologos.cc/logos/uniswap-uni-logo.svg?v=010"
+            class="ubeswap-logo"
+            src="https://app.ubeswap.org/static/media/icon-ube.73779bdc.svg"
           />
         </v-btn>
       </div>
@@ -159,7 +159,7 @@ export default {
 
   methods: {
     getUniswapTradeUrl(symbol) {
-      return blockchain.getAddressForSymbol(symbol, "uniswapTradeUrl");
+      return blockchain.getAddressForSymbol(symbol, "ubeswapTradeUrl");
     },
 
     async loadPrices() {
@@ -424,7 +424,7 @@ hr {
   }
 }
 
-.uniswap-logo {
+.ubeswap-logo {
   width: 16px;
   position: relative;
   bottom: 2px;

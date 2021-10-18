@@ -3,14 +3,15 @@ import sleep from "./sleep";
 import store from "@/store";
 import { WrapperBuilder } from "redstone-flash-storage";
 import deployedTokens from "@/assets/data/deployed-tokens.json";
+// const { CeloProvider } = require("@celo-tools/celo-ethers-wrapper");
 
-const KO_TOKEN_USD = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
-const KO_TOKEN_ETH = require('../../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
-const ERC20_ABI = require('../../abi/ERC20.json');
+const KO_TOKEN_CELO = require('../../artifacts/contracts/KoTokenCELO.sol/KoTokenCELO');
+const KO_TOKEN_CUSD = require('../../artifacts/contracts/KoTokenCUSD.sol/KoTokenCUSD');
+const ERC20_ABI = require('../../abi/erc20.json');
 
 const DEFAULT_SOLVENCY = 150; // 150%
 const MIN_SOLVENCY = 121; // 121%
-const USDC_ADDRESS = "e22da380ee6b445bb8273c81944adeb6e8450422";
+const CUSD_ADDRESS = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"; // cUSD on alfajores testnet
 
 const { ethereum, web3 } = window;
 
@@ -22,17 +23,15 @@ if (ethereum) {
 // Will use metamask web3
 let provider;
 if (web3) {
+  // TODO: maybe use CeloProvider??
   provider = new ethers.providers.Web3Provider(web3.currentProvider);
 }
 
 const parseNumber = (number) => ethers.utils.parseEther(String(number));
 const bigNumberPriceToNumber = (bn) => Number(ethers.utils.formatEther(bn));
-const formatUsdcUnits = (bn) => Number(ethers.utils.formatUnits(bn, 6));
-const parseUsdcNumber = (number) =>
-  ethers.utils.parseUnits(String(Math.round(number, 6)), 6);
 
 function getRequiredBlockchainNetworkName() {
-  return process.env.VUE_APP_TARGET_BLOCKCHAIN_NETWORK || "kovan";
+  return "alfajores";
 }
 
 async function getAddress() {
@@ -40,9 +39,9 @@ async function getAddress() {
   return signer.getAddress();
 }
 
-async function getUsdcContract() {
+async function getCusdContract() {
   const signer = await getSigner();
-  return new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
+  return new ethers.Contract(CUSD_ADDRESS, ERC20_ABI, signer);
 }
 
 function getAddressForSymbol(symbol, addressType) {
@@ -62,8 +61,8 @@ function getAddressForSymbol(symbol, addressType) {
 function getEtherscanUrlForToken(symbol) {
   const tokenAddress = getAddressForSymbol(symbol, "koToken");
   const network = getRequiredBlockchainNetworkName();
-  if (network === "kovan") {
-    return 'https://kovan.etherscan.io/token/' + tokenAddress;
+  if (network === "alfajores") {
+    return 'https://alfajores-blockscout.celo-testnet.org/address/' + tokenAddress;
   } else {
     return "";
   }
@@ -95,10 +94,10 @@ async function getTokenContract(symbol, opts = {}) {
 
 function getTokenContractAbi() {
   const baseCurrency = getBaseCurrency();
-  if (baseCurrency === "USDC") {
-    return KO_TOKEN_USD.abi;
+  if (baseCurrency === "CELO") {
+    return KO_TOKEN_CELO.abi;
   } else {
-    return KO_TOKEN_ETH.abi;
+    return KO_TOKEN_CUSD.abi;
   }
 }
 
@@ -112,8 +111,8 @@ async function getTokenContractForTxSending(symbol) {
 async function getNetworkName() {
   await sleep(1000);
   if (provider && provider._network) {
-    if (provider._network.chainId === 137) {
-      return "polygon";
+    if (provider._network.chainId === 44787) {
+      return "alfajores";
     } return provider._network.name;
   } else {
     return await getNetworkName();
@@ -142,11 +141,11 @@ async function mint(symbol, amount, stakeAmount) {
   const token = await getTokenContractForTxSending(symbol);
   const baseCurrency = getBaseCurrency();
 
-  if (baseCurrency === "USDC") {
+  if (baseCurrency === "cUSD") {
     return await token.mint(
       parseNumber(amount),
-      parseUsdcNumber(stakeAmount));
-  } else if (baseCurrency === "ETH") {
+      parseNumber(stakeAmount));
+  } else if (baseCurrency === "CELO") {
     return await token.mint(parseNumber(amount), {
       value: parseNumber(stakeAmount),
     });
@@ -162,32 +161,30 @@ async function addCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
   const baseCurrency = getBaseCurrency();
 
-  if (baseCurrency === "USDC") {
-    return await token.addCollateral(parseUsdcNumber(amount));  
-  } else if (baseCurrency === "ETH") {
+  if (baseCurrency === "cUSD") {
+    return await token.addCollateral(parseNumber(amount));  
+  } else if (baseCurrency === "CELO") {
     return await token.addCollateral({ value: parseNumber(amount) });
   }
 }
 
-async function approveUsdcSpending(amount, symbol) {
+async function approveCusdSpending(amount, symbol) {
   const token = await getTokenContractForTxSending(symbol);
-  const usdc = await getUsdcContract();
+  const cusd = await getCusdContract();
 
-  return await usdc.approve(token.address, parseUsdcNumber(amount));
+  return await cusd.approve(token.address, parseNumber(amount));
 }
 
 async function removeCollateral(symbol, amount) {
   const token = await getTokenContractForTxSending(symbol);
-  const baseCurrencyParser = getBaseCurrencyParser();
-  return await token.removeCollateral(baseCurrencyParser(amount));
+  return await token.removeCollateral(parseNumber(amount));
 }
 
 async function getCollateralAmount(symbol) {
   const token = await getTokenContractForTxSending(symbol);
   const address = await getAddress();
   const collateral = await token.collateralOf(address);
-  const formatter = getBaseCurrencyFormatter();
-  return formatter(collateral);
+  return bigNumberPriceToNumber(collateral);
 }
 
 async function getSolvency(symbol) {
@@ -209,17 +206,17 @@ async function getBalance(symbol) {
   return bigNumberPriceToNumber(balance);
 }
 
-async function getEthBalance() {
+async function getCeloBalance() {
   const address = await getAddress();
   const balance = await provider.getBalance(address);
   return bigNumberPriceToNumber(balance);
 }
 
-async function getUsdcBalance() {
+async function getCusdBalance() {
   const address = await getAddress();
-  const usdc = await getUsdcContract();
-  const balance = await usdc.balanceOf(address);
-  return formatUsdcUnits(balance, 6);
+  const cusd = await getCusdContract();
+  const balance = await cusd.balanceOf(address);
+  return bigNumberPriceToNumber(balance);
 }
 
 function calculateStakeAmount({
@@ -229,7 +226,7 @@ function calculateStakeAmount({
   solvency = DEFAULT_SOLVENCY,
 }) {
   const baseCurrency = getBaseCurrency();
-  if (baseCurrency === "USDC") {
+  if (baseCurrency === "cUSD") {
     return (solvency / 100) * tokenAmount * tokenPrice;
   } else {
     const currentTokenEthPrice = tokenPrice / ethPrice;
@@ -240,24 +237,6 @@ function calculateStakeAmount({
 // Internal function for getting baseCurrency from global Vuex state
 function getBaseCurrency() {
   return store.state.baseCurrency;
-}
-
-function getBaseCurrencyParser() {
-  const baseCurrency = getBaseCurrency();
-  if (baseCurrency === "USDC") {
-    return parseUsdcNumber;
-  } else {
-    return parseNumber;
-  }
-}
-
-function getBaseCurrencyFormatter() {
-  const baseCurrency = getBaseCurrency();
-  if (baseCurrency === "USDC") {
-    return formatUsdcUnits;
-  } else {
-    return bigNumberPriceToNumber;
-  }
 }
 
 export default {
@@ -272,8 +251,8 @@ export default {
   getSolvency,
   getCollateralAmount,
   getBalance,
-  getEthBalance,
-  getUsdcBalance,
+  getCeloBalance,
+  getCusdBalance,
 
   // Network
   getNetworkName,
@@ -284,7 +263,7 @@ export default {
   burn,
   addCollateral,
   removeCollateral,
-  approveUsdcSpending,
+  approveCusdSpending,
 
   // Const
   DEFAULT_SOLVENCY,

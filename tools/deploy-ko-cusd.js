@@ -1,24 +1,24 @@
 const ethers = require("ethers");
-const wallet = require("./celo-wallet");
-const { WrapperBuilder } = require("redstone-flash-storage");
-const provider = require("./ehters-provider");
-const KoTokenCelo = require("../artifacts/contracts/KoTokenCELO.sol/KoTokenCELO");
 const utils = require("./utils");
+const { WrapperBuilder } = require("redstone-flash-storage");
+const wallet = require("./celo-wallet");
+const KoTokenCUSD = require("../artifacts/contracts/KoTokenCUSD.sol/KoTokenCUSD");
+const { CUSD_ADDRESS } = require("./tools-config");
 
 const toBytes32 = ethers.utils.formatBytes32String;
 
 const GAS_LIMIT = 10000000;
 
-async function deployKoTokenCELO(asset) {
+async function deployKoTokenCUSD(asset) {
   const addresses = {};
-  const koFactory = new ethers.ContractFactory(KoTokenCelo.abi, KoTokenCelo.bytecode, wallet);
+  const koFactory = new ethers.ContractFactory(KoTokenCUSD.abi, KoTokenCUSD.bytecode, wallet);
   
   // Contract deployment
   addresses.koToken = await utils.getNextContractAddress(wallet);
   let koToken = await koFactory.deploy({gasLimit: GAS_LIMIT});
   await koToken.deployed();
-  console.log("KoTokenCelo deployed: " + addresses.koToken);
-  koToken = new ethers.Contract(addresses.koToken, KoTokenCelo.abi, wallet);
+  console.log("KoTokenCUSD deployed: " + addresses.koToken);
+  koToken = new ethers.Contract(addresses.koToken, KoTokenCUSD.abi, wallet);
 
   // Provider authorization
   const wrappedTokenContract = WrapperBuilder
@@ -32,14 +32,15 @@ async function deployKoTokenCELO(asset) {
   // Token init
   const initTx = await koToken.initialize(
     toBytes32(asset),
-    `komodo-${asset}`,
-    `k${asset}`
+    CUSD_ADDRESS,
+    `komodo-${asset}-cusd-collateral`,
+    `k$${asset}`
   );
   await initTx.wait();
-  console.log("KoTokenCELO initialized: " + initTx.hash);
+  console.log("KoTokenCUSD initialized: " + initTx.hash);
   addresses.initTx = initTx.hash;
-
+  
   return addresses;
 }
 
-module.exports = deployKoTokenCELO;
+module.exports = deployKoTokenCUSD;

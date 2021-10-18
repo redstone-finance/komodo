@@ -23,13 +23,13 @@ contract KoTokenCUSD is ERC20Initializable, Ownable, PriceAware {
     mapping(address => uint256) public collateral;
     mapping(address => uint256) public debt;
 
-    function initialize(bytes32 asset_, ERC20 usd_, string memory name_, string memory symbol_) external {
+    function initialize(bytes32 asset_, ERC20 cusd_, string memory name_, string memory symbol_) external {
         require(!initialized);
 
         super.initialize(name_, symbol_);
 
         asset = asset_;
-        usd = usd_;
+        usd = cusd_;
 
         initialized = true;
     }
@@ -81,7 +81,7 @@ contract KoTokenCUSD is ERC20Initializable, Ownable, PriceAware {
 
 
     /**
-     * @dev Collateral amount in USDC stable coins
+     * @dev Collateral amount in cUSD stable coins
      */
     function collateralOf(address account) public view returns(uint256) {
         return collateral[account];
@@ -89,12 +89,11 @@ contract KoTokenCUSD is ERC20Initializable, Ownable, PriceAware {
 
 
     /**
-     * @dev Collateral value expressed with 10^18 precision
+     * @dev Collateral value in USD with 10*26 precision
+     * 26 = 18 (default token precision on Celo) + 8 (redstone usd values precision)
      */
     function collateralValueOf(address account) public view returns(uint256) {
-        //USDC usded 6 digits precision ( * 10**12)
-        //Prices from redstone use 8 digits precision ( * 10**8) 
-        return collateralOf(account) * 10**20;
+        return collateralOf(account) * 10 ** 8;
     }
 
 

@@ -6,7 +6,7 @@ import deployedTokens from "@/assets/data/deployed-tokens.json";
 
 const KO_TOKEN_USD = require('../../artifacts/contracts/KoTokenBoostedUSD.sol/KoTokenBoostedUSD');
 const KO_TOKEN_ETH = require('../../artifacts/contracts/KoTokenBoostedETH.sol/KoTokenBoostedETH');
-const ERC20_ABI = require('../../uni-abi/ERC20.json');
+const ERC20_ABI = require('../../abi/ERC20.json');
 
 const DEFAULT_SOLVENCY = 150; // 150%
 const MIN_SOLVENCY = 121; // 121%

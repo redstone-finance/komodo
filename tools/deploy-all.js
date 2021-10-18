@@ -1,12 +1,11 @@
 const fs = require("fs");
-const redstone = require("redstone-api");
-const deployKoBoostUSD = require("./deploy-ko-boost-usd");
-const deployKoBoostETH = require("./deploy-ko-boost-eth");
-const uniswap = require("./uni");
+const deployKoCELO = require("./deploy-ko-celo");
+const deployKoCUSD = require("./deploy-ko-cusd");
+const ubeswap = require("./ubeswap");
 const commodities = require("../src/assets/data/commodities.json");
 
 // Set to 0 to disable limit
-const LIMIT = 0;
+const LIMIT = 1;
 const OFFSET = 0;
 
 main();
@@ -47,39 +46,32 @@ async function main() {
 }
 
 async function deployKoToken(symbol) {
-  const usdcAddresses = await deployKoTokenUsd(symbol);
-  const ethAddresses = await deployKoTokenEth(symbol);
+  const cusdAddresses = await deployKoCusdWithUbeswap(symbol);
+  const celoAddresses = await deployKoCeloWithUbeswap(symbol);
   return {
-    "ETH": ethAddresses,
-    "USDC": usdcAddresses,
+    "CELO": celoAddresses,
+    "cUSD": cusdAddresses,
   };
 }
 
-async function deployKoTokenEth(symbol) {
-  console.log(`=== Deploying koTokenEth for ${symbol}. Started ===`);
-  const addresses = await deployKoBoostETH(symbol);
-  const price = await redstone.getPrice(symbol, {provider: "redstone-stocks"});
-  console.log(
-    `=== Creating a uniswap pool with initial price: $${price.value} for symbol: ${symbol} ===`);
-  const uniswapAddresses = await uniswap.createPool(addresses.koToken, price.value);
-  console.log(`=== Deploying koTokenEth for ${symbol}. Completed ===`);
+async function deployKoCeloWithUbeswap(symbol) {
+  console.log(`=== Deploying koTokenCELO for ${symbol}. Started ===`);
+  const addresses = await deployKoCELO(symbol);
+  const ubeswapAddresses = await ubeswap.createPool(addresses.koToken);
+  console.log(`=== Deploying koTokenCELO for ${symbol}. Completed ===`);
   return {
     ...addresses,
-    ...uniswapAddresses,
+    ...ubeswapAddresses,
   };
 }
 
-async function deployKoTokenUsd(symbol) {
-  console.log(`=== Deploying koTokenUsd for ${symbol}. Started ===`);
-  const addresses = await deployKoBoostUSD(symbol);
-  console.log("-----------------------------------");
-  const price = await redstone.getPrice(symbol, {provider: "redstone-stocks"});
-  console.log(
-    `=== Creating a uniswap pool with initial price: $${price.value} for symbol: ${symbol} ===`);
-  const uniswapAddresses = await uniswap.createPool(addresses.koToken, price.value);
-  console.log(`=== Deploying koTokenUsd for ${symbol}. Completed ===`);
+async function deployKoCusdWithUbeswap(symbol) {
+  console.log(`=== Deploying koTokenCUSD for ${symbol}. Started ===`);
+  const addresses = await deployKoCUSD(symbol);
+  const ubeswapAddresses = await ubeswap.createPool(addresses.koToken);
+  console.log(`=== Deploying koTokenCUSD for ${symbol}. Completed ===`);
   return {
     ...addresses,
-    ...uniswapAddresses,
+    ...ubeswapAddresses,
   };
 }

@@ -1,6 +1,5 @@
-const ethers = require('ethers');
-const { CeloProvider } = require('@celo-tools/celo-ethers-wrapper');
+const { CeloProvider } = require("@celo-tools/celo-ethers-wrapper");
 
-const provider = new CeloProvider('https://alfajores-forno.celo-testnet.org');
+const provider = new CeloProvider("https://alfajores-forno.celo-testnet.org");
 
 module.exports = provider;

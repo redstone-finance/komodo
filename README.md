@@ -10,10 +10,20 @@ The commodity trading sector is a large and growing market estimated at $20 tril
 Komodo is aiming to solve the problems by building a global and distributed infrastructure for commodities trading. Our solution is based on an open, smart-contract protocol that enables anyone to create synthetic commodities which creates the opportunity for investors and helps miners and farmers hedge their business risk.
 
 ## Built on Celo blockchain
-The komodo protocol is built on the Celo blockchain facilitating its high performance and convenience of the built-in stable cUSD token.
+The komodo protocol is built on the Celo blockchain facilitating its high performance and convenience of the built-in stable **cUSD** token.
 
 We've deployed the komodo web app to the celo alfajores testnet:
 [alfajores-komodo.redstone.finance](https://alfajores-komodo.redstone.finance)
+
+## How to use the app
+
+Please complete the following steps to use the komodo application:
+
+- Add celo alfajores testnet to Metamask. [Learn more](https://docs.celo.org/getting-started/wallets/using-metamask-with-celo/manual-setup#adding-a-celo-network-to-metamask)
+- Add cUSD token to Metamask (select the "Alfajores Testnet" tab). [Learn more](https://docs.celo.org/getting-started/wallets/using-metamask-with-celo/manual-setup#adding-tokens-eg-cusd-ceur)
+- Fund your account with CELO and cUSD tokens. [Learn more](https://celo.org/developers/faucet)
+- Visit [alfajores-komodo.redstone.finance](https://alfajores-komodo.redstone.finance)
+
 
 ## How we built synthetic commodities
 We decided to base our architecture on the popular and battle-tested **CDP** (collateralized debt position) pattern.
@@ -22,11 +32,14 @@ The collateral of every user is kept in a segregated account limiting personal r
 We calculate the value of collateral and debt in real-time and the ratio is called a solvency score. 
 All the parameters could be actively controlled by users in the interface:
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-collateral.png" width="400">
+  <img src="docs/balance-screen.png" width="400">
+</p>
+<p align="center">
+  <img src="docs/collateral-screen.png" width="400">
 </p>
 We automatically enforce that every user action must leave the system in a solvent state:
 
-```
+```js
 modifier remainsSolvent() {
   _;
   require(solvencyOf(msg.sender) >= MIN_SOLVENCY, "The account must remain solvent");        
@@ -35,14 +48,14 @@ modifier remainsSolvent() {
 
 When it drops below a safe level (currently 120%), everyone can liquidate part of the position, forcibly exchanging commodity tokens for collateral at a discounted rate:
 
-```
+```js
 function liquidate(address account, uint256 amount) public {
   require(solvencyOf(account) < MIN_SOLVENCY, "Cannot liquidate a solvent account");
   this.transferFrom(msg.sender, account, amount);
   super._burn(account, amount);
   debt[account] -= amount;
 
-  //Liquidator reward
+  // Liquidator reward
   uint256 collateralRepayment = amount * priceFeed.getPrice(asset);
   uint256 bonus = collateralRepayment * LIQUIDATION_BONUS / SOLVENCY_PRECISION;
 
@@ -54,7 +67,7 @@ function liquidate(address account, uint256 amount) public {
 }
 ```
 
-Currently, we support both **ETH** and **USDC** as collateral. 
+Currently, we support both **CELO** and **cUSD** as collateral. 
 
 
 ## Data access
@@ -62,7 +75,7 @@ Currently, we support both **ETH** and **USDC** as collateral.
 The most challenging part of our development was providing the real-world pricing data to our synthetic smart-contracts.
 
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-prices.png" width="600">
+  <img src="docs/price-chart.png" width="600">
 </p>
 
 We've been considering multiple oracle solutions. Chainlink offers the most convenient way of accessing the data directly from on-chain storage with Price Reference Data. However, the list of supported tokens is controlled by the sponsors and it's not easy to add new positions. On the other hand, UMA is very efficient with the priceless model but the data is not available on-chain and the process of getting actual feeds requires multiple transactions. 
@@ -74,7 +87,7 @@ The raw transaction is forwarded to the commodity token contract which may conve
 The following diagram shows how we provide data to Komodo Token contract:
 
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-flash-storage.png" width="800">
+  <img src="docs/komodo-flash-storage.png" width="800">
 </p>
 
 1. We fetch the data from [Redstone API](https://redstone.finance/)
@@ -89,39 +102,33 @@ The following diagram shows how we provide data to Komodo Token contract:
 ### Ubeswap
 We automatically generate ubeswap pools for every token pair (25 pools in total).
 
-TODO - add an updated screenshot
 <p align="center">
-  <img src="https://github.com/redstone-finance/komodo/blob/master/public/desc/komodo-uniswap.png" width="400">
+  <img src="docs/ubeswap-komodo.png" width="400">
 </p>
 
 # Project setup & deployment
 
 ## Project setup
 ```
-npm install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn build
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn lint
 ```
 
-### Run your unit tests
+### Run contract tests
 ```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
+yarn test
 ```
